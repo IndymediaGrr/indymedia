@@ -1,0 +1,85 @@
+#CACHE{0}
+[(#REM)
+	Affiche les X derniers editos, du plus récent au plus ancien
+	Ainsi que le cadre publier
+]
+
+#SET{liste_rubriques, #ARRAY}
+#SET{liste_rubriques, #GET{liste_rubriques}|push{#CONFIG{metapack::indymedia/rubrique_debat}}}
+#SET{liste_rubriques, #GET{liste_rubriques}|push{#CONFIG{metapack::indymedia/rubrique_agenda}}}
+#SET{liste_rubriques, #GET{liste_rubriques}|push{#CONFIG{metapack::indymedia/rubrique_collectif}}}
+#SET{liste_rubriques, #GET{liste_rubriques}|push{#CONFIG{metapack::indymedia/rubrique_elsewhere}}}
+#SET{liste_rubriques, #GET{liste_rubriques}|push{#CONFIG{metapack::indymedia/rubrique_edito_modo}}}
+
+<BOUCLE_rubriques(RUBRIQUES){id_parent=#CONFIG{metapack::indymedia/rubrique_contribution} }{tout}>
+	#SET{liste_rubriques, #GET{liste_rubriques}|push{#ID_RUBRIQUE}}
+</BOUCLE_rubriques>
+#SET{coupe, 650}
+[(#CONFIG{metapack::indymedia_accueil/coupe_edito}|>{0}|oui) 
+	#SET{coupe, #CONFIG{metapack::indymedia_accueil/coupe_edito}}
+]
+#SET{taille_vignette, 150}
+[(#CONFIG{metapack::indymedia_accueil/taille_image_edito}|>{0}|oui) 
+	#SET{taille_vignette, #CONFIG{metapack::indymedia_accueil/taille_image_edito}}
+]
+
+[(#REM)	le lien publier ]
+
+<BOUCLE_si_open_pub_ouvert(CONDITION){si  #CONFIG{metapack::indymedia_modo/moderation_publication_ouverte}|non}>
+#INCLURE{fond=noix/prepublier}
+</BOUCLE_si_open_pub_ouvert>
+	
+[(#REM)	si Affichage edito ]
+<BOUCLE_si_affichage_editos(CONDITION){si  #CONFIG{metapack::indymedia_accueil/desactiver_edito}|non}>
+	<div class="edito bloc_edito">
+		<div class="titreRubrique">[(#CONFIG{metapack::indymedia_accueil/titre_edito}|extraire_multi|sinon{<:menu_editorial:>})]</div>
+	</div>
+
+<BOUCLE_edito(ARTICLES)
+	{id_rubrique IN #GET{liste_rubriques}}
+	{id_mot = #CONFIG{metapack::indymedia_accueil/mot_edito}}
+	{par date}
+	{inverse}
+	{0,1}
+	{doublons}>
+		<BOUCLE_rub_titre(RUBRIQUES){id_rubrique}>
+			#SET{rub_id,#ID_RUBRIQUE}
+			#SET{rub_titre,#TITRE*|extraire_multi{#ENV{lang},#ARRAY{'lang_defaut','fr'}}|propre|supprimer_tags|supprimer_numero}
+		</BOUCLE_rub_titre>
+		[(#REM)	Affiche les edito complet ? ]
+		<BOUCLE_mot_complet(MOTS){id_article}{id_mot = #CONFIG{metapack::indymedia_accueil/mot_edito_complet}}{0,1}>
+		</BOUCLE_mot_complet>
+		<div class="cadre espace edito bloc_edito">
+			<div class="titre-article-edito">
+				<div class="titre"><a href="#URL_ARTICLE">#TITRE</a></div>
+			</div>
+			<INCLURE{fond=noix/article-metas,env,id_article,id_rubrique,extra,date}>
+			<div class="texte">[(#TEXTE|image_reduire{400,400}|replace{<br>,<br />})]</div>
+			<div class="pied ytalic"><INCLURE{fond=noix/article-resume-pied,env,id_article,id_rubrique=#GET{rub_id},extra,date}{rub_titre=#GET{rub_titre}}>
+			</div>
+			
+		</div>
+		[(#REM)	Affiche les edito resume ]
+		</B_mot_complet>
+		<INCLURE{fond=noix/article-resume-liste}{id_article}{coupe=#GET{coupe}}{taille_vignette=#GET{taille_vignette}}{class=bloc_edito}>
+		<//B_mot_complet>
+</BOUCLE_edito>
+
+</BOUCLE_si_affichage_editos>
+</B_si_affichage_editos>
+
+[(#REM) Affichage focus ]
+	<INCLURE{fond=noix/focus}{ajax}{env}{liste_rubriques=#GET{liste_rubriques}}>
+	
+[(#REM)	si Affichage filextra ]
+<BOUCLE_si_affichage_filextra(CONDITION){si  #CONFIG{metapack::indymedia_accueil/desactiver_filextra}|non}>
+	<div class="colonnes">
+	<INCLURE{fond=noix/fil-de-presse-extra}{ajax}{env}>
+	</div>
+</BOUCLE_si_affichage_filextra>
+
+[(#REM)	si Affichage liste_editos ]
+<BOUCLE_si_affichage_liste_editos(CONDITION)
+		{si  #CONFIG{metapack::indymedia_accueil/desactiver_liste_edito}|non}>
+	[(#INCLURE{fond=noix/derniers_editos}{ajax}{env}{doublons}{liste_rubriques=#GET{liste_rubriques}})]
+</BOUCLE_si_affichage_liste_editos>	

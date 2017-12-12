@@ -1,0 +1,23 @@
+
+	</div>
+
+	<div id="pied">
+		[(#ENV{page-style}|=={impression}|non)
+			[(#PLUGIN{listeimc}|oui)
+				<div class="cadre-pied">
+					<INCLURE{fond=cities}>
+					<br class="spacer" />
+				</div>
+			]
+		]
+		<INCLURE{fond=noix/mention}>
+		[(#ENV{page-style}|=={impression}|non)
+			<INCLURE{fond=noix/version}>
+		]
+	</div>
+	[(#REM) bouton top js ]
+	<a href="#0" class="cd-top">Top</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<div class="sous-titre-po">
+	<div class="avis_goche">  
+		<:publication_etape_3_titre:>
+	</div>
+	<div class="avis_droite">  
+		<:etapes:>
+		<div class="etape_droite">
+		<INCLURE{fond=formulaires/publication_ouverte/boite_etapes,env}>
+	    </div>
+	</div>
+</div>
+
+[<h3>(#CONFIG{metapack::indymedia/inclure_document}|extraire_multi{#LANG}|propre)</h3>]
+<B_document>
+<div class="mini_cadre">
+
+	<p><:publication_etape_3_liste:></p>
+
+	
+	<BOUCLE_document(DOCUMENTS){mode IN image, document}{id_article=#ENV*{id_article}}{tout}>
+		<div class="liste_document">
+			<div>[(#LOGO_DOCUMENT)]</div>
+			<div>[(#FICHIER|basename)]</div>
+		</div>
+	</BOUCLE_document>
+	
+	<br class="spacer">
+</div>
+</B_document>

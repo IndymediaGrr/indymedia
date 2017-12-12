@@ -1,0 +1,20 @@
+#CACHE{3600}
+
+<B_debats>
+
+<div class="sous-titre"><:explication_debat_moderation:></div>
+
+<BOUCLE_debats(DEBATS){id_article}{par date}>
+
+	<div class="cadre explication moderateur">
+		<span class="libelle">[(#DATE|affdate)] [(#DATE|heures)]h[(#DATE|minutes)], par 
+			<BOUCLE_auteur(AUTEURS){id_auteur}>
+				#NOM
+			</BOUCLE_auteur>
+		</span>
+		<p>#TEXTE</p>
+	</div>
+
+</BOUCLE_debats>
+
+</B_debats>

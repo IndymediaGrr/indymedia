@@ -1,0 +1,22 @@
+<div class="prepub">
+	<div class="titre"><:publiez:></div>
+	<BOUCLE_presentation_publication(ARTICLES)
+		{id_article=#CONFIG{metapack::indymedia/article_regles}}>
+		<p><:lire_attentivment{url=#URL_ARTICLE}:></p>
+	</BOUCLE_presentation_publication>
+	<br class="spacer" />
+	<p>
+	<a class="bouton_publier" href="#URL_PAGE{publication-ouverte-agenda}">
+		<:publier_a_l_agenda:>
+	</a></p>
+	<br class="spacer" />
+	<p>
+	<a class="bouton_publier" href="#URL_PAGE{publication-ouverte-info}">
+		<:publier_une_info:>
+	</a></p>
+	<br class="spacer" />
+	<p>
+	<a class="bouton_publier" href="#URL_PAGE{publication-ouverte-elsewhere}">
+		<:publier_elsewhere:>
+	</a></p>
+</div>

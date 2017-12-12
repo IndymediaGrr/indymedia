@@ -1,0 +1,18 @@
+<div class="formulaire_menu_lang" id="formulaire_menu_lang">
+	<form method="post" action="#ENV{url}">
+	<div>
+	[(#ENV{url}|form_hidden)]
+		<BOUCLE_cpt(POUR){tableau #ENV*{name}|liste_options_langues}>
+			<div class="lang[ (#VALEUR|=={#LANG}|non)ytalic]">
+			[(#VALEUR|=={#LANG}|non)
+				[<a name="#ENV{nom}" id="#ENV{nom}"[ href="(#ENV{url}|parametre_url{#ENV{nom},#VALEUR})"] >(#VALEUR|traduire_nom_langue|lettreMajuscule)</a>]
+			]
+			[(#VALEUR|=={#LANG}|oui)
+				[(#VALEUR|traduire_nom_langue|lettreMajuscule)]
+			]
+			[(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|oui)&nbsp;|&nbsp;]
+			</div>
+		</BOUCLE_cpt>
+	</div>
+	</form>
+</div>

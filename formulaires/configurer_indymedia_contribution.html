@@ -1,0 +1,147 @@
+#CACHE{0}
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+<h3 class='titrem'><:indymedia:indymedia:> - <:indymedia:gestion_colonne_fils_infos:></h3>	
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#SELF">
+		<div>[(#ENV{_cfg_}|form_hidden)] 
+			#ACTION_FORMULAIRE{#ENV{action}}
+			
+		
+		<fieldset>
+		<legend><:indymedia:vignette_dans_fil:></legend>
+			<fieldset style="background:#F5EDED;">
+				<label><:indymedia:cocher_activer_vignette:></label>
+				<input type="checkbox" id="vignette_dans_fil" name="vignette_dans_fil" value="vignette_dans_fil"  [(#ENV{vignette_dans_fil}|?{checked="yes"})] />
+				<p class="boutons">
+					<input type="submit" name="submit"  class='submit' value="Enregistrer" />
+				</p>		
+			</fieldset>
+		</fieldset>			
+			
+		[(#REM) option melanger articles ]
+		<fieldset>			
+		<legend><:gestion_colonne_article:></legend>						
+		<ul>								
+			<li class="editer melanger_actif[ (#ENV**{erreurs}|table_valeur{melanger_actif}|oui)erreur]">
+				<fieldset style="background:#F5EDED;">
+					<label><:indymedia:melanger_articles_fil:></label>
+					<p>
+					<input type="checkbox" title="<:indymedia:activer_desactiver:>" name="melanger_actif" value="melanger_actif" [(#ENV{melanger_actif}|?{checked="yes"})] onchange="var t=jQuery(this).parents('li').eq(0).siblings('li.fieldset_non_melange');if (jQuery(this).prop('checked')) t.hide('fast'); else t.show('fast');" /> 
+					<:indymedia:activer_desactiver:><br />
+					<legend><:indymedia:nombre_melange:> ?</legend>
+					<input type="text" id="nombre_article_melange" name="nombre_article_melange" value="#ENV{nombre_article_melange}" size="10" />
+					</p>
+					<p class="boutons">
+						<input type="submit" name="submit"  class='submit' value="Enregistrer" />
+					</p>
+				</fieldset>
+			</li>
+			<li class="fieldset_non_melange[(#ENV{melanger_actif}|=={melanger_actif}|oui)none]">
+				<BOUCLE_config_contribution(RUBRIQUES){id_parent=#CONFIG{metapack::indymedia/rubrique_contribution} }{tout}>
+					<fieldset style="background:#F5EDED;">
+						<legend><:indymedia:gestion_colonne:> #TITRE</legend>
+						<label><:indymedia:nombre_article:></label><br />
+						<input type="text" id="nombre_article_rub#ID_RUBRIQUE" name="nombre_article_rub#ID_RUBRIQUE" value="#ENV{nombre_article_rub#ID_RUBRIQUE}" size="10" />
+						<p class="boutons">
+							<input type="submit" name="submit"  class='submit' value="Enregistrer" />
+						</p>
+					</fieldset>
+				</BOUCLE_config_contribution>
+			</li>
+		</ul>	
+		</fieldset>	
+
+		<BOUCLE_config_agenda(RUBRIQUES){id_rubrique=#CONFIG{metapack::indymedia/rubrique_agenda} }{tout}>
+		<fieldset>
+		<legend><:indymedia:gestion_colonne:> #TITRE</legend>							
+		<ul>										
+			<li>
+			<fieldset style="background:#F5EDED;">
+				<label><:indymedia:nombre_article:></label>
+				<p>
+					<input type="text" id="nombre_article_rub#ID_RUBRIQUE" name="nombre_article_rub#ID_RUBRIQUE" value="#ENV{nombre_article_rub#ID_RUBRIQUE}" size="10" />
+				</p>
+				<p class="boutons">
+					<input type="submit" name="submit"  class='submit' value="Enregistrer" />
+				</p>		
+			</fieldset>
+			</li>
+		</ul>	
+		</fieldset>	
+		</BOUCLE_config_agenda>
+		
+		<fieldset>
+		<legend><:indymedia:gestion_colonne_elsewhere:></legend>							
+		<ul>										
+			<li>
+		<BOUCLE_config_elsewhere(RUBRIQUES){id_rubrique=#CONFIG{metapack::indymedia/rubrique_elsewhere} }{tout}>
+			<fieldset style="background:#F5EDED;">
+				<label><:indymedia:nombre_article:></label>
+				<p>
+					<input type="text" id="nombre_article_elsewhere" name="nombre_article_elsewhere" value="#ENV{nombre_article_elsewhere}" size="10" />
+				</p>
+				<p class="boutons">
+					<input type="submit" name="submit"  class='submit' value="Enregistrer" />
+				</p>		
+			</fieldset>
+		</BOUCLE_config_elsewhere>
+			</li>
+		</ul>	
+		</fieldset>	
+		
+		<fieldset>	
+		<legend><:gestion_sites_amis:></legend>							
+		<ul>										
+			<li>
+				<fieldset style="background:#F5EDED;">
+					<label><:avertissement_sites_amis:></label>
+					<p>
+						<:mot_site_ami:>
+					<div class='choix'>
+						<select name="mot_site_ami" value="#ENV{mot_site_ami}">
+							<option>---</option>
+							<BOUCLE_groupe_test(GROUPES_MOTS){tous}>
+							</BOUCLE_groupe_test>
+								<BOUCLE_mot_edito(MOTS){tout}{closeKey}{par titre}>
+									<option value="#ID_MOT" [(#ENV{mot_site_ami}|=={#ID_MOT}|?{selected="yes"})]>#TITRE</option>
+								</BOUCLE_mot_edito>
+							</B_groupe_test>
+						</select>
+					</div>
+					</p>
+					<hr />
+					<p>
+						<:nb_sites_amis:>
+						<br />
+						<input type="text" id="nombre_sites_amis" name="nombre_sites_amis" value="#ENV{nombre_sites_amis}" size="10" />
+					</p>
+					<p>
+						<:libelle_sites_amis:>
+						<br />
+						<input type="text" id="libelle_sites_amis" name="libelle_sites_amis" value="#ENV{libelle_sites_amis}" size="20" />
+					</p>
+					<hr />
+					<p>
+						<:nb_articles_syndic:>
+						<br />
+						<input type="text" id="nombre_articles_syndic" name="nombre_articles_syndic" value="#ENV{nombre_articles_syndic}" size="10" />
+					</p>
+					<p>
+						<:libelle_articles_syndic:>
+						<br />
+						<input type="text" id="libelle_articles_syndic" name="libelle_articles_syndic" value="#ENV{libelle_articles_syndic}" size="20" />
+					</p>
+					<p class="boutons">
+						<input type="submit" name="submit"  class='submit' value="Enregistrer" />
+					</p>
+				</fieldset>
+			</li>
+		</ul>	
+		</fieldset>	
+		</div>
+	</form>
+</div>	
+
+

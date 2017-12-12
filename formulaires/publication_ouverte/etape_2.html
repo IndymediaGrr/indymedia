@@ -1,0 +1,118 @@
+
+<div class="sous-titre-po">
+	<div class="avis_goche">  
+	[(#ENV{elsewhere}|non|?{
+		<:publication_etape_2_titre:>
+			,
+		<:publication_etape_2_elsewhere:>
+	})]	
+	</div>
+	<div class="avis_droite">  
+		<:etapes:>
+		<div class="etape_droite">
+		<INCLURE{fond=formulaires/publication_ouverte/boite_etapes,env}>
+	    </div>
+	</div>
+</div>
+
+<fieldset>
+	<ul id="#ENV{iddoc,media}#ID_DOCUMENT">
+		<li>
+			[<h3>(#CONFIG{metapack::indymedia/redaction}|extraire_multi{#LANG}|propre)</h3>]
+		</li>
+		<li><label><:publication_etape_2_auteur:></label><input name="pseudo" value="[(#ENV*{pseudo})]"
+		/></li>
+		<li><label><:publication_etape_2_email:></label><input name="email" value="[(#ENV*{email})]"
+		/></li>
+		
+		<li>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span><br />]
+			<label><span class="oblige" title="<:obligatoire:>"><:star_oblige:></span><:publication_etape_2_label_titre:></label>
+			<input name="titre" value="[(#ENV**{titre})]"  size="56" />
+		</li>
+
+		[<li>
+			<h3>
+				(#ENV{elsewhere}|oui|?{
+				<br />#CONFIG{metapack::indymedia/redaction_elsewhere}|extraire_multi{#LANG}|propre
+			})
+			</h3>
+		</li>]
+		<li class="editer editer_texte obligatoire">
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span><br />]
+			<label for="texte">
+				<span class="oblige" title="<:obligatoire:>"><:star_oblige:></span><:publication_etape_2_redigez:>
+			</label>
+			<textarea  id='texte' name="texte" rows="10" cols="70" class="inserer_barre_edition">[(#ENV**{texte})]</textarea>
+		</li>
+
+		<fieldset class="niveau2">
+			<ul id='doc'>
+					[<h3>(#CONFIG{metapack::indymedia/inclure_document}|extraire_multi{#LANG}|propre)</h3>]
+				<li class='editer saisie_document_indy[ (#ENV**{erreurs}|table_valeur{document_indy}|oui)erreur]'>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{document_indy})</span>]
+					<label><:medias:bouton_ajouter_document:></label>
+					<input type="hidden" name="cle_ajouter_document" value="(#ENV{cle_ajouter_document})" />
+					[<div id="ajouter_document_up">(#ENV{ajouter_document})
+						<label for="supprimer_document_ajoute">
+							<input type='checkbox' name='supprimer_document_ajoute' id='supprimer_document_ajoute' />
+						<:supprimer_doc:></label>
+					</div>]
+					<div><!--[(#REM)
+						[<label for="ajouter_document">(#ENV{formats_documents_forum}|join{', '})</label>] ]-->
+						<input class='file' type="file" name="ajouter_document" id="ajouter_document" value="ajouter_document"
+						 />
+					</div>
+			
+					<script type='text/javascript'>
+						$(document).ready(function(){		
+							console.log('coucou');
+							// $(document).scrollTop( $("#ENV{ancre}").offset().top );	
+	var ancre = ($( "#ENV{ancre}").offset().top);	
+		$('body,html').animate({
+			scrollTop: ancre ,
+		 	}, 400
+		); 
+						});
+						jQuery('#ajouter_document_up')
+						.next()
+							.hide()
+						.prev()
+						.find(':checkbox')
+						.bind('change', function(){
+							jQuery('#ajouter_document_up').hide().next().show();
+						});
+					</script>
+					
+			
+					[(#REM) Piege a robots spammeurs, dont on change le nom a chaque fois,
+					]
+					[<p style="display: none;">
+						<label for="(#ENV{cle_ajouter_document})"><:antispam_champ_vide:></label>
+						<input type="text" class="text" name="#ENV{cle_ajouter_document}" id="#ENV{cle_ajouter_document}" value="#ENV{#ENV{cle_ajouter_document}}" size="10" />
+					</p>]
+					[(#ENV{cle_ajouter_document}|non)
+					<p style="display: none;">
+						<label for="nobot_forum"><:antispam_champ_vide:></label>
+						<input type="text" class="text" name="nobot" id="nobot_forum" value="#ENV{nobot}" size="10" />
+					</p>
+					]	
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{joindre_upload})</span><br />]
+					<p class='boutons'><input class='submit' type="submit" name="joindre_upload" value="<:televerser:>"/></p>
+				</li>
+					[<div class="comment-doc"><:medias:info_document:> : (#ENV{ajouter_document}|table_valeur{name})</div>]
+				<BOUCLE_art_doc(ARTICLES){id_article=#ENV{id_article}}{statut IN prop, publie, debat, refuse,prepa}>
+					[(#STATUT|=={prepa}|oui)
+						[(#SESSION{statut}|!={0minirezo}|oui) 	
+							<INCLURE{fond=noix/documents-codes,env}>
+						]	
+					]	
+					[(#SESSION{statut}|=={0minirezo}|oui) 	
+						<INCLURE{fond=noix/documents-codes,env}>
+					]	
+				</BOUCLE_art_doc>
+			</ul>
+		</fieldset>
+	</ul>
+</fieldset>
+

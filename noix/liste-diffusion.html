@@ -1,0 +1,8 @@
+#CACHE{0}
+<div class="page_liste_diffusion">
+	[<div class="titre">(#ENV**{page-titre})</div>]
+	<BOUCLE_article(ARTICLES){id_article=#CONFIG{indymedia/article_liste_diffusion}}>
+		#TEXTE
+	</BOUCLE_article>
+</div>
+#FORMULAIRE_ABOMAILMAN

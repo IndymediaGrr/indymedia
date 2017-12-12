@@ -1,0 +1,11 @@
+#CACHE{3600}
+
+<BOUCLE_mois(ARTICLES){id_rubrique=#CONFIG{metapack::indymedia/rubrique_agenda}}
+	{agenda date_debut_indy, mois, #ENV{annee}, #ENV{mois}}
+>[(#DATE_DEBUT_INDY|agenda_memo{#DESCRIPTIF,
+		#TITRE,
+		#URL_ARTICLE,
+		calendrier-couleur[(#ID_SECTEUR|
+			modulo{14,1})]})]</BOUCLE_mois>[(#DATE_DEBUT_INDY|
+	agenda_affiche{<:aucun_article:>, 'mois'}
+)]<//B_mois>

@@ -1,0 +1,53 @@
+[(#REM) Moderation des lieux ]
+
+<div class="formulaire_spip ajax" id="formulaire_moderation_lieu">
+
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data' id='moderationLieu'>
+		#ACTION_FORMULAIRE{#ENV{action}}
+				
+		<input type="hidden" name="id_lieu" value="#ENV*{id_lieu}">
+
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span><br /><br />]
+
+		<fieldset>
+			<legend>#ENV*{nom}</legend>
+			
+			<ul>
+				<li>
+					<label><:lieu_nom:></label>
+					<input name="nom" type="text" class="text" value="#ENV*{nom}" />
+				</li>
+
+				<li>
+					<label><:lieu_ville:></label>
+					<input name="ville" type="text" class="text" value="#ENV*{ville}" />
+				</li>
+
+				<li>
+					<label><:lieu_adresse:></label>
+					<input name="adresse" type="text" class="text" value="#ENV*{adresse}" />
+				</li>
+
+				<li>
+					<label><:lieu_tel:></label>
+					<input name="tel" type="text" class="text" value="#ENV*{tel}" />
+				</li>
+
+				<li>
+					<label><:lieu_email:></label>
+					<input name="email" type="text" class="text" value="#ENV*{email}" />
+				</li>
+
+				<li>
+					<label><:lieu_site_web:></label>
+					<input name="site_web" type="text" class="text" value="#ENV*{site_web}" />
+				</li>
+			</ul>
+
+			<p class="boutons">
+				<input type="submit" name="enregistrer" value="<:enregistrer_modification:>" />
+				<input type="submit" name="supprimer" class="danger" value="<:supprimer_lieu:>" />
+			</p>
+		</fieldset>
+	</form>
+</div>

@@ -1,0 +1,29 @@
+<B_document_article>
+<li>
+<BOUCLE_document_article(DOCUMENTS){mode IN image, document}{id_article=#ENV*{id_article}}{tout}>
+	<fieldset class="niveau3inline">
+		<div class="codedoc">
+			<h3 title="[(#FICHIER|basename)]">[(#FICHIER|basename{.*}|couper{20, (...).#EXTENSION})]</h3>
+			<div>[(#LOGO_DOCUMENT)]</div>
+			<BOUCLE_son(DOCUMENTS){id_document}{extension IN mp3,ogg}{tout}>
+				<<code>doc</code>#ID_DOCUMENT<code>|player</code>><br />
+			</BOUCLE_son>
+			</B_son>
+				<BOUCLE_img(DOCUMENTS){id_document=#ID_DOCUMENT}{extension IN jpg,png,gif,svg}{tout}>
+					<<code>image</code>#ID_DOCUMENT><br />
+				</BOUCLE_img>
+				<em><:mini:></em><br />
+				<<code>doc</code>#ID_DOCUMENT<code>|left</code>><br />
+				<<code>doc</code>#ID_DOCUMENT<code>|right</code>><br />
+			<//B_son>
+			<label for="supprimer_document_ajoute#ID_DOCUMENT">
+				<:supprimer_doc:>
+					<input type='checkbox' name='supprimer_documents[]' id='supprimer_document_ajoute#ID_DOCUMENT' value="#ID_DOCUMENT" [(#ID_DOCUMENT|in_any{#ENV**{supprimer_documents}, ''}|?{'checked="checked"',''})]/>
+			</label>
+		</div>
+	</fieldset>
+</BOUCLE_document_article>
+<br class="spacer" />
+	<p class='boutons'><input class='submit' type="submit" name="supprimer_selectionnes" value="<:supprimer_selectionnes:>"/></p>
+</li>
+</B_document_article>

@@ -1,0 +1,18 @@
+#CACHE{3600*24}
+
+<B_liste>
+#ANCRE_PAGINATION
+<div class="titre-article">
+	<BOUCLE_rubrique_l(RUBRIQUES){id_rubrique}{tout}>
+		<div class="titre">[(#_rubrique_l:TITRE) ] </div>
+	</BOUCLE_rubrique_l>
+</div>
+	
+<BOUCLE_liste(ARTICLES){id_rubrique}{par date}{inverse}{pagination #CONFIG{indymedia_listes/nombre_liste} }>
+	<INCLURE{fond=noix/article-resume-liste}{id_article}{taille_vignette=80}>
+</BOUCLE_liste>
+[<p class="pagination">(#PAGINATION{page})</p>]
+</B_liste>
+	<:liste_pas_article:>
+<//B_liste>
+

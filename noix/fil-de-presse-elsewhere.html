@@ -1,0 +1,33 @@
+#CACHE{0}
+	<BOUCLE_publication_ouverte(RUBRIQUES){id_rubrique=#CONFIG{metapack::indymedia/rubrique_elsewhere} }{tout}{par num titre, id_rubrique}>
+	#SET{titre_rubrique, #TITRE}
+		<B_article>
+	<div class="info">
+		#ANCRE_PAGINATION
+		[<a name="(#TITRE|no_space)"></a>]
+		<div class="titreRubrique">
+		<a href="#URL_PAGE{liste,id_rubrique=#ID_RUBRIQUE}">
+			#TITRE
+		</a>
+		</div>
+		<BOUCLE_article(ARTICLES){id_rubrique}{par date}{inverse}{pagination #CONFIG{metapack::indymedia_contribution/nombre_article_elsewhere}}>
+		<div class="caseArticle">
+			<span class="titreArticle"><a href="#URL_ARTICLE" [ title="(#TEXTE|attribut_html|couper{100})[ - (#URL_SITE|couper{100})]"]>
+				[(#CONFIG{metapack::indymedia_contribution/vignette_dans_fil}|oui)
+				<INCLURE{fond=noix/vignette-fil,id_article}>]
+				[(#TITRE|lettreMajuscule)]</a></span>
+			<span class="dateArticle">
+				<INCLURE{fond=noix/article-fil-pied,env,id_article,id_rubrique,extra,date,titre_rubrique=#GET{titre_rubrique}}>
+			</span>
+		</div>
+		</BOUCLE_article>
+		<div class="caseArticle">
+			[<p class="pagination">(#PAGINATION{page})</p>]
+		</div>
+		<div class="piedInfo">		
+			<strong title="<:voir_tous_article:>"><a href="#URL_PAGE{liste,id_rubrique=#ID_RUBRIQUE}">[(#TITRE)]</a></strong><br />
+			<a href="#haut"> <:indymedia:revenir_haut:></a>
+		</div>
+	</div>
+		</B_article>
+	</BOUCLE_publication_ouverte>

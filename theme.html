@@ -1,0 +1,14 @@
+[(#REM)
+	Liste des articles selon une thématique particulière
+]
+
+#CACHE{0}
+
+<BOUCLE_theme(MOTS){id_mot}>
+
+	<INCLURE{fond=structure/structure,env}
+		{page-titre=<:theme:> #TITRE}
+		{droite=fil-de-presse-2col}
+		{centre=theme}>
+
+</BOUCLE_theme>

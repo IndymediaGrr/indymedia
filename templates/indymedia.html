@@ -1,0 +1,46 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type: text/html}
+[(#REM)
+/**********************************************************
+* Ce squelette pour Abomailmains
+* Attention a :
+* - ne pas envoyer des gabarits de plus de 10Ko
+* - ne pas placer de balises html <html><body> ni de fermeture </body></html>
+* ils seront ajoutes automatiquement a l'envoi du mail
+* - mettre les style  CSS directement dans les balises pour etre sur qu'ils seront interpretes (meme par les webmails)
+* - les urls et liens images seront automatiquement converties en absolues
+*  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
+* Inspire du plugin Spip-Listes
+* $Id: nouveautes.html 31032 2009-08-20 20:46:24Z pierrekuhn82@gmail.com $
+***********************************************************/]
+
+#URL_SITE_SPIP -- [(#NOM_SITE_SPIP)]
+
+#ENV{sujet}
+
+#ENV{message}
+
+
+<B_articlesDate>
+	<BOUCLE_articlesDate(ARTICLES){age_relatif< 0}{id_rubrique ?}{id_mot ?}{par date}{inverse}>
+
+		<BOUCLE_agenda(MOTS){titre=AGENDA}{id_article}>#SET{type, agenda}</BOUCLE_agenda>
+
+		[(#GET{type}|!={'agenda'}|?{'',' '})
+			[[(#DATE_DEBUT_INDY|nom_jour)] (#DATE_DEBUT_INDY|affdate_jourcourt)[ - (#DATE_DEBUT_INDY|affdate{'H:i'})]]
+		]
+		
+* [(#TITRE|textebrut|supprimer_numero)]
+--------------------------------------------------------------
+			
+[(#GET{type}|=={'agenda'}|?{'',' '})[(#DATE|affdate)]]
+
+[(#INTRODUCTION|liens_absolus)]
+
+<:abomailmans:lire_article:> : [(#URL_ARTICLE|url_absolue)]
+
+===============================================================
+
+	</BOUCLE_articlesDate>
+</B_articlesDate>
+<//B_articlesDate>

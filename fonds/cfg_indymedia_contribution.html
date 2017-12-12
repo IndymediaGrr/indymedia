@@ -1,0 +1,56 @@
+<!-- descriptif= -->
+
+<!-- titre=Configuration des rubriques contributions-->
+
+[(#REM) liens*=indymedia_contribution]
+
+<!-- boite=Configuration des rubriques contributions-->
+<!-- nom=indymedia_contribution-->
+
+#CACHE{0}
+
+#CFG_ARBO{indymedia_contribution}
+
+<form method="post" action="#SELF">
+[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset style="background:#F5EDED;">
+<legend>Selectionnez la rubrique CONTRIBUTION à configurer</legend>
+
+	<select onMouseUp="this.form.id.value = this.options[this.selectedIndex].value;">
+	<BOUCLE_config_contribution(RUBRIQUES){id_parent=#CONFIG{metapack::indymedia/rubrique_contribution} }>
+		<option value="#ID_RUBRIQUE" [(#ENV{id}|=={#ID_RUBRIQUE}|?{selected="selected"})]>#TITRE</option>
+	</BOUCLE_config_contribution>
+	</select>
+
+	<label>Id : </label><input type="text" name="id" class="cfg_id" id="id" value="#ENV{id}" readonly="readonly" /> 
+	<input type="submit" name="_cfg_affiche" value="Afficher la configuration" /><br />
+	<div style="display:none;"><label>Nouvelle config si Id modifié </label><input type="checkbox" name="_cfg_copier" /></div>
+</fieldset>
+
+<br /><br />
+
+
+</fieldset>
+
+<br /><br />
+
+<fieldset style="background:#F5EDED;">
+<legend>Configuration de la rubrique</legend>
+
+<label><:indymedia:nombre_article:></label><br />
+<input type="text" name="nombre_article" value="#ENV{nombre_article}" size="10" />
+<br /><br />
+
+<label><:indymedia:poid:></label><br />
+<input type="text" name="poid" value="#ENV{poid}" size="10" />
+<br /><br />
+
+
+<input type="submit" name="_cfg_delete" value="Supprimer" />
+
+<input type="reset" value="Annuler" />
+
+<input type="submit" name="_cfg_ok" value="Enregistrer" />
+
+</fieldset>

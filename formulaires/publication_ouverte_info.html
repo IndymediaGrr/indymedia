@@ -1,0 +1,60 @@
+<div class="formulaire_spip" id="formulaire_publication_ouverte_info">
+<BOUCLE_si_open_pub_ouvert(CONDITION){si  #CONFIG{metapack::indymedia_modo/moderation_publication_ouverte}|non}>
+	[<p class='formulaire_ok'>(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#REM)
+       seul un admin peut modifier un article publie via ce formulaire
+	]
+	#SET{admin,oui}
+	<BOUCLE_article_publie(ARTICLES){id_article=#ENV**{id_article}}>
+		[(#STATUT|=={publie}|oui)		
+		[(#SESSION{statut}|!={0minirezo}|oui)
+			[(#SET{admin,non})]
+		]
+		]
+	</BOUCLE_article_publie>
+	[(#REM)
+       si non admin afficher message article deja publie
+	]
+	[(#GET{admin}|=={non}|oui)
+		<p class="reponse_formulaire reponse_formulaire_erreur"><:impossible_modifier_article_publie:></p>
+	]
+	[(#GET{admin}|=={oui}|oui)
+	<form method='post' action='#ENV{action}#etape_4' enctype='multipart/form-data' id='publication_ouverte_info'>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		[<input type="hidden" name="id_article" value="(#ENV*{id_article})" />]
+		[<input type="hidden" name="date" value="(#ENV*{date})" />]
+		[<input type="hidden" name="date_modif" value="(#ENV*{date_modif})" />]
+		<input  type="hidden" name="etape" value="#ENV*{etape}" />
+		<a href="#etape_1" name="etape_1"></a>
+		[(#ENV**{erreurs}|oui)
+			<INCLURE{fond=formulaires/publication_ouverte/erreurs,env}>			
+		]
+		
+		<div id="etape_1" class="contenu">
+			<INCLURE{fond=formulaires/publication_ouverte/etape_1_info,env}>
+		</div>
+
+		<a href="#etape_2" name="etape_2"></a>
+		<div id="etape_2" class="contenu">
+			<INCLURE{fond=formulaires/publication_ouverte/etape_2,env}>
+		</div>
+
+		<a href="#etape_3" name="etape_3"></a>
+		<div id="etape_3" class="contenu">
+			<INCLURE{fond=formulaires/publication_ouverte/etape_4,env}>
+		</div>
+
+		<a href="#etape_4" name="etape_4"></a>
+		<div id="etape_4" class="contenu">
+			<INCLURE{fond=formulaires/publication_ouverte/etape_5,env}>
+		</div>
+	</form>
+	]
+</BOUCLE_si_open_pub_ouvert>
+</B_si_open_pub_ouvert>
+<p class="reponse_formulaire reponse_formulaire_ok">#CONFIG{metapack::indymedia_modo/texte_moderation_publication_ouverte}
+</p>
+<//B_si_open_pub_ouvert>
+</div>

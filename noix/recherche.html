@@ -1,0 +1,72 @@
+#CACHE{0}
+
+#SET{taille_liste, 20}
+[(#CONFIG{indymedia_listes/nombre_liste}|oui)
+	#SET{taille_liste, #CONFIG{indymedia_listes/nombre_liste}|mult{2}}
+]
+<div class="titre-article"><div class="titre"><:titre_recherche:></div></div>
+<br />	#FORMULAIRE_RECHERCHE
+	
+[(#REM) Articles trouves ]
+<B_articles>
+<div class="page_liste">
+	#ANCRE_PAGINATION
+	<h3><:resultats_recherche:>
+		<span class="sous-titre">
+		&#171;&nbsp;#RECHERCHE&nbsp;&#187;
+		</span>
+		&nbsp;:&nbsp;#GRAND_TOTAL&nbsp;[(#GRAND_TOTAL|=={1}|?{<:resultat_trouve:>.,<:resultats_trouves:>.})]
+	</h3>
+	<h3 class="invisible"><:articles:></h3>		
+	<ul>
+	<BOUCLE_articles(ARTICLES) 
+			{recherche}
+			{branche?}
+			{pagination #GET{taille_liste}}
+			{!par date} >
+		<li>
+			<a href="#URL_ARTICLE">#TITRE</a>
+				<div class="rinfo">			
+				[le (#DATE|affdate) - ]
+				<BOUCLE_rub(RUBRIQUES){id_rubrique}>
+					#TITRE
+				</BOUCLE_rub>
+
+				<BOUCLE_mot(MOTS){id_article}>
+					[/ (#TITRE)]
+				</BOUCLE_mot>
+
+			</div>
+		</li>
+	</BOUCLE_articles>
+	</ul>
+
+	<p class="pagination" style="text-align:center">
+		[(#PAGINATION{page})<hr/>]
+	</p>
+
+</div>
+</B_articles>
+
+[<div class="sous-titre">
+	<:rechercheavancee:pas_resultats_recherche:>
+	<span class="titre">&#171;&nbsp;(#RECHERCHE)&nbsp;&#187;</span>
+</div>]
+
+<//B_articles>
+
+[(#REM) Mots-cles trouves ]
+<B_mots>
+	<div class="liste-articles">
+		#ANCRE_PAGINATION
+	<h3 class="titre"><:rechercheavancee:autres_resultats:><:mots_clefs:></h3>
+	<ul>
+	<BOUCLE_mots(MOTS) {recherche} {par points}{inverse} {pagination 5}>
+		<BOUCLE_groupe(GROUPES_MOTS){id_groupe}>
+			<li class=surtitre><a href="#URL_PAGE{theme,id_groupe=#ID_GROUPE}">#TITRE / #_mots:TITRE</a></li>
+		</BOUCLE_groupe>
+	</BOUCLE_mots>
+	</ul>
+	[<p class="pagination" style="text-align:center">(#PAGINATION)</p>]
+	</div>
+</B_mots>

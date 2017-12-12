@@ -1,0 +1,26 @@
+<div id="colonneCentre">
+
+	[(#REM)
+		Par défaut, la ligne de navigation est contruite à partit du
+		titre de la page, mais si le parametre "navigation" est
+		fourni, alors un utilise ce parametre de preference
+	]
+	
+	[(#ENV{page-style}|=={impression}|non)
+		[(#ENV{navigation}|=={''}|oui)
+<!--
+			[<div class="navigation">
+				<a href="#URL_PAGE{sommaire}">Accueil</a> > (#ENV{page-titre})
+			</div>]
+-->
+		]
+	]
+	
+<!--
+	[<div class="navigation">
+		<a href="#URL_PAGE{sommaire}">Accueil</a> > (#ENV{navigation})
+	</div>]
+-->
+	
+	<INCLURE{fond=noix/#ENV{noix},env,ajax}>
+</div>

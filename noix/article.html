@@ -1,0 +1,109 @@
+#CACHE{3600*24}
+
+[(#REM)
+	Affichage de l'article
+
+	arguments : 
+		- id_article
+		- id_lieu
+		- titre oui|non
+		- info oui|non
+		- suivant_precedent oui|non
+		- moderer oui|non
+		- imprimer oui|non
+		- alerter oui|non
+		- forum oui|non
+]
+
+<BOUCLE_article(ARTICLES) {id_article}{statut IN prop, publie, debat, refuse, prepa}>
+
+[(#REM)
+	Cadre d'explication si l'article est en attente
+]
+[(#ENV{message_publication}|=={ok}|oui)
+	<div class="cadre reussite"><p><:publication_ok:></p></div>
+]
+[(#ENV{message_alerte}|=={ok}|oui)
+	<div class="cadre reussite"><p><:alerte_ok:></p></div>
+]
+[(#STATUT|=={prop}|oui)
+	<div class="avertissement moderateur">
+		<span class="libelle"><:attente_article_explication:></span>
+		<div><:raison_attente:></div>
+		<em>[(#EXTRA|extra{OP_moderation})]</em>
+	</div>
+]
+
+[(#REM)
+	Cadre d'explication si l'article est refuse
+]
+[(#STATUT|=={refuse}|oui)
+	<div class="avertissement moderateur">
+		<span class="libelle"><:refus_article_explication:></span>
+		<div><:raison_refus:></div>
+		<em>[(#EXTRA|extra{OP_moderation})]</em>
+	</div>
+]
+
+[(#REM)
+	Cadre d'explication si l'article est en débat
+]
+[(#STATUT|=={debat}|oui)
+	<div class="avertissement moderateur">
+		<span class="libelle"><:debat_article_explication:></span>
+		<div><:raison_debat:></div>
+		<em>[(#EXTRA|extra{OP_moderation})]</em>
+	</div>
+]
+	
+<div class="page-article"> 
+	<div class="titre-article">
+		<BOUCLE_rubriques(RUBRIQUES){id_rubrique}{!id_rubrique=#CONFIG{metapack::indymedia/rubrique_agenda}}{tous}>
+			[<div class="meta_droite"><a href="(#URL_PAGE{liste}|parametre_url{id_rubrique,#ID_RUBRIQUE})" title="<:categorie:>">#TITRE</a></div>]
+		</BOUCLE_rubriques>
+		<BOUCLE_rubriques_agenda(RUBRIQUES){id_rubrique}{id_rubrique=#CONFIG{metapack::indymedia/rubrique_agenda}}{tous}>
+			<div class="meta_droite"><a href="#URL_PAGE{agenda}" title="<:categorie:>">#TITRE</a></div>
+		</BOUCLE_rubriques_agenda>
+		[(#ENV{titre}|!={non}|oui)
+			<div class="titre">
+				[(#TITRE|lettreMajuscule)]
+			</div>			
+		]
+	</div>
+	<div class="contenu-article">
+	<INCLURE{fond=noix/article-metas,env,id_article,id_rubrique,extra,date,id_lieu,mots}>
+		
+	[(#STATUT|!={refuse}|oui)
+		<INCLURE{fond=noix/article_contenu,env,id_article}{ajax}>
+	]
+	[(#STATUT|=={refuse}|oui)
+		<INCLURE{fond=noix/article_contenu,env,id_article}>
+	]
+	</div>
+</div>
+
+[(#REM)
+	Le debat des modérateurs
+]
+[(#ENV{moderer}|!={non}|oui)
+	[(#STATUT|=={debat}|oui)
+		[(#STATUT|!={prepa}|oui)
+			<INCLURE{fond=noix/moderation-debats,env}>
+		]
+	]
+]
+
+[(#REM)
+	 Formulaire de modération uniquement pour les modérateurs
+]
+[(#ENV{mode_previsu}|=={oui}|non) 
+	[(#SESSION{statut}|=={0minirezo}|oui) 
+		[(#STATUT|!={prepa}|oui)
+			[<div class="ajax">
+				(#FORMULAIRE_MODERATION{#ID_ARTICLE})
+			</div>]
+		]
+	]
+]
+
+</BOUCLE_article>

@@ -1,0 +1,14 @@
+[(#REM)
+	Page article du collectif
+]
+
+#CACHE{0}
+
+<BOUCLE_principale(ARTICLES){id_article}>
+
+	<INCLURE{fond=structure/structure,env}
+		{page-titre=#TITRE}
+		{droite=texte-du-collectif}
+		{centre=article}>
+
+</BOUCLE_principale>

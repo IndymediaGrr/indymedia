@@ -1,0 +1,50 @@
+#CACHE{3600*24}
+
+[(#ENV{noix_moderation}|=={oui}|oui) 
+	[(#SESSION{statut}|=={0minirezo}|oui)
+		[(#STATUT|!={prepa}|oui)
+			[(#ENV{mode_previsu}|=={oui}|non) 
+			<div class="liens barre_modo">
+				<img src="#CHEMIN{images/indybxl-16.png}" alt="<:moderation:>"/>
+				<a href="#ancre_moderation"><:indymedia:moderation:></a>
+			</div>
+			]
+		]
+	]
+]
+
+		<BOUCLE_si_open_pub_ouvert(CONDITION){si #CONFIG{metapack::indymedia_modo/moderation_publication_ouverte}|non}>
+<div class="liens">
+	<img src="#CHEMIN{images/indy_mini.png}" alt="<:publiez:>" width="16" height="16" class="format_png"/>
+	<strong><a href="#URL_PAGE{prepublication}"><:publiez:></a></strong>
+</div>
+		</BOUCLE_si_open_pub_ouvert>
+
+[(#ENV{noix_lang}|=={oui}|oui) 
+<div class="liens">
+	<img src="#CHEMIN{images/langues-24.gif}" alt="<:mention_syndication:>" width="16" height="16" class="format_png" />
+	#MENU_LANG
+</div>
+]
+
+<div class="liens">
+	#FORMULAIRE_RECHERCHE
+</div>
+
+[(#REM)
+	En attendant une decision collective, cette page est désactivée.
+<div class="liens">
+	<img src="#CHEMIN{images/lieux.png}" alt="Lieux" />
+	<a href="#URL_PAGE{liste-lieux}">Liste des lieux</a>
+</div>
+]
+
+[(#PLUGIN{abomailmans}|oui)
+	[(#INCLURE{fond=noix/fil_abo})]
+]
+
+<div class="liens">
+	<img src="#CHEMIN{images/newsletter_mini.png}" alt="<:contacter_le_collectif:>"/>
+	<a href="#URL_PAGE{collectif}"><:contacter_le_collectif:></a>
+</div>
+

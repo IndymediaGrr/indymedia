@@ -1,0 +1,25 @@
+#CACHE{3600}
+
+[(#REM)
+	Fourni les événéments ayant lieu le même jour
+]
+
+<BOUCLE_article(ARTICLES){id_article}{id_rubrique==#CONFIG{metapack::indymedia/rubrique_agenda}}{tout}{doublons}>
+<B_evenement_meme_jour>
+<div class="info">
+	<div class="titreRubrique"><:evenement_meme_jour:></div>
+	<div class="caseMot">[(#DATE_DEBUT_INDY|jour)]/[(#DATE_DEBUT_INDY|mois)]/[(#DATE_DEBUT_INDY|annee)]</div>
+	<BOUCLE_evenement_meme_jour(ARTICLES){id_rubrique}
+				{date_debut_indy < (#VAL{Y-m-d}|date{#VAL{+1 day}|strtotime{#DATE_DEBUT_INDY|affdate{U}}})}
+				{date_debut_indy > (#VAL{Y-m-d}|date{#VAL{-0 day}|strtotime{#DATE_DEBUT_INDY|affdate{U}}})}
+				{par date_debut_indy}
+				{doublons}>
+		<div class="caseArticle">
+			<span class="titreArticle"><a href="#URL_ARTICLE">[(#TITRE|lettreMajuscule)]</a></span>
+			<span class="dateArticle">[(#DATE_DEBUT_INDY|heures)]h[(#DATE_DEBUT_INDY|minutes)] - [Lieu :&nbsp;(#EXTRA|extra{lieu})]
+			</span>
+		</div>
+	</BOUCLE_evenement_meme_jour>
+</div>
+</B_evenement_meme_jour>
+</BOUCLE_article>

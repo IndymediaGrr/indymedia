@@ -1,0 +1,26 @@
+#CACHE{3600*24}
+
+<BOUCLE_theme(MOTS){id_mot}>
+<div class="page_liste">
+	<B_liste>
+		#ANCRE_PAGINATION
+		<div class="titre-article">
+			<div class="titre"><:theme:> #TITRE</div>
+		</div>
+		<BOUCLE_liste(ARTICLES)
+			{id_mot}
+			{par date}
+			{inverse}
+			{pagination #CONFIG{indymedia_listes/nombre_liste} }>
+			
+			<INCLURE{fond=noix/article-resume-liste}{id_article}>
+			
+		</BOUCLE_liste>
+		[<p class="pagination">(#PAGINATION{page})</p>]
+	</B_liste>
+</div>
+</BOUCLE_theme>
+
+</B_theme>
+	<:theme_pas_article:>
+<//B_theme>

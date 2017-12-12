@@ -1,0 +1,24 @@
+#CACHE{0}	
+	<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+		#SET{titre_rubrique, #TITRE*|extraire_multi{#ENV{lang},#ARRAY{'lang_defaut','fr'}}|propre|supprimer_tags|supprimer_numero}
+		<B_article>
+		#ANCRE_PAGINATION
+		[<a name="(#TITRE|no_space)"></a>]
+		<div class="titreRubrique">
+		<a href="#URL_PAGE{liste,id_rubrique=#ID_RUBRIQUE}">
+			#TITRE
+		</a>
+		</div>
+		<BOUCLE_article(ARTICLES){id_rubrique}{par date}{inverse}{pagination #CONFIG{metapack::indymedia_contribution/nombre_article_rub#ID_RUBRIQUE} #ID_RUBRIQUE}{0, 100}>
+			<INCLURE{fond=noix/fil-resume-noix-article,env,id_article,id_rubrique,extra,date,titre_rubrique=#GET{titre_rubrique}}>
+		</BOUCLE_article>
+
+		[<div class="caseArticle" title="<:derniers_posts:>">
+			<p class="pagination">(#PAGINATION{page})</p>
+		</div>]
+		<div class="piedInfo">		
+			<strong title="<:voir_tous_article:>"><a href="#URL_PAGE{liste,id_rubrique=#ID_RUBRIQUE}">[(#TITRE)]</a></strong><br />
+			<a href="#haut"> <:indymedia:revenir_haut:></a>
+		</div>
+		</B_article>
+	</BOUCLE_rubrique>

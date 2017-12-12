@@ -1,0 +1,16 @@
+
+<body>
+<script type="text/javascript">
+	$(function(){$('body').addClass('jsEnabled');});
+</script>
+
+<div id="page">
+
+	[(#ENV{page-style}|=={impression}|non)
+	<div id="haut">
+		#INCLURE{fond=noix/bandeau}
+		#INCLURE{fond=noix/menu}
+	</div>
+			
+	]
+	<div id="milieu">

@@ -1,0 +1,59 @@
+
+<BOUCLE_article(ARTICLES) {id_article}{statut IN prop, publie, debat, refuse, prepa}>	
+<div class=" texte [(#STATUT|=={refuse}|oui)		
+		[(#SESSION{statut}|!={0minirezo}|oui)
+			black
+		]
+		]">
+	[(#TEXTE|image_reduire{615,600})]
+	<br class="spacer" />
+	[<div class="notes surlignable"><div class="titre"><:info_notes:></div>(#NOTES)</div>]
+</div>
+[(#ENV{info}|!={non}|oui)
+	<div class="pied">
+		<div class="aligne_droite">	
+		<span class="info_extra">
+			[<:poste_le:>(#DATE|affdate)] 
+			[#SEPARATEUR&nbsp;<:article_auteur:>&nbsp;<span class="pseudo">(#EXTRA|extra{OP_pseudo})</span>#SEPARATEUR&nbsp;]
+		</span>	
+		
+			[(#ENV{alerter}|!={non}|oui)
+				<a href="#URL_PAGE{alerter,id_article=#ID_ARTICLE}"
+					 title="<:article_alerter:>">
+					<img src="#CHEMIN{images/alerter.png}" title="<:article_alerter:>" alt="<:article_alerter:>" />
+				</a>				
+			]
+					
+			[(#ENV{imprimer}|!={non}|oui)
+				<a href="#URL_PAGE{imprimer,id_article=#ID_ARTICLE}" title="<:article_imprimer:>">
+					<img src="#CHEMIN{images/imprimer.png}" title="<:article_imprimer:>" alt="<:article_imprimer:>" />
+				</a>
+			]
+		
+			[(#REM) les liens vers l'article précédent ou suivant de la même rubrique
+				 ET du même statut, par ordre chronologique
+			]		
+			[(#ENV{suivant_precedent}|!={non}|oui)
+				<INCLURE{fond=noix/suivant_precedent}{id_article=#ID_ARTICLE}>
+			]
+		</div>
+	</div>
+]
+
+[(#REM)
+	Les documents liés à l'article
+]
+[(#INCLURE{fond=noix/documents}{id_article}{env})]
+		
+[(#REM) 
+	Forum de l'article uniquement pour les articles publiés 
+]
+[(#ENV{mode_previsu}|=={oui}|non) 
+	[(#STATUT|=={publie}|ou{#STATUT|=={debat}}|ou{#STATUT|=={refuse}}|oui)
+		[(#ENV{forum}|!={non}|oui)
+			<INCLURE{fond=noix/forum}{id_article=#ID_ARTICLE}{ajax}>
+		]
+	]
+]
+
+</BOUCLE_article>

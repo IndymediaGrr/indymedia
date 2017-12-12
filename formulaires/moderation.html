@@ -1,0 +1,372 @@
+<a href="#ancre_moderation" name="ancre_moderation"></a>
+<div class="modo_cadre formulaire_spip" id="formulaire_moderation">
+
+	<div class="sous-titre">
+		<:cadre_moderation:> - <:moderation_rapide:>
+			<a href="#haut" title="<:retour_haut:>">
+				<span class="img_droite">
+				</span>
+			</a>
+		<div class="modo_droite">
+			<:indymedia:statut:>
+			[(#REM)	determine et affiche statut article]
+			<BOUCLE_article_nonpub(ARTICLES) {id_article}{statut IN prop, debat, publie, refuse}>
+				#SET{article_statut,#STATUT}
+			</BOUCLE_article_nonpub>
+			[(#GET{article_statut}|=={prop}|oui)<div class="avis_attente"><:indymedia:attente:></div>]
+			[(#GET{article_statut}|=={debat}|oui)<div class="avis_debat"><:indymedia:debat:></div>]
+			[(#GET{article_statut}|=={publie}|oui)<div class="avis_publie"><:indymedia:publie:></div>]
+			[(#GET{article_statut}|=={refuse}|oui)<div class="avis_refuse"><:indymedia:refus:></div>]
+		</div>
+	</div> 
+	<form method='post' action='#ENV{action}#ancre_moderation' enctype='multipart/form-data' id='moderation'>
+	<div> 
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		[<input type="hidden" value="(#ENV*{id_article})" name="id_article" />]
+		[<div class="cadre reussite reponse_formulaire reponse_formulaire_ok"><p>(#ENV*{message_ok})</p></div>]	
+		[<div class="cadre avertissement reponse_formulaire reponse_formulaire_erreur"><p>(#ENV*{message_erreur})</p></div>]
+
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_article})</span><br />]
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{explication})</span><br />]
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{heure_evenement})</span><br />]
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{jour_evenement})</span><br />]
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{mois_evenement})</span><br />]
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{annee_evenement})</span><br />]
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_evenement})</span><br />]
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lieu_evenement})</span><br />]
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{mots})</span><br />]
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte_debat})</span><br />]
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{accepter_forum})</span><br />]
+		
+		<div class="sous-titre">
+			<:modifier_categorie:>
+			<div class="avis_droite_modo">
+			[(#SESSION{statut}|=={0minirezo}|oui)
+				[(#ENV*{id_rubrique_change}|=={#CONFIG{metapack::indymedia/rubrique_agenda}}|non)
+					[(#ENV*{id_rubrique_change}|=={#CONFIG{metapack::indymedia/rubrique_elsewhere}}|oui)
+						<a [href="(#URL_PAGE{publication-ouverte-elsewhere}|parametre_url{id_article,#ENV*{id_article}})"]>
+						<:editer_article:>
+						</a>
+					]	
+					[(#ENV*{id_rubrique_change}|=={#CONFIG{metapack::indymedia/rubrique_elsewhere}}|non)
+						<a [href="(#URL_PAGE{publication-ouverte-info}|parametre_url{id_article,#ENV*{id_article}})"]>
+						<:editer_article:>
+						</a>
+					]			
+				]
+				[(#ENV*{id_rubrique_change}|=={#CONFIG{metapack::indymedia/rubrique_agenda}}|oui)
+					<a [href="(#URL_PAGE{publication-ouverte-agenda}|parametre_url{id_article,#ENV*{id_article}})"]>
+					<:editer_article:>
+					</a>
+				]
+			]
+			</div>
+		</div>
+		<ul>
+			<li>
+			<label><:moderation_texte_rubrique:></label>
+			<select name="id_rubrique_change" onchange="var t=jQuery(this).parents('li').eq(0).siblings('li.fieldset_agenda');if (jQuery(this).val()==('#CONFIG{metapack::indymedia/rubrique_agenda}')) t.show('fast'); else t.hide('fast');">
+				<BOUCLE_change_rubrique_contribs(RUBRIQUES){id_parent = #CONFIG{metapack::indymedia/rubrique_contribution}}{tout}>
+					<option value="#ID_RUBRIQUE" [(#ENV*{id_rubrique_change}|=={#ID_RUBRIQUE}|oui)selected="selected"]>#TITRE</option>
+				</BOUCLE_change_rubrique_contribs>
+				<BOUCLE_change_rubrique_agenda(RUBRIQUES){id_rubrique = #CONFIG{metapack::indymedia/rubrique_agenda}}{tout}>
+					<option value="#ID_RUBRIQUE" [(#ENV*{id_rubrique_change}|=={#ID_RUBRIQUE}|oui)selected="selected"]>#TITRE</option>
+				</BOUCLE_change_rubrique_agenda>>
+				<BOUCLE_change_rubrique_web(RUBRIQUES){id_rubrique = #CONFIG{metapack::indymedia/rubrique_elsewhere}}{tout}>
+					<option value="#ID_RUBRIQUE" [(#ENV*{id_rubrique_change}|=={#ID_RUBRIQUE}|oui)selected="selected"]>#TITRE</option>
+				</BOUCLE_change_rubrique_web>
+				<BOUCLE_change_rubrique_edito(RUBRIQUES){id_rubrique = #CONFIG{metapack::indymedia/rubrique_edito}}{tout}>
+					<option value="#ID_RUBRIQUE" [(#ENV*{id_rubrique_change}|=={#ID_RUBRIQUE}|oui)selected="selected"]>#TITRE</option>
+				</BOUCLE_change_rubrique_edito>
+				<BOUCLE_change_rubrique_collectif(RUBRIQUES){id_rubrique = #CONFIG{metapack::indymedia/rubrique_collectif}}{tout}>
+					<option value="#ID_RUBRIQUE" [(#ENV*{id_rubrique_change}|=={#ID_RUBRIQUE}|oui)selected="selected"]>#TITRE</option>
+				</BOUCLE_change_rubrique_collectif>
+				
+			</select>
+			<br class="spacer" />
+			<div class="choix">
+				<input type="checkbox" title="<:edito:>" name="mise_en_edito" value="mise_en_edito" [(#ENV{mise_en_edito}|?{checked="checked"})] /> 
+				<label><:mettre_edito:></label>
+			</div>
+			<div class="choix">
+				<input type="checkbox" title="<:edito_complet:>" id="edito_complet" name="edito_complet" value="edito_complet" [(#ENV{edito_complet}|?{checked="checked"})] />
+				<label for="edito_complet"><:mettre_edito_complet:></label>
+			</div>
+			<div class="choix">
+				<input type="checkbox" title="<:mot_focus:>" id="mot_focus" name="mot_focus" value="mot_focus" [(#ENV{mot_focus}|?{checked="checked"})] />
+				<label for="mot_focus"><:mot_focus:></label>
+			</div>
+			<br class="spacer" />
+			</li>
+			<li class="fieldset_agenda" [(#ENV*{id_rubrique_change}|=={#CONFIG{metapack::indymedia/rubrique_agenda}}|non)style="display: none;"]>
+				<div class="sous-titre"><:modifier_evenement:></div>
+				<ul>
+				[(#REM)	Test Si rubrique = agenda ] 
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{jour_evenement})</span><br />]
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{annee_evenement})</span><br />]
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{mois_evenement})</span><br />]
+					<li>
+						<label><:date:> ? </label>
+						<:jour:> : 
+						<select name="jour_evenement">
+							<option>---</option>
+							<option value='01' [(#ENV*{jour_evenement}|=={01}|oui)selected="selected"]>01</option>
+							<option value='02' [(#ENV*{jour_evenement}|=={02}|oui)selected="selected"]>02</option>
+							<option value='03' [(#ENV*{jour_evenement}|=={03}|oui)selected="selected"]>03</option>
+							<option value='04' [(#ENV*{jour_evenement}|=={04}|oui)selected="selected"]>04</option>
+							<option value='05' [(#ENV*{jour_evenement}|=={05}|oui)selected="selected"]>05</option>
+							<option value='06' [(#ENV*{jour_evenement}|=={06}|oui)selected="selected"]>06</option>
+							<option value='07' [(#ENV*{jour_evenement}|=={07}|oui)selected="selected"]>07</option>
+							<option value='08' [(#ENV*{jour_evenement}|=={08}|oui)selected="selected"]>08</option>
+							<option value='09' [(#ENV*{jour_evenement}|=={09}|oui)selected="selected"]>09</option>
+							<option value='10' [(#ENV*{jour_evenement}|=={10}|oui)selected="selected"]>10</option>
+							<option value='11' [(#ENV*{jour_evenement}|=={11}|oui)selected="selected"]>11</option>
+							<option value='12' [(#ENV*{jour_evenement}|=={12}|oui)selected="selected"]>12</option>
+							<option value='13' [(#ENV*{jour_evenement}|=={13}|oui)selected="selected"]>13</option>
+							<option value='14' [(#ENV*{jour_evenement}|=={14}|oui)selected="selected"]>14</option>
+							<option value='15' [(#ENV*{jour_evenement}|=={15}|oui)selected="selected"]>15</option>
+							<option value='16' [(#ENV*{jour_evenement}|=={16}|oui)selected="selected"]>16</option>
+							<option value='17' [(#ENV*{jour_evenement}|=={17}|oui)selected="selected"]>17</option>
+							<option value='18' [(#ENV*{jour_evenement}|=={18}|oui)selected="selected"]>18</option>
+							<option value='19' [(#ENV*{jour_evenement}|=={19}|oui)selected="selected"]>19</option>
+							<option value='20' [(#ENV*{jour_evenement}|=={20}|oui)selected="selected"]>20</option>
+							<option value='21' [(#ENV*{jour_evenement}|=={21}|oui)selected="selected"]>21</option>
+							<option value='22' [(#ENV*{jour_evenement}|=={22}|oui)selected="selected"]>22</option>
+							<option value='23' [(#ENV*{jour_evenement}|=={23}|oui)selected="selected"]>23</option>
+							<option value='24' [(#ENV*{jour_evenement}|=={24}|oui)selected="selected"]>24</option>
+							<option value='25' [(#ENV*{jour_evenement}|=={25}|oui)selected="selected"]>25</option>
+							<option value='26' [(#ENV*{jour_evenement}|=={26}|oui)selected="selected"]>26</option>
+							<option value='27' [(#ENV*{jour_evenement}|=={27}|oui)selected="selected"]>27</option>
+							<option value='28' [(#ENV*{jour_evenement}|=={28}|oui)selected="selected"]>28</option>
+							<option value='29' [(#ENV*{jour_evenement}|=={29}|oui)selected="selected"]>29</option>
+							<option value='30' [(#ENV*{jour_evenement}|=={30}|oui)selected="selected"]>30</option>
+							<option value='31' [(#ENV*{jour_evenement}|=={31}|oui)selected="selected"]>31</option>
+						</select>
+						<:mois:> : 
+						<select name="mois_evenement">
+							<option>---</option>
+							<option value='01' [(#ENV*{mois_evenement}|=={01}|oui)selected="selected"]>01</option>
+							<option value='02' [(#ENV*{mois_evenement}|=={02}|oui)selected="selected"]>02</option>
+							<option value='03' [(#ENV*{mois_evenement}|=={03}|oui)selected="selected"]>03</option>
+							<option value='04' [(#ENV*{mois_evenement}|=={04}|oui)selected="selected"]>04</option>
+							<option value='05' [(#ENV*{mois_evenement}|=={05}|oui)selected="selected"]>05</option>
+							<option value='06' [(#ENV*{mois_evenement}|=={06}|oui)selected="selected"]>06</option>
+							<option value='07' [(#ENV*{mois_evenement}|=={07}|oui)selected="selected"]>07</option>
+							<option value='08' [(#ENV*{mois_evenement}|=={08}|oui)selected="selected"]>08</option>
+							<option value='09' [(#ENV*{mois_evenement}|=={09}|oui)selected="selected"]>09</option>
+							<option value='10' [(#ENV*{mois_evenement}|=={10}|oui)selected="selected"]>10</option>
+							<option value='11' [(#ENV*{mois_evenement}|=={11}|oui)selected="selected"]>11</option>
+							<option value='12' [(#ENV*{mois_evenement}|=={12}|oui)selected="selected"]>12</option>
+						</select>
+						<:annee:> : 
+						#SET{an-1,#DATE|annee|moins{1}}
+						#SET{an-2,#DATE|annee|moins{2}}
+						#SET{an0,#DATE|annee}
+						#SET{an1,#DATE|annee|plus{1}}
+						#SET{an2,#DATE|annee|plus{2}}						
+						<select name="annee_evenement">
+							<option>[(#ENV*{annee_evenement}|<{#GET{an-2}}|oui)#ENV*{annee_evenement}]				[(#ENV*{annee_evenement}|<{#GET{an-2}}|non)---]</option>
+							<option value='#GET{an-2}' [(#ENV*{annee_evenement}|=={#GET{an-2}}|oui)selected="selected"]>#GET{an-2}</option>
+							<option value='#GET{an-1}' [(#ENV*{annee_evenement}|=={#GET{an-1}}|oui)selected="selected"]>#GET{an-1}</option>
+							<option value='#GET{an0}' [(#ENV*{annee_evenement}|=={#GET{an0}}|oui)selected="selected"]>#GET{an0}</option>
+							<option value='#GET{an1}' [(#ENV*{annee_evenement}|=={#GET{an1}}|oui)selected="selected"]>#GET{an1}</option>
+							<option value='#GET{an2}' [(#ENV*{annee_evenement}|=={#GET{an2}}|oui)selected="selected"]>#GET{an2}</option>
+						</select>
+					</li>
+					<li>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{heure_evenement})</span><br />]
+						<label><:heure_evenement:></label>
+						<select name="heure_evenement">
+							<option>---</option>
+							<option value='06:00' [(#ENV*{heure_evenement}|=={06:00}|oui)selected="selected"]>06:00</option>
+							<option value='06:30' [(#ENV*{heure_evenement}|=={06:30}|oui)selected="selected"]>06:30</option>
+							<option value='07:00' [(#ENV*{heure_evenement}|=={07:00}|oui)selected="selected"]>07:00</option>
+							<option value='07:30' [(#ENV*{heure_evenement}|=={07:30}|oui)selected="selected"]>07:30</option>
+							<option value='08:00' [(#ENV*{heure_evenement}|=={08:00}|oui)selected="selected"]>08:00</option>
+							<option value='08:30' [(#ENV*{heure_evenement}|=={08:30}|oui)selected="selected"]>08:30</option>
+							<option value='09:00' [(#ENV*{heure_evenement}|=={09:00}|oui)selected="selected"]>09:00</option>
+							<option value='09:30' [(#ENV*{heure_evenement}|=={09:30}|oui)selected="selected"]>09:30</option>
+							<option value='10:00' [(#ENV*{heure_evenement}|=={10:00}|oui)selected="selected"]>10:00</option>
+							<option value='10:30' [(#ENV*{heure_evenement}|=={10:30}|oui)selected="selected"]>10:30</option>
+							<option value='11:00' [(#ENV*{heure_evenement}|=={11:00}|oui)selected="selected"]>11:00</option>
+							<option value='11:30' [(#ENV*{heure_evenement}|=={11:30}|oui)selected="selected"]>11:30</option>
+							<option value='12:00' [(#ENV*{heure_evenement}|=={12:00}|oui)selected="selected"]>12:00</option>
+							<option value='12:30' [(#ENV*{heure_evenement}|=={12:30}|oui)selected="selected"]>12:30</option>
+							<option value='13:00' [(#ENV*{heure_evenement}|=={13:00}|oui)selected="selected"]>13:00</option>
+							<option value='13:30' [(#ENV*{heure_evenement}|=={13:30}|oui)selected="selected"]>13:30</option>
+							<option value='14:00' [(#ENV*{heure_evenement}|=={14:00}|oui)selected="selected"]>14:00</option>
+							<option value='14:30' [(#ENV*{heure_evenement}|=={14:30}|oui)selected="selected"]>14:30</option>
+							<option value='15:00' [(#ENV*{heure_evenement}|=={15:00}|oui)selected="selected"]>15:00</option>
+							<option value='15:30' [(#ENV*{heure_evenement}|=={15:30}|oui)selected="selected"]>15:30</option>
+							<option value='16:00' [(#ENV*{heure_evenement}|=={16:00}|oui)selected="selected"]>16:00</option>
+							<option value='16:30' [(#ENV*{heure_evenement}|=={16:30}|oui)selected="selected"]>16:30</option>
+							<option value='17:00' [(#ENV*{heure_evenement}|=={17:00}|oui)selected="selected"]>17:00</option>
+							<option value='17:30' [(#ENV*{heure_evenement}|=={17:30}|oui)selected="selected"]>17:30</option>
+							<option value='18:00' [(#ENV*{heure_evenement}|=={18:00}|oui)selected="selected"]>18:00</option>
+							<option value='18:30' [(#ENV*{heure_evenement}|=={18:30}|oui)selected="selected"]>18:30</option>
+							<option value='19:00' [(#ENV*{heure_evenement}|=={19:00}|oui)selected="selected"]>19:00</option>
+							<option value='19:30' [(#ENV*{heure_evenement}|=={19:30}|oui)selected="selected"]>19:30</option>
+							<option value='20:00' [(#ENV*{heure_evenement}|=={20:00}|oui)selected="selected"]>20:00</option>
+							<option value='20:30' [(#ENV*{heure_evenement}|=={20:30}|oui)selected="selected"]>20:30</option>
+							<option value='21:00' [(#ENV*{heure_evenement}|=={21:00}|oui)selected="selected"]>21:00</option>
+							<option value='21:30' [(#ENV*{heure_evenement}|=={21:30}|oui)selected="selected"]>21:30</option>
+							<option value='22:00' [(#ENV*{heure_evenement}|=={22:00}|oui)selected="selected"]>22:00</option>
+							<option value='22:30' [(#ENV*{heure_evenement}|=={22:30}|oui)selected="selected"]>22:30</option>
+							<option value='23:00' [(#ENV*{heure_evenement}|=={23:00}|oui)selected="selected"]>23:00</option>
+							<option value='23:30' [(#ENV*{heure_evenement}|=={23:30}|oui)selected="selected"]>23:30</option>
+							<option value='00:00' [(#ENV*{heure_evenement}|=={00:00}|oui)selected="selected"]>00:00</option>
+							<option value='00:30' [(#ENV*{heure_evenement}|=={00:30}|oui)selected="selected"]>00:30</option>
+							<option value='01:00' [(#ENV*{heure_evenement}|=={01:00}|oui)selected="selected"]>01:00</option>
+							<option value='01:30' [(#ENV*{heure_evenement}|=={01:30}|oui)selected="selected"]>01:30</option>
+							<option value='02:00' [(#ENV*{heure_evenement}|=={02:00}|oui)selected="selected"]>02:00</option>
+							<option value='02:30' [(#ENV*{heure_evenement}|=={02:30}|oui)selected="selected"]>02:30</option>
+							<option value='03:00' [(#ENV*{heure_evenement}|=={03:00}|oui)selected="selected"]>03:00</option>
+							<option value='03:30' [(#ENV*{heure_evenement}|=={03:30}|oui)selected="selected"]>03:30</option>
+							<option value='04:00' [(#ENV*{heure_evenement}|=={04:00}|oui)selected="selected"]>04:00</option>
+							<option value='04:30' [(#ENV*{heure_evenement}|=={04:30}|oui)selected="selected"]>04:30</option>
+							<option value='05:00' [(#ENV*{heure_evenement}|=={05:00}|oui)selected="selected"]>05:00</option>
+							<option value='05:30' [(#ENV*{heure_evenement}|=={05:30}|oui)selected="selected"]>05:30</option>
+						</select>
+					</li>	
+					
+					<li>
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lieu_evenement})</span><br />]
+						<label>Lieu d&eacute;j&agrave; existant :</label>
+						<select name="id_lieu_change">
+							<option value="">---</option>
+						<BOUCLE_lieux(LIEUX)>
+							<option value="#ID_LIEU" [(#ENV*{id_lieu_change}|=={#ID_LIEU}|oui)selected="selected"]>#NOM</option>
+						</BOUCLE_lieux>
+						</select>
+					</li>
+	
+					<li>
+						<h3>Si votre lieu n'existe pas encore, cr&eacute;ez en un nouveau :
+						</h3>
+		
+						<ul class="panneau nouveau_lieu">
+							<li>
+								<label>Nom du lieu</label>
+								<input type="text" name="lieu_evenement" value="#ENV*{lieu_evenement}" />
+							</li>
+		
+							<li>
+								<label>Ville</label>
+								<input type="text" name="ville_evenement" value="#ENV*{ville_evenement}" class="texte" />
+							</li>
+		
+							<li>
+								<label>Adresse</label>
+								<input type="text" name="adresse_evenement" value="#ENV*{adresse_evenement}" class="texte" />
+							</li>
+		
+							<li>
+								<label>Tel</label>
+								<input type="text" name="tel_evenement" value="#ENV*{tel_evenement}" class="texte" />
+							</li>
+		
+							<li>
+								<label>Site web</label>
+								<input type="text" name="web_evenement" value="#ENV*{web_evenement}" class="texte" />
+							</li>
+		
+							<li>
+								<label>Email</label>
+								<input type="text" name="email_evenement" value="#ENV*{email_evenement}" class="texte" />
+							</li>
+					
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+
+			<p class="boutons">
+				<input name="modifier_rubrique" type="submit" class="submit" value="<:modifier_rubrique_evenement:>" />
+			</p>
+
+		<div class="sous-titre"><:modifier_mots_cles:></div>
+		<select multiple="multiple" name="mots[]">
+		<BOUCLE_groupes(GROUPES_MOTS){openKey}>
+			<BOUCLE_mots(MOTS){id_groupe}>
+				<option value="#ID_MOT" [(#ENV*{mots}|find{#ID_MOT}|oui)selected="selected"]>#_groupes:TITRE | #TITRE</option>
+			</BOUCLE_mots>
+			<option disabled="disabled"></option>
+		
+		</BOUCLE_groupes>
+		</select>
+		
+		<p class="boutons"><input type="submit" name="modifier_mots" value="<:modifier_mots_cles:>"/></p>
+
+		<div class="sous-titre"><:formulaire_moderation:></div>
+
+		<a class="" href="#URL_PAGE{article,id_article=#CONFIG{metapack::indymedia/article_regles}
+		}"><:ouvrir_politique_editoriale:></a>
+
+	
+		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+		<ul>
+		<li><label><:donner_explication:></label>
+		<textarea name="explication" style="width:320px;" rows="3" cols="200">#ENV*{explication}</textarea></li>
+		</ul>
+		<p class="boutons">
+			[(#REM)	afficher seulement les boutons utiles - d'apres le statut de article]
+			[(#GET{article_statut}|!={publie}|oui)
+				<input name="publie" type="submit" value="<:btn_publie:>" class="submit" />
+			]
+			[(#CONFIG{indymedia/en_attente_actif}|=={en_attente_actif}|oui)
+				[(#GET{article_statut}|!={prop}|oui)
+				<input name="attente" type="submit" value="<:btn_attente:>" class="submit" />]
+			]
+			[(#CONFIG{indymedia/en_debat_actif}|=={en_debat_actif}|oui)
+				[(#GET{article_statut}|!={debat}|oui)
+				<input name="debat" type="submit" value="<:btn_debat:>" class="submit" />]
+			]
+			[(#CONFIG{indymedia/refus_actif}|=={refus_actif}|oui)
+				[(#GET{article_statut}|!={refuse}|oui)
+				<input name="refus" type="submit" value="<:btn_refus:>" class="submit" />]
+			]			
+		</p>
+		
+		[(#GET{article_statut}|=={en_debat}|oui)
+			<div class="sous-titre"><:moderation_debat:></div>
+			<ul>
+				<li>
+					<label><:debat_taper_texte:></label>
+					<textarea name="texte_debat" style="width:320px;" rows="3" cols="200">#ENV*{debat}</textarea>
+				</li>
+			</ul>
+	
+			<p class="boutons"><input class="submit" type="submit" name="ajouter_debat" value="<:ajouter_debat:>" /></p>
+			
+		]		
+		<div class="sous-titre"><:moderation_commentaires:></div>
+		<ul>
+			<li>
+			<label><:moderation_commentaires:></label>
+				<select name="accepter_forum">
+				<option value="pos" [(#ENV{accepter_forum}|=={pos}|oui) selected="selected"]>
+					<:moderation_commentaire_post:>
+				</option>
+				<option value="pri" [(#ENV{accepter_forum}|=={pri}|oui) selected="selected"]>
+					<:moderation_commentaire_priorie:>
+				</option>
+				<option value="non" [(#ENV{accepter_forum}|=={non}|oui) selected="selected"]>
+					<:moderation_commentaire_aucun:>
+				</option>
+			</select>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input name="modifier_forum" type="submit" value="<:modifier_moderation_commentaire:>" class="submit" />
+		</p>
+	</div> 
+	</form>
+	<div class="sous-titre">&nbsp;
+			<a href="#haut" title="<:retour_haut:>">
+				<span class="img_droite">
+				</span>
+			</a>
+	</div> 
+</div>

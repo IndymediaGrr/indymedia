@@ -1,0 +1,35 @@
+#SET{liste_rubriques, #ARRAY}
+
+#SET{liste_rubriques, #GET{liste_rubriques}|push{#CONFIG{metapack::indymedia/rubrique_debat}}}
+#SET{liste_rubriques, #GET{liste_rubriques}|push{#CONFIG{metapack::indymedia/rubrique_agenda}}}
+#SET{liste_rubriques, #GET{liste_rubriques}|push{#CONFIG{metapack::indymedia/rubrique_edito_modo}}}
+
+<BOUCLE_rubriques(RUBRIQUES){id_parent=#CONFIG{metapack::indymedia/rubrique_contribution} }{tout}>
+	#SET{liste_rubriques, #GET{liste_rubriques}|push{#ID_RUBRIQUE}}
+</BOUCLE_rubriques>
+
+<B_liste>
+<div class="page_liste">
+	#ANCRE_PAGINATION
+	<BOUCLE_rubrique_l(RUBRIQUES){id_rubrique IN #GET{liste_rubriques}}{tout}>
+	</BOUCLE_rubrique_l>
+	<div class="titre-article">
+		<div class="titre"><:menu_edito:></div>
+	</div>
+	</B_rubrique_l>
+	
+	<BOUCLE_liste(ARTICLES)
+		{id_rubrique IN #GET{liste_rubriques}}
+		{id_mot = #CONFIG{metapack::indymedia_accueil/mot_edito}}
+		{par date}{inverse}
+		{pagination #CONFIG{indymedia_listes/nombre_liste} }>
+		
+		<INCLURE{fond=noix/article-resume-liste}{id_article}>
+			
+	</BOUCLE_liste>
+	[<p class="pagination">(#PAGINATION{page})</p>]
+</div>
+</B_liste>
+	<:liste_pas_article:>
+<//B_liste>
+

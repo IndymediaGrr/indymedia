@@ -1,0 +1,9 @@
+.spip-admin-boutons {
+    background: none repeat scroll 0 0 #666666;
+    border: 0 none;
+    border-radius: 0 0 0.3em 0.3em;
+    font-weight: bold;
+    margin: 0;
+    opacity: 0.4;
+    padding: 0.4em 1em;
+}

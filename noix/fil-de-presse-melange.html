@@ -1,0 +1,41 @@
+#CACHE{0}
+	<div class="info ajax">
+		<B_article_melange>
+		#ANCRE_PAGINATION
+		[<a name="(#TITRE|no_space)"></a>]
+		<div class="titreRubrique">
+			<:derniers_posts:>
+		</div>
+		<div class="topInfo">
+<!--
+			<:menu_categories:><br />
+-->
+			<BOUCLE_ancre_top(RUBRIQUES){id_parent=#CONFIG{metapack::indymedia/rubrique_contribution} }{tout}{par num titre, id_rubrique}{'&nbsp;|&nbsp;'}>
+				<strong><a href="#URL_PAGE{liste,id_rubrique=#ID_RUBRIQUE}">[(#TITRE)]</a></strong>
+			</BOUCLE_ancre_top>
+		</div>
+		<BOUCLE_article_melange(ARTICLES){id_secteur=#CONFIG{metapack::indymedia/rubrique_contribution}}
+				{pagination #CONFIG{metapack::indymedia_contribution/nombre_article_melange}}{par date}{inverse}>
+				#SET{titre_rubrique, #INFO_TITRE{rubrique,#ID_RUBRIQUE}}
+			<div class="caseArticle">
+			
+			<span class="titreArticle">
+				<a href="#URL_ARTICLE" [ title="[(#FICHIER|image_reduire{25,45})](#TEXTE|attribut_html|couper{250})"]>
+				[(#CONFIG{metapack::indymedia_contribution/vignette_dans_fil}|oui)
+				<INCLURE{fond=noix/vignette-fil,id_article}>][(#TITRE|lettreMajuscule|couper{150})]</a></span>
+			<span class="dateArticle">
+				<INCLURE{fond=noix/article-fil-pied,env,id_article,id_rubrique,extra,date,titre_rubrique=#GET{titre_rubrique}}>
+			</span>
+		</div>
+		</BOUCLE_article_melange>
+		<div class="caseArticle">
+			[<p class="pagination">(#PAGINATION{page})</p>]
+		</div>
+		<div class="piedInfo">
+			<a href="#haut">Retourner en haut</a><br />
+			<BOUCLE_ancre(RUBRIQUES){id_parent=#CONFIG{metapack::indymedia/rubrique_contribution} }{tout}{par num titre, id_rubrique}{'&nbsp;|&nbsp;'}>
+				<strong><a href="#URL_PAGE{liste,id_rubrique=#ID_RUBRIQUE}">[(#TITRE)]</a></strong>
+			</BOUCLE_ancre>
+		</div>
+		</B_article_melange>
+	</div>

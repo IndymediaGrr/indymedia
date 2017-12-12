@@ -1,0 +1,28 @@
+#CACHE{3600*24}
+[(#REM)
+	Fourni les articles de la même thématique pour un article
+]
+<B_thematiques>
+<div class="info">
+	<div class="titreRubrique"><:article_meme_thematique:></div>
+	<BOUCLE_thematiques(MOTS){id_article}{openKey}{0,5}{doublons}>
+		<BOUCLE_article_perimes(ARTICLES){id_article!=#ID_ARTICLE}{id_rubrique=#CONFIG{metapack::indymedia/rubrique_agenda}}{par date}{inverse}{doublons}{id_mot}
+			{date_debut_indy < (#VAL{Y-m-d}|date{#VAL{+0 day}|strtotime{#ENV{date}|affdate{U}}})}>
+		</BOUCLE_article_perimes>
+		<B_article2>
+			<div class="caseMot"><a href="#URL_PAGE{theme,id_mot=#ID_MOT}" title="<:menu_thematique:>">#TITRE</a></div>
+		<BOUCLE_article2(ARTICLES){id_article!=#ID_ARTICLE}{par date}{inverse}{doublons}{id_mot}{0,5}>
+			<div class="caseArticle">
+				<span class="titreArticle"><a href="#URL_ARTICLE">[(#TITRE|lettreMajuscule)]</a></span>
+				<span class="dateArticle">
+					post&eacute; <:le:>&nbsp;[(#DATE|affdate)] - 
+					<BOUCLE_foro(FORUMS) {id_article}></BOUCLE_foro>
+					[(#TOTAL_BOUCLE) commentaire(s).]
+					<//B_foro>
+				</span>
+			</div>
+		</BOUCLE_article2>
+		</B_article2>
+	</BOUCLE_thematiques>
+</div>
+</B_thematiques>

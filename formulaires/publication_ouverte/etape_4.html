@@ -1,0 +1,36 @@
+
+<div class="sous-titre-po">
+	<div class="avis_goche">  
+		<:publication_etape_4_titre:>
+	</div>
+	<div class="avis_droite">  
+		<:etapes:>
+		<div class="etape_droite">
+		<INCLURE{fond=formulaires/publication_ouverte/boite_etapes,env}>
+	    </div>
+	</div>
+</div>
+<fieldset>	
+	[(#REM)]
+	<ul>
+	<li>
+		[<h3>(#CONFIG{metapack::indymedia/choix_mots_cles}|extraire_multi{#LANG}|propre)</h3>]
+		<div class="mots-po">
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{mots})</span><br />]
+			<label>
+				<span class="oblige" title="<:obligatoire:>"><:star_oblige:></span>
+			<:publication_etape_4_mot_oblig:> <:publication_etape_4_ctrl:>
+			</label>
+			<select name="mots[]" multiple>
+			<BOUCLE_groupe(GROUPES_MOTS){openKey}>
+				<BOUCLE_mot(MOTS){id_groupe}{par titre}>
+					<option value="#ID_MOT" [(#ENV*{mots}|find{#ID_MOT}|oui)selected="yes"]><strong>#_groupe:TITRE</strong> | #TITRE</option>
+				</BOUCLE_mot>
+					<option disabled></option>
+			</BOUCLE_groupe>
+			</select>
+		</div>
+	</li>
+	</ul>
+	
+</fieldset>

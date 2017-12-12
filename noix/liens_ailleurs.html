@@ -1,0 +1,24 @@
+#CACHE{0}
+<BOUCLE_si_articles_syndic_actif(CONDITION){si  #CONFIG{metapack::indymedia_contribution/nombre_articles_syndic}}>
+<B_principale>
+<div class="ailleurs info ajax">
+	<div class="titreRubrique">
+		#CONFIG{metapack::indymedia_contribution/libelle_articles_syndic}
+	</div>	
+	#ANCRE_PAGINATION
+	<BOUCLE_principale(SYNDIC_ARTICLES){!par date}{pagination #CONFIG{metapack::indymedia_contribution/nombre_articles_syndic}}{0, 100}>
+	<div class="caseArticle">
+		<img src="#CHEMIN{images/feed.png}" alt="<:mention_syndication_agenda:>" width="16" height="16" class="format_png" />
+		<a href="#URL_ARTICLE" title="#DESCRIPTIF
+#URL_SITE" class="caseSite">#TITRE</a>
+			<span class="dateArticle">
+				[(#DATE|affdate_court) - #NOM_SITE]
+			</span>
+	</div>
+	</BOUCLE_principale>
+	[<div class="caseArticle">
+		<p class="pagination">(#PAGINATION{page})</p>
+	</div>]
+</div>
+</B_principale>
+</BOUCLE_si_articles_syndic_actif>

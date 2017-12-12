@@ -1,0 +1,29 @@
+#CACHE{3600*24}
+
+[(#REM)
+	Fourni les événéments ayant lieu au même endroits
+]
+
+<BOUCLE_lieux(LIEUX){id_article}>
+<B_evenement_meme_lieu>
+<div class="info">
+	<div class="titreRubrique"><:indymedia:evenement_meme_lieu:></div>
+	<div class="caseMot">#NOM</div>
+	<BOUCLE_evenement_meme_lieu(ARTICLES)
+		{id_article!=#ID_ARTICLE}
+		{id_rubrique==#CONFIG{metapack::indymedia/rubrique_agenda}}
+		{id_lieu==#ID_LIEU}
+		{par date_debut_indy}
+		{date_debut_indy > #ENV{date}}
+		{doublons}>
+		<div class="caseArticle">
+			<span class="titreArticle"><a href="#URL_ARTICLE">[(#TITRE|lettreMajuscule)]</a></span>
+			<span class="dateArticle">[(#DATE_DEBUT_INDY|nom_jour)] [(#DATE_DEBUT_INDY|affdate)] - [(#DATE_DEBUT_INDY|heures)]h[(#DATE_DEBUT_INDY|minutes)] [- Lieu :&nbsp;(#EXTRA|extra{lieu})]
+			</span>
+		</div>
+	</BOUCLE_evenement_meme_lieu>
+	</ul>
+</div>
+</B_evenement_meme_lieu>
+
+</BOUCLE_lieux>

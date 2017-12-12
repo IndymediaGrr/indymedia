@@ -1,0 +1,12 @@
+#CACHE{0}
+<BOUCLE_melange(CONDITION){si #CONFIG{indymedia_contribution/melanger_actif}}>
+	<INCLURE{fond=noix/fil-de-presse-melange}{env}{ajax}>
+</BOUCLE_melange>
+</B_melange>	
+	<BOUCLE_si_affichage_filextra(CONDITION){si  #CONFIG{metapack::indymedia_accueil/desactiver_filextra}|non}>
+		<INCLURE{fond=noix/fil-de-presse-contribs-num}{env}{ajax}{num=0}>
+	</BOUCLE_si_affichage_filextra>
+	</B_si_affichage_filextra>
+		<INCLURE{fond=noix/fil-de-presse-contribs}{env}{ajax}>
+	<//B_si_affichage_filextra>
+<//B_melange>

@@ -1,0 +1,24 @@
+[(#REM)
+	Page article
+]
+
+<BOUCLE_principale(ARTICLES) {id_article}{statut IN prop, publie, debat, refuse}>
+	[(#STATUT|!={publie}|oui)
+		<INCLURE{fond=structure/structure,env}
+			{page-titre=#TITRE}
+			{navigation=<:navigation_article:>}
+			{droite=fil-de-presse-article, id_rubrique}
+			{centre=article}
+			{robot=none}>
+	]
+	
+	[(#STATUT|=={publie}|oui)
+		<INCLURE{fond=structure/structure,env}
+			{page-titre=#TITRE}
+			{navigation=<:navigation_article:>}
+			{page-description=#DESCRIPTIF_SITE_SPIP}
+			{droite=fil-de-presse-article, id_rubrique}
+			{centre=article}
+			{forum=#ACCEPTER_FORUM}>
+	]
+</BOUCLE_principale>

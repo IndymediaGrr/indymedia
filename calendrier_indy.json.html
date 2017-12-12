@@ -1,0 +1,6 @@
+#HTTP_HEADER{Content-type:text/javascript;}
+[<BOUCLE_periode(ARTICLES){id_mot?}{id_rubrique=#CONFIG{metapack::indymedia/rubrique_agenda}}
+	{agenda date_debut_indy, periode,
+	#ENV{start}|todate|affdate{Y}, #ENV{start}|todate|affdate{m}, #ENV{start}|todate|affdate{d},
+	#ENV{end}|todate|affdate{Y}, #ENV{end}|todate|affdate{m}, #ENV{end}|todate|affdate{d}}{', '}>
+[(#ARRAY{id,#ID_ARTICLE,title,[(#TITRE|html2unicode|unicode2charset|couper{35,' ...'})],allDay,#EVAL{false},start,#DATE_DEBUT_INDY,end,#DATE_FIN_INDY,url,#URL_ARTICLE,className,calendrier-couleur6,description,[(#INTRODUCTION|html2unicode|unicode2charset)]}|json_encode)]</BOUCLE_periode>]

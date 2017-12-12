@@ -1,0 +1,10 @@
+#CACHE{3600}
+
+<BOUCLE_periode(ARTICLES){id_rubrique=#CONFIG{indymedia/rubrique_agenda}}
+	{agenda date_debut_indy, periode,
+	#ENV{annee}, #ENV{mois}, #ENV{jour},
+	#ENV{annee_fin}, #ENV{mois_fin}, #ENV{jour_fin}}>[
+(#DATE_DEBUT_INDY|agenda_memo{#DESCRIPTIF, #TITRE, #URL_ARTICLE, 'calendrier-couleur6'})
+]</BOUCLE_periode>[(#TOTAL_BOUCLE|
+	agenda_affiche{<:aucun_article:>, 'periode', 'calendrier-couleur6'}
+)]<//B_periode>

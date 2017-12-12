@@ -1,0 +1,14 @@
+
+			<div class="choix">
+				<input type="checkbox" title="<:edito:>" id="mise_en_edito" name="mise_en_edito" value="mise_en_edito" [(#ENV{mise_en_edito}|?{checked="yes"})] /> 
+				<label for="mise_en_edito"><:mettre_edito:></label>
+			</div>
+			<div class="choix">
+				<input type="checkbox" title="<:edito_complet:>" id="edito_complet" name="edito_complet" value="edito_complet" [(#ENV{edito_complet}|?{checked="yes"})] />
+				<label for="edito_complet"><:mettre_edito_complet:></label>
+			</div>
+			<div class="choix">
+				<input type="checkbox" title="<:mot_focus:>" id="mot_focus" name="mot_focus" value="mot_focus" [(#ENV{mot_focus}|?{checked="checked"})] />
+				<label for="mot_focus"><:mot_focus:></label>
+			</div>
+			<br class="spacer" />

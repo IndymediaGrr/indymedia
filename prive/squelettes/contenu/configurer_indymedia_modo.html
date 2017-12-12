@@ -1,0 +1,6 @@
+[(#AUTORISER{configurer,indymedia_accueil}|sinon_interdire_acces)]
+
+<div class="ajax">
+[(#VAL{indymedia}|barre_onglets{#ENV{exec}|replace{configurer_,""},onglets_simple})]
+	#FORMULAIRE_CONFIGURER_INDYMEDIA_MODO
+</div>

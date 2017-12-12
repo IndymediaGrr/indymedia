@@ -1,0 +1,19 @@
+[(#REM)
+	Page Newsletter
+]
+
+#CACHE{0}
+[(#REM)
+	verifie si existe liste abomailman active
+]
+
+<B_listes>
+<BOUCLE_listes(ABOMAILMANS){0,1}{desactive=0}>
+</BOUCLE_listes>
+<INCLURE{fond=structure/structure,env}
+	{page-titre=<:liste_diffusion:>}
+	{robot=none}
+	{droite=fil-de-presse-2col}
+	{centre=liste-diffusion}
+>
+</B_listes>

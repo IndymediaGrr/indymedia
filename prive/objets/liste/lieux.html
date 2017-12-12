@@ -1,0 +1,92 @@
+[(#SET{defaut_tri,#ARRAY{
+	id_lieu,-1,
+	nom,1, 
+	date,-1, 
+	points,-1
+}})]<B_liste_lieux>
+<style>
+	.liste-objets tr.non  { color: #333; font-color: #333;}
+	.liste-objets tr.oui  { color: green; font-color: green;}
+	.liste-objets td.ooh, th.ooh  { width:100px}
+	#extra { display: none;}
+	#navigation { display: none;}
+	#chemin { display: none;}
+	html body.lieux .largeur #contenu {width: 100%; }
+	html body.lieux table.spip { width: 100%; }
+	html .liste-objets tr td { border-right: 1px dotted #E6E6E6; border-bottom: 1px dotted #A7A7A7;}
+	button  { width: 100px;}
+</style>
+#ANCRE_PAGINATION
+[<span class='message_ok'>(#ENV**{message_ok})</span><br /><br />]
+<div class="liste-objets lieux">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{nom,#GRAND_TOTAL|singulier_ou_pluriel{lieu:info_1_nb_lieux,lieu:info_nb_lieux}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='ooh'>[(#TRI{id_lieu,<:lieu:label_modifier:>,ajax})]</th>
+			<th class='nom' >[(#TRI{nom,<:lieu:label_lieux:>,ajax})]</th>
+			<th class=''>[(#TRI{ville,<:lieu:label_ville:>,ajax})]</th> 
+			<th class=''>[(#TRI{adresse,<:lieu:info_adresse:>,ajax})]</th>
+			<th class=''>[(#TRI{tel,<:lieu:info_tel:>,ajax})]</th>
+			<th class='ooh'>[(#TRI{site_web,<:lieu:info_site_web:>,ajax})]</th>
+			<th class='ooh'>[(#TRI{email,<:lieu:info_email:>,ajax})]</th>
+			<th class=''>[(#TRI{approuve,<:lieu:info_approuve:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_lieux(LIEUX){id_mot?}{where?}{recherche?}{tri #ENV{par,num id_lieu},#GET{defaut_tri}}{!par id_lieu}{pagination #ENV{nb,50}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})] [(#APPROUVE|=={oui}) oui][(#APPROUVE|=={non}) non]'>
+			<td class='ooh'>
+				<a href="#URL_SITE_SPIP/spip.php?page=moderation-lieu&id_lieu=#ID_LIEU" title="<:info_numero_abbreviation|attribut_html:> #ID_LIEU">
+					<:lieu:label_modifier:>
+				</a>
+			</td>
+			<td class='nom'>[(#NOM)]</td>
+			<td class=''>[(#VILLE)]</td> 
+			<td class=''>[(#ADRESSE)]</td>
+			<td class=''>[(#TEL)]</td>
+			<td class='ooh'>[(#SITE_WEB|lignes_longues{10})]</td>
+			<td class='ooh'>[(#EMAIL|lignes_longues{10})]</td>
+			<td class='[(#APPROUVE|=={oui}) oui][(#APPROUVE|=={non}) non]'>				
+			<BOUCLE_si_approuve_ok(CONDITION){si  #APPROUVE|!={oui}}>	
+			[(#BOUTON_ACTION{
+				[(#CHEMIN_IMAGE{ajouter-12.png}
+					|balise_img{<:lieu:approuver:>}
+					|concat{&nbsp;}
+					|concat{<:lieu:approuver:>}|_T)
+					],
+				[(#URL_ACTION_AUTEUR{ajouter_lieu_approuve,
+					[(#ID_LIEU)],
+					#SELF}
+					)],
+				'ajouter ajax',
+				'',
+				<:lieu:approuver:>}
+			)]
+			</BOUCLE_si_approuve_ok>
+			</B_si_approuve_ok>
+			[(#BOUTON_ACTION{
+				[(#CHEMIN_IMAGE{supprimer-12.png}
+					|balise_img{<:lieu:enlever:>}
+					|concat{&nbsp;}
+					|concat{<:lieu:enlever:>}|_T)
+					],
+				[(#URL_ACTION_AUTEUR{enlever_lieu_approuve,
+					[(#ID_LIEU)],
+					#SELF}
+					)],
+				'supprimer ajax',
+				'',
+				<:lieu:enlever:>}
+			)]
+			<//B_si_approuve_ok>
+			</td> 
+		</tr>
+	</BOUCLE_liste_lieux>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_lieux>[
+<div class="liste-objets lieux caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_lieux>

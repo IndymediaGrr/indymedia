@@ -1,0 +1,54 @@
+[(#REM)
+	Ce fichier sert à créer les flux RSS
+	qui permettent aux visiteurs de suivre l'actualité
+	de votre site depuis un lecteur de news.
+
+	Cette page génère un code XML/RSS adapté
+
+]#CACHE{0}[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml 
+version="1.0"[ encoding="(#CHARSET)"]?>
+<rss version="2.0" [(#REM) rss 2.0.9)]
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
+[(#SET{titre_flux,#NOM_SITE_SPIP|textebrut|texte_backend})]
+<BOUCLE_rub_agenda(RUBRIQUES){id_rubrique=#CONFIG{metapack::indymedia/rubrique_agenda}}{0,1}>
+	#SET{titre_flux,#GET{titre_flux}|concat{" - "}|concat{#TITRE}}
+</BOUCLE_rub_agenda>
+[(#ENV{integral}|=={oui}|?{ #SET{titre_flux,#GET{titre_flux}|concat{" "}|concat{#VAL{<:rss_integral:>}}}})]
+[(#ENV{integral}|!={oui}|?{ #SET{titre_flux,#GET{titre_flux}|concat{" "}|concat{#VAL{<:rss_resume:>}}}})]
+<channel[ xml:lang="(#LANG)"]>
+		<title>#GET{titre_flux}</title>
+	[<link>(#URL_PAGE{agenda}|url_absolue)</link>]
+	[<description>(#DESCRIPTIF_SITE_SPIP|supprimer_tags|texte_backend)</description>]
+	[(#DESCRIPTIF_SITE_SPIP|non|?{ <description>#GET{titre_flux}</description>})]
+	<language>#LANG</language>
+	<generator>SPIP - www.spip.net</generator>
+
+	<image>
+		<title>[(#GET{titre_flux})]</title>
+		[<url>(#LOGO_SITE_SPIP|image_reduire{300,400}|extraire_attribut{src}|url_absolue|texte_backend)</url>]
+		[<link>(#URL_PAGE{agenda}|url_absolue)</link>]
+		[<height>(#LOGO_SITE_SPIP|image_reduire{144,400}|extraire_attribut{height})</height>]
+		[<width>(#LOGO_SITE_SPIP|image_reduire{144,400}|extraire_attribut{width})</width>]
+	</image>
+
+
+<BOUCLE_article_agenda(ARTICLES)
+	{id_rubrique=#CONFIG{metapack::indymedia/rubrique_agenda}}
+	{date_debut_indy >= (#VAL{Y-m-d}|date{#VAL{+0 day}|strtotime{#ENV{date}|affdate{U}}})}
+	{date_debut_indy <= (#VAL{Y-m-d}|date{#VAL{+6 month}|strtotime{#ENV{date}|affdate{U}}})}
+	{par date_debut_indy}
+	{0,20}>
+	<BOUCLE_integral_rubrique(CONDITION){si  #ENV{integral}|=={oui}}>
+		<INCLURE{fond=noix/rss-items-integral, id_article,env} />
+	</BOUCLE_integral_rubrique>
+	</B_integral_rubrique>
+		<INCLURE{fond=noix/rss-items, id_article,env} />
+	<//B_integral_rubrique>
+</BOUCLE_article_agenda>
+
+
+</channel>
+
+</rss>

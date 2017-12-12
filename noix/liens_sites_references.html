@@ -1,0 +1,25 @@
+<BOUCLE_si_sites_amis_actif(CONDITION){si  #CONFIG{metapack::indymedia_contribution/nombre_sites_amis}}>
+<B_principale>
+<div class="sites_ref info ajax">
+	<div class="titreRubrique">
+		#CONFIG{metapack::indymedia_contribution/libelle_sites_amis}
+		
+	</div>
+	#ANCRE_PAGINATION
+	<BOUCLE_principale(SITES){0, 25}{id_mot = #CONFIG{metapack::indymedia_contribution/mot_site_ami}}{!par date}{pagination #CONFIG{metapack::indymedia_contribution/nombre_sites_amis}}>
+	[<div> 
+		<a href="#URL_SITE" [ title="#NOM_SITE - (#URL_SITE)"] class="caseSite spip_out">
+			<div>#NOM_SITE </div>
+			(#LOGO_SITE|image_reduire{200,60})
+		</a>
+	</div>]
+	</BOUCLE_principale>
+	[<div class="caseArticle">
+	<p class="pagination">(#PAGINATION{page})</p>
+	</div>]
+</div>
+</B_principale>
+</BOUCLE_si_sites_amis_actif>
+<style>
+	
+</style>

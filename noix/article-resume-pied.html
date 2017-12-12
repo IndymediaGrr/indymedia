@@ -1,0 +1,14 @@
+[(#REM)
+	Affiche 
+	Local |  posté le 1er novembre 2013 |  3 commentaires
+]
+	[(#ENV{rub_titre}|?{
+		[(#ID_RUBRIQUE|!={#CONFIG{metapack::indymedia/rubrique_agenda}}|?{
+		[<strong><a [ href="(#URL_PAGE{liste}|parametre_url{id_rubrique,#ID_RUBRIQUE})"] title="<:categorie:>">(#ENV{rub_titre})</a>
+		</strong>&nbsp;-&nbsp;]
+		,
+		[<strong><a href="#URL_PAGE{agenda}" title="<:categorie:>">(#ENV{rub_titre})</a></strong>&nbsp;-&nbsp;]
+	})]		
+	})]
+	<:poste_le:>[(#DATE|affdate{'d/m/y'})]
+	<INCLURE{fond=noix/article-resume-forum,id_article}>

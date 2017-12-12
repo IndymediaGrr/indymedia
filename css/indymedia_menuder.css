@@ -1,0 +1,70 @@
+
+/* adapté sur inspiration du plugin menuder */
+.menuder-container {    
+	display: block;
+    overflow: visible;
+    position: absolute;
+    right: 50px;
+    top : 20px;
+}
+.menuder li { list-style: none; float: right; background: #FFF url(img/stripelight.png); }
+/*
+.menuder li:hover { color: #fff;
+	background: #a00; }
+*/
+.shaddy { 
+   -moz-box-shadow: 2px 2px 5px #aaa;
+   -webkit-box-shadow: 2px 2px 5px #aaa;
+    box-shadow: 2px 2px 5px #aaa;}
+.menuder,
+.menuder ul { float: right; width: 100%; margin: 0; padding: 0;  border-width: .1em 0; list-style: none; text-align: left; font-weight: bold; background: url("img/stripelight.png") repeat scroll 0 0 #FFFFFF;}
+.menuder a { display: block; width: 10em; w\idth: 6em; text-decoration: none; padding: 0.25em 0.5em 0.25em 2em;}
+.menuder a.daddy { background: url(img/menuder.gif) center right no-repeat; }
+.menuder li li { width: 9em; padding: 0; padding-right: 6px;}
+.menuder li li li { float: left; background:url("img/stripelight.png") repeat scroll 0 0 #FFFFFF; }
+.menuder li li ul { position: absolute; left: -999em; height: auto; width: 16.4em; w\idth: 16.9em; margin: 0; border-width: .1em; font-weight: normal; z-index:100;  margin-left: -3.5em;}
+.menuder li li li li { width: 13em; padding-right: 0em; }
+.menuder li li ul a { width: 13.5em; w\idth:13.5em; border-bottom: 0.1em dotted #BBBBBB;}
+.menuder li li ul ul { margin: -1.75em 0 0 10em;}
+.menuder li li:hover ul ul,
+.menuder li li:hover ul ul ul,
+.menuder li li:hover ul ul ul ul,
+.menuder li li.hover ul ul,
+.menuder li li.hover ul ul ul,
+.menuder li li.hover ul ul ul ul { left: -999em; }
+.menuder li li:hover ul, 
+.menuder li li li:hover ul, 
+.menuder li li li li:hover ul,
+.menuder li li li li li:hover ul { left: auto; }
+.menuder li li.hover ul,
+.menuder li li li.hover ul,
+.menuder li li li li.hover ul,
+.menuder li li li li li.hover ul { left: auto; }
+.menuder li li li:hover,
+.menuder li li li.hover { background: #FFF;color : #000000; width: 15.4em; }
+.menuder li li li span:hover,
+.menuder li li li span.hover { color : #333; }
+.menuder ul span { text-align:center; display: block; width: 10em; 
+w\idth: 6em; padding: .25em 1em; font-weight: bold; color : #FFF; border: 0px solid #bbb; background: #7A1547; border-top-left-radius: 10px; border-bottom-right-radius: 10px;}
+/* end */  	
+.menuder ul ul span { border: none; width: 14.7em; border-bottom: 0.1em dotted #AAAAAA; color : #555; background: url("img/stripe.png") repeat scroll 0 0 #FFFFFF;}
+.menuder ul ul ul span {font-size: 1.05em; font-weight: normal;}
+.menuder ul ul{  border: 1px solid #ccc;}
+.menuder ul ul:hover{  border: 1px solid #aaa;}
+.menuder span a { display: block; width: 10em; w\idth: 6em; padding: 0em; text-decoration: none;color: black; }
+.menuder li li li span:hover{
+    color: #555;
+}
+.menuder li li span:hover{
+    color: #000;
+}
+.menuder li li ul ul {
+    margin: -1.75em 0 0 -15.5em;
+}
+.menuder li li.mamy{
+}
+.menuder li li.mamy span{
+    float: left; 	
+    text-align: left;
+	background: inherit;
+}

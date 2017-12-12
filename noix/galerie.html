@@ -1,0 +1,65 @@
+#CACHE{3600*24}
+
+[(#REM)
+	Recupération de toutes les rubriques succeptible de contenir des articles refusé
+		- la rubrique agenda
+		- la rubrique debat
+		- les sous-rubriques de contribution
+		- les editos
+]
+
+#SET{liste_rubriques, #ARRAY}
+
+#SET{liste_rubriques, #GET{liste_rubriques}|push{#CONFIG{metapack::indymedia/rubrique_debat}}}
+#SET{liste_rubriques, #GET{liste_rubriques}|push{#CONFIG{metapack::indymedia/rubrique_agenda}}}
+#SET{liste_rubriques, #GET{liste_rubriques}|push{#CONFIG{metapack::indymedia/rubrique_edito}}}
+<BOUCLE_rubriques(RUBRIQUES){id_parent=#CONFIG{metapack::indymedia/rubrique_contribution} }{tout}>
+	#SET{liste_rubriques, #GET{liste_rubriques}|push{#ID_RUBRIQUE}}
+</BOUCLE_rubriques>
+
+<B_document>
+
+<center><b><:navigation:>&nbsp;:&nbsp;</b>#PAGINATION{page_precedent_suivant}</center>
+
+<br/>
+
+
+	<BOUCLE_document(DOCUMENTS)
+		{mode=image}
+		{par date}
+		{inverse}
+		{pagination 10}>
+
+			[(#REM) recherche de l'article associé au document modifié ]
+			<BOUCLE_chercheLienArticle(spip_documents_liens articles){id_document} {objet = article}>
+        			        #SET{id_article, #ID_OBJET}
+		        </BOUCLE_chercheLienArticle>
+
+			[(#REM) on ne prend que les articles publiés ! ]
+			<B_statut><BOUCLE_statut(ARTICLES){id_article=#GET{id_article} }{statut="publie"}>
+		        </BOUCLE_statut>
+
+				#SET{ratio_x,#LARGEUR|div{115}}
+				#SET{ratio_y,#HAUTEUR|div{115}}
+				#SET{ratio,#GET{ratio_x}|<={#GET{ratio_y}}|?{#GET{ratio_x},#GET{ratio_y}}}
+
+				<div class="cadre">
+					<div class="vignette">[(#FICHIER|image_reduire{150,150})]</div>
+
+					<BOUCLE_article(ARTICLES){id_article=#GET{id_article} }>
+						<div class="float_left">
+							<p><a href="#URL_ARTICLE">[(#TITRE|lettreMajuscule)]</a></p>
+							<p>[(#INTRODUCTION|couper{300})]</p>
+							<p><:publie_le:>&nbsp;[(#DATE|affdate)]</p>
+						</div>
+
+						<br class="spacer" />						
+					</BOUCLE_article>
+				</div>
+			
+			</B_statut>
+
+	</BOUCLE_document>
+
+</B_document>
+

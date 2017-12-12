@@ -1,0 +1,21 @@
+
+<BOUCLE_article_liste(ARTICLES){id_article}>
+	<div class="meta_info">
+	<span class="info_extra ytalic">
+		[<:poste_le:>(#DATE|affdate{'d/m/y'})] 
+		[#SEPARATEUR<:article_auteur:>&nbsp;<span class="pseudo">(#EXTRA|extra{OP_pseudo})</span>]
+		
+		[-&nbsp;<a [ href="(#URL_PAGE{liste}|parametre_url{id_rubrique,#ID_RUBRIQUE})"] title="<:categorie:>">(#ENV{rub_titre})</a>]
+		
+	</span>
+</div>[
+(#ID_RUBRIQUE|=={#CONFIG{metapack::indymedia/rubrique_agenda}}|oui)
+<div class="caseDate">
+				<span class="titreArticle">
+		[(#DATE_DEBUT_INDY|nom_jour|ucfirst)][ (#DATE_DEBUT_INDY|affdate_jourcourt)][ (#DATE_DEBUT_INDY|heures)<:heures_court:>][(#DATE_DEBUT_INDY|minutes)]
+				</span>
+			</div>
+			<br />
+] 
+</BOUCLE_article_liste>
+

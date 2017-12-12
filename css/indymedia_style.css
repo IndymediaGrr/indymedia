@@ -1,0 +1,1792 @@
+/*
+ * Feuille de style indymédia lille
+ *
+ * - PRESENTATION : couleur des différents éléments. Contient les propriétés suivantes :
+ *
+ *	- border-color
+ *	- background-color
+ *	- color
+ *	- text-decoration
+ *	- font-weight
+ *
+ * Un nouvel IMC, s'il ne change pas la structure de base du squelette, n'a qu'à modifier
+ * la partie présentation, afin d'utiliser ses propres couleurs.
+ *
+ */
+
+
+/*=============================*/
+
+/* INDYMEDIA lille
+   --------- */
+/*
+ * Listes des couleurs utilisés
+ * - violet très foncé : 2c1f2e
+ * - violet foncé (fond de page) : 443046
+ * - violet (titre, soulignement, liens) : 906594
+ * - violet clair (fond de boite) : f5eded
+ */
+/* INDYMEDIA bxl
+   --------- */
+
+/*
+ * Listes des couleurs utilisés
+ * - violet très foncé : 2c1f2e (violet sombre)
+ * - violet foncé (fond de page) : AA0000 (rouge sombre)
+ * - violet (titre, soulignement, liens) : EE3232
+ * - violet clair (fond de boite) : f5eded
+ */
+
+
+/*
+ * fond de page en violet foncé
+ * couleur des caractères : noir
+ * police de caractère : arial
+ * taille des caractères : 10pt
+ */
+
+body {
+/*
+	background:#443046 none repeat scroll 0 0;
+	color:#000;
+	background: #FFF url(img/background.png); 
+	background: #eeeeee ; 
+	background: #FFF url(img/background.png);
+	font-size:10pt;
+*/
+	font-family: Arial, Helvetica, "Liberation Sans", FreeSans, sans-serif; 
+	font-size:10pt;
+	background: #efefef none repeat scroll 0 0;
+/*	background: #FFF url(img/stripelight.png);*/
+	
+}
+
+  /* police titres */
+div.titreRubrique, a.lien_publier, a.bouton_publier, div.sous-titre, div.sous-titre-po{
+	font-family: "Ubuntu", Arial, Helvetica, "Liberation Sans", FreeSans, sans-serif;
+}
+div.titre{
+	font-size: 1.7em; 
+}
+#colonneDroite div.titreRubrique, #colonneDroite-2col  div.titreRubrique,
+.edito  div.titreRubrique, .prepub  div.titreRubrique, .colonnes  div.titreRubrique
+{
+    font-size: 1.15em;
+}
+body.jsEnabled div.titre{
+/*
+	font-size: 1.7em; 
+*/
+}
+body.jsEnabled #colonneDroite div.titreRubrique, body.jsEnabled #colonneDroite-2col  div.titreRubrique,
+body.jsEnabled .edito  div.titreRubrique, body.jsEnabled .prepub  div.titreRubrique, body.jsEnabled .colonnes  div.titreRubrique
+{
+    font-size: 1.05em;
+}
+div.titreRubrique a{
+	color: #222;
+}
+/*
+ * la page principale 
+ * couleur de fond : blanc
+ * bordure de 2 pixels
+ */
+
+#page {
+/*
+	border-color: #eee;
+	background: #fff none repeat scroll 0 0;   
+	background:#eee none repeat scroll 0 0;
+*/
+	right: 3px;
+/*
+	background: #FFF url(img/stripelight.png);
+*/
+}
+
+#haut {
+	border-color : #CCCCCC;
+}
+
+#bandeau {
+	background-color :transparent;
+}
+
+#milieu
+{
+	border-color : #ccc;
+}
+.cadre .texte {
+    text-align: justify;
+}
+#colonneCentre {
+	border-color : #ccc;
+}
+.colonnes{
+	clear : both;    
+	display: inline-block;
+}
+#colonneDroite, #colonneDroite-2col {
+    width: 23%;  
+}
+#colonne-extra1, #colonne-extra2{
+    width: 48%; 
+    display: block; 
+    margin-top: 6px;
+    position: relative;
+}   
+
+#colonne-extra2{
+    float: left;
+    margin-left: 0;
+    margin-right: 1px; 
+}   
+
+#colonne-extra1{    
+	float: right;
+    margin-left: 1px;
+    margin-right: 0;
+}
+
+#pied
+{
+	border-color : #ccc;
+}
+
+#listeImc 
+{
+	border-color : #ccc;
+}
+
+#mention 
+{
+	border : none;
+}
+
+
+/*
+ * Liens en violet foncé, sans décoration
+ * surlignage du lien lorsque la souris passe au dessus
+ */
+
+a {
+	color : #000000;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+	color : #87174E;
+}
+
+a.lien_publier
+{
+	color : #a00;
+/*
+	background: url(img/stripe.png);
+*/
+	background: #7A1547;
+	color: #f5eded;
+   	font-weight : bold;
+	font-size : 2.1em;
+	border : 0px solid #AAA;
+	text-decoration : none;
+	margin-bottom : 0px;
+	border-radius: 15px;
+}
+a.lien_publier:hover
+{
+	border : 1px solid #AAA;
+	color: #2c1f2e;
+	background: #f5eded;
+}
+a.bouton_publier
+{
+	font-weight : bold;
+	font-size : 1.5em;
+	border : 0px solid #fff;
+	text-decoration : none;
+	padding : 6px;
+	margin : 15px;
+	margin-left : 0px;
+	width :300px;
+	background: #7A1547;
+	color: #FFF;    
+	line-height: 1.8em;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;	
+}
+a.bouton_publier:hover
+{
+	border : 1px solid #333;
+	color : #7A1547;
+	background: url(img/stripe.png); 
+}
+
+/* Les liens pour les modérateurs/tices */
+
+a.moderation
+{
+	color :red;
+}
+
+div.cadre
+{
+	border : 1px dotted #fff;
+	margin: 6px;    
+	margin-left: 0px;  
+	margin-right: 0px;    
+}
+
+div.cadre div.pied, div.pied
+{
+	border-color : #ccc; 
+	background: url(img/stripe.png); 
+/*
+	font-weight : bold;     
+*/
+	margin-top: 0.8em;    
+	clear: both;
+}
+
+div.reussite
+{
+	background-color : #71bd4c;
+	font-weight : bold;
+}
+
+div.avertissement { 
+	background: #FFF url(img/background.png);
+    border: 1px dashed #AA0000;    
+    padding: 0 10px;
+	margin-bottom : 0.8em;
+}
+
+p.modo { 
+	background: #FFF url(img/background.png);
+    border: 1px dashed #AA0000;    
+    padding: 0 10px 15px;
+	margin-bottom : 0.8em;
+}
+blockquote { 
+    border-left: 2px solid #cc6600;    
+    padding: 0 10px 10px;
+	margin-bottom : 0.8em;
+	color : #cc6600;
+	background: url(img/stripe.png); 
+}
+/* Pour indiquer qu'il s'agit d'un message d'un membre de l'equipe de moderation */
+
+div.moderateur
+{  
+	margin-bottom: 0.8em;
+    padding: 1em;
+}
+
+div.titre
+{
+/*
+	color : #881414;
+*/
+	border-color : #ccc; 
+	font-weight : bold;
+}
+
+.edito div.titre
+{
+    padding-top: 2px;
+}
+
+.page_liste h2
+{
+	text-align : center;
+}
+
+.page_liste ul li
+{    
+    list-style: none outside none;
+    padding: 0.4em;
+    
+}
+
+.page_liste ul
+{    
+	padding-left : 0em;
+}
+
+#abomailmansListes fieldset, #formulaire_recherche fieldset
+{    
+	border : none;
+}
+
+div.sous-titre
+{
+	background:  url("img/stripe.png") repeat 0 0 #FFFFFF;
+    border: 1px solid #ccc;
+    font-weight: 700;
+}
+div.sous-titre-po
+{
+	background: #FFFFFF;
+    border: 1px solid #ccc;
+    font-weight: 700;
+	font-size : 1.2em;
+	margin-bottom: 10px;
+	height: 40px;
+}
+
+div.mots-po
+{
+	padding: 10px;
+}
+span.info_meta
+{    
+	background: url(img/stripe.png);
+	border-bottom: 1px dashed #aaa;
+    font-size: 1em;
+	font-style: italic;
+	padding: 2px;
+    margin: 0;
+    margin-bottom: 5px; 
+}
+
+div.sous-titre-elsewhere
+{   
+	border: 1px dashed #666666;
+    display: block;
+    clear: both;
+    font-size: 1.3em;
+	background: url(img/stripe.png);
+	padding : 10px;
+    float: left;
+    margin: 5px 10px 10px 0;	
+	text-align: center;
+}
+.page-article div.sous-titre-agenda
+{    
+	border: 1px dashed #666666;
+    display: block;
+    font-size: 1.1em;
+	background: url(img/stripe.png);
+	padding : 10px;
+    float: right;
+    margin-left: 15px;	
+	text-align: center;
+    width: 300px;
+}
+div.sous-titre-agenda, div.friture
+{      
+	background: url("img/stripe.png") repeat scroll 0 0 #FFFFFF;
+    border: 1px dashed #999999;
+    display: block;
+    float: right;
+    clear: right;
+    font-size: 1.1em;
+    margin-left: 20px;
+    margin-bottom: 5px;
+    margin-top: 0;
+    margin-right: 0;
+    padding: 10px;
+    text-align: center;
+    width: 250px;
+}
+div.friture
+{  
+    width: 35%; 
+}   
+div.sous-titre-agenda-liste
+{    
+    font-size: 1.2em;
+	background: #FFF url(img/background.png);
+	padding : 5px;
+	padding-left : 10px;
+	margin-top : 5px;
+}
+div.dash-agenda-liste
+{    
+	border-bottom: 1px dashed #CCCCCC;
+    width: 200px;
+    height: 1px;
+}
+div.vignette
+{
+	border-color : #ccc;
+}
+
+
+
+/* les listes d'information */
+
+ul.information
+{
+	padding-top : 10px;
+	padding-bottom : 10px;
+}
+
+ul.information
+{
+	list-style-type: none;
+	background: #FFF url(img/background.png);
+	border : 1px solid #ccc;
+}
+
+ul.information li
+{
+	margin-bottom : 5px;
+	clear : both;
+}
+
+/* les libellés (a defaut d'autre nom) */
+
+span.libelle
+{
+	font-weight : bold;	
+}
+
+
+
+/* les boutons dangereux */
+
+input.danger
+{
+	background-color : red;
+	border-color : red;
+}
+
+/* Les liens vers des pages annexe du site (colonne de droite)  */
+
+div.liens
+{
+	display : block;
+	min-height : 21px;
+	border-bottom : 0px solid;
+	margin-top : 2px;
+}
+
+div.liens
+{
+	border-color : #ccc;
+}
+
+div.liens a
+{
+	min-height: 22px;
+	margin-top : 2px;
+/*
+	padding-left : 30px;
+*/
+}
+
+div.liens img
+{
+	float: left; 
+	vertical-align:middle; 
+    margin: 0 0 0em;
+    padding: 0 10px 0 0;
+}
+
+.sites_ref .caseSite img
+{
+/*
+	float: left; 
+*/
+	vertical-align:middle; 
+    margin: 0.5em;;
+    padding: 0 0 0 0;
+    text-align: center;
+}
+.sites_ref .caseSite
+{
+	border-bottom : 1px dotted #bbb;
+	display : block;    
+	text-align: center;
+	padding-bottom : 10px;
+	padding-top : 10px;    
+	margin-bottom: 0px;
+    margin-top: 0px;
+}
+.sites_ref .caseSite:hover
+{
+	background-color : #fff;
+	border-color : #888;
+}
+div.ailleurs
+{
+	float: left;
+	padding-top : 6px; 
+    text-align: left;
+    border: none;
+}
+div.ailleurs .caseArticle img
+{
+	vertical-align:middle;
+}
+div.ailleurs .caseArticle a
+{
+	display:inline;
+}
+/* Les fieldset "selected" (interface de publication ouverte) */
+
+div.formulaire_spip label
+{
+	color : #222;
+	font-weight : bold;
+	border : none;
+}
+
+div.formulaire_spip label.selected
+{
+	color : #39ac3c;
+	font-size : 1.3em;
+}
+
+span.spip_documents img
+{
+	border-color : #bbb;
+	margin-top: 12px;
+	margin-bottom: 12px;
+}
+
+.page-article div.texte span.spip_documents {
+    margin: 0px;
+}
+.page-article div.texte span.spip_documents_left, .page-article div.texte span.spip_documents_right {
+    margin: 15px 15px 15px 15px;
+}
+
+/* les ancres de la colonne de droite */
+
+div.ancres
+{
+	display : block;
+	height : 1.6em;
+}
+
+#colonneDroite div.info , #colonneDroite-2col div.info, .colonnes div.info
+{
+	margin-bottom : 40px;
+}
+#colonneDroite div.info a, #colonneDroite-2col div.info a, .colonnes div.info a
+{
+	text-decoration : none;
+}
+.edito 
+{        
+	margin: 0.8em;
+	margin-left: 0px;  
+	margin-right: 0px; 
+}
+.barre_focus
+{        
+	margin-bottom: 0;
+}
+#colonneDroite div.titreRubrique , #colonneDroite-2col div.titreRubrique,
+.edito  div.titreRubrique, .colonnes div.titreRubrique
+{
+    text-align: center;
+	background-color : #E7DFF3	;
+	border-top :  1px solid #E7DFF3;
+	border-bottom :  1px solid #bbb;
+}
+
+.edito.bloc_edito  div.titreRubrique
+{
+/*
+	color : #a94300	;
+	border-left :  2px solid #c60;
+	border-right :  2px solid #c60;
+	background-color : #c60	;
+	color : #fff	;
+*/
+}
+.bloc_edito  div.titre a {
+/*
+	color : #c60	;
+*/
+}
+#colonneDroite div.caseArticle, #colonneDroite-2col div.caseArticle , .colonnes div.caseArticle
+{    
+	padding: 4px 5px 4px;
+	clear: both;
+	
+	overflow: auto; 
+}
+#colonneDroite div.caseMot, #colonneDroite-2col div.caseMot, .colonnes div.caseMot
+{ 
+	padding : 4px;
+	text-align : center;
+	font-size: 1em;
+	font-style: italic;
+	border-top : 1px solid #ddd;  
+	background: url(img/stripe.png);
+    border-bottom: 1px #ddd;
+}
+#colonneDroite div.caseDate, #colonneDroite-2col div.caseDate, .colonnes div.caseDate
+{ 
+	padding : 4px;
+	text-align : center;
+	font-size: 1.15em;
+	font-weight: bold;
+	border-top : 1px solid #ddd;    
+	background: url(img/stripe.png);
+  	border-bottom: 1px solid #ddd;
+	text-transform: capitalize;
+}
+span.caseDateFocus
+{ 
+	margin : 4px;
+	font-style: italic;
+	background: url(img/stripe.png);    
+	line-height: 1.3em;border: 1px dotted #aaa;
+}
+#colonneDroite .info_agenda span.titreArticle, #colonneDroite-2col .info_agenda span.titreArticle, .colonnes .info_agenda span.titreArticle
+{ 
+	padding-bottom : 4px;
+}
+
+
+#colonneDroite div.caseArticle span.titreArticle, #colonneDroite-2col div.caseArticle span.titreArticle, .colonnes  div.caseArticle span.titreArticle
+{
+	display: block;
+}
+#colonneDroite div.caseArticle span.titreJour, #colonneDroite-2col div.caseArticle span.titreJour, .colonnes  div.caseArticle span.titreJour
+{
+	display: block;
+	font-size : 8pt;    
+}
+
+#colonneDroite div.caseArticle span.dateArticle , #colonneDroite-2col div.caseArticle span.dateArticle, .colonnes  div.caseArticle span.dateArticle
+{
+	display: block;
+	font-size : 8pt; 
+	font-style: italic;
+}
+
+#colonneDroite div.caseArticle span.nombreCommentaire, #colonneDroite-2col div.caseArticle span.nombreCommentaire, .colonnes  div.caseArticle span.nombreCommentaire
+{
+	display: block;
+	font-size : 8pt;
+}
+
+#colonneDroite div.piedInfo, #colonneDroite-2col div.piedInfo, .colonnes  div.piedInfo
+{
+	margin-top : 5px;
+	margin-bottom : 5px;
+}
+#colonneDroite div.topInfo, #colonneDroite-2col div.topInfo, .colonnes  div.topInfo
+{
+	border-bottom : 1px solid;
+	margin-bottom : 2px;
+	padding : 2px;
+	text-align : center;
+	border-color : #ccc;
+}
+
+/* Les liens generer par le plugin liste IMC */
+
+a.listeimc
+{
+	float:left;
+}
+
+
+h2.listeimc{
+	float : left;
+	font-size : 10pt;
+	margin:0;
+	padding:0;
+}
+
+
+
+
+#mention img.copyleft {
+	margin-top : 2px;
+}
+
+/*
+ * Formulaire de publication ouverte
+ */
+
+#formulaire_publication_ouverte, #formulaire_publication_ouverte_info, #formulaire_publication_ouverte_agenda
+{
+	display : block;
+	margin-bottom: 3em;
+/*
+	max-width:65.5em;
+*/
+	min-width:50em;
+	overflow:visible;
+	position:relative;
+}
+
+/*
+ * Système de menu
+ */
+
+#menu div.menu 
+{
+	margin-top : 6px;
+	display : block;
+	float : right;
+	border-left : 1px solid;
+	border-top : 1px solid;
+	cursor : pointer;
+}
+
+#menu div.premier 
+{
+	border-left : 1px solid;	
+}
+
+#menu div.dernier 
+{
+	border-right : 1px solid;	
+}
+
+#menu div.menu div.menuTitre 
+{
+	display: block;
+	border:0 none;
+	float:left;
+	width: 120px;
+	font-size : 1.3em;
+	text-align : center;
+	clear:both;
+}
+
+#menu div.menu ul.menuItem 
+{
+	display: none;
+	list-style-image:none;
+	list-style-position:outside;
+	list-style-type:none;
+	margin:0;
+	padding:0;
+	border : 2px solid;
+	border-left : 1px solid;
+	font-size : 10pt;
+	text-align : left;
+	padding-left : 5px;
+}
+
+/*
+ * Système d'onglet
+ */
+
+#onglets div.tabs
+{
+	display : block;
+/*
+	width : 800px;
+*/
+	height : 50px;
+}
+
+#onglets div.panneau
+{
+	display : block;
+	border : 1px solid #ddd;
+	border-top : 0;
+	margin-top : 1px; 
+	padding : 10px;
+	background-color : #fff;
+	-moz-border-radius : 0px 10px 10px 10px;
+}
+
+#onglets div.tabs span
+{
+	display : block;
+	float : left;
+	width : 110px;
+	height : 50px;
+	border : 1px solid #000;
+	text-align : center;
+	cursor : pointer;
+	background-color : #eee;
+}
+
+#onglets div.tabs span.premier 
+{
+	-moz-border-radius : 10px 0px 0px 0px;	
+}
+
+#onglets div.tabs span.dernier
+{
+	-moz-border-radius : 0px 10px 0px 0px;
+}
+
+#onglets div.tabs span a
+{
+	text-decoration : none;
+	/* font-size : 1.1em; */
+	font-weight : bold;
+}
+
+#onglets div.tabs span.actif
+{
+	background-color : #AA0000;
+} 
+#onglets div.tabs span.actif a
+{
+	color : #fff;
+}
+
+#onglets div.contenu
+{
+/*
+	display : none;
+*/
+}
+
+#onglets label
+{
+	display : block;
+	width : 35%;
+	
+}
+div.modo_cadre
+{
+	display : block;
+	border:1px solid #eee;
+	border-left:2px solid #AA0000;
+	margin-bottom : 10px;
+	padding : 10px;
+}
+
+ div.mini_cadre
+{
+	display : block;
+	border:1px dashed #666666;
+	margin-bottom : 10px;
+	padding : 10px;
+    font-size: 1.3em;
+}
+
+#onglets div.cadre_redaction
+{
+	float: left;
+	width : 500px;
+}
+
+#onglets div.cadre_document
+{
+	float:left;
+	width : 180px;
+	height:380px;
+	overflow:auto;
+	padding:5px;
+}
+
+#onglets div.liste_document
+{
+	display:block;
+	float:left;
+	width:150px;
+/*
+	height:180px;
+*/
+	border:1px solid #000;
+	margin-left : 8px;
+	margin-bottom:5px;
+	text-align:center;
+	background-color:#fff;
+}
+
+#onglets div.article_previsu
+{
+	display:block;
+	background-color:#fff;
+	border : 1px solid #000;
+	height:350px;
+	overflow:auto;
+}
+
+/*
+ * Modification des styles de la recherche avancée
+ */
+.liste-articles img
+{
+	display : none;
+}
+
+
+
+
+/********************************************************/
+/* Présentation d'un article + portfolio + commentaires */
+/********************************************************/
+
+
+
+
+div.refus div.explication
+{
+	border : 2px solid;
+}
+
+div.info .pagination {
+text-align: center;
+margin: 2px;
+}
+
+div.texte { 
+	line-height: 1.25em;
+	padding-top: 5px;
+}
+span.titreArticle {  
+	line-height: 1.25em; 
+}
+div.caseArticle:hover {  
+	background: #fefefe; 
+}
+div.contenu-article { 
+	background: #FFF url(img/stripelight.png);
+	padding: 8px; 
+}
+div.texte span.spip_documents 
+{
+	margin: 15px 30px 15px 15px;
+}
+
+
+
+
+#documents_portfolio, div.thematique, div.formulaire_spip {
+	margin-top : 10px;
+} 
+div.mini_cadre
+{
+	margin-top : 20px;
+}
+
+
+div.commentaire {
+	margin-top : 30px;
+}
+div.commentaire div.explication ul {
+	list-style-type:circle;
+}
+
+/* Moderation des commentaires */
+
+.commentaire_dernier
+{
+	background-color: #aaa;
+}
+
+div.formulaire_spip fieldset.commentaire_cache
+{
+	border-left : 4px solid #AA0000;
+	background-color: #E6ADAD;
+}
+div.formulaire_spip fieldset.commentaire_prop
+{
+	border-left : 4px solid #FFA500;
+	background-color: #F9E5C1;
+}
+div.formulaire_spip fieldset.commentaire_pub
+{
+	border-left : 4px solid #338626;
+	background-color: #AFD6A9;
+}
+
+fieldset.danger
+{
+	border : 1px dashed #AA0000;
+}  
+
+div.formulaire_spip fieldset.danger 
+{ 
+	margin-bottom: 2px;
+}
+
+div.mod_commentaire_titre
+{
+	font-size : 1.1em;
+	margin-top : 5px;	
+}
+
+div.mod_commentaire_info
+{
+	display :block;
+	font-style : italic;
+}
+
+
+div.mod_commentaire_texte
+{
+	display : block;
+	background-color : #fff;
+	padding-left : 10px;
+	margin : 5px;
+	margin-left : 0;
+	border : 1px dashed #777;
+	text-align : justify;
+	font-size : 1.1em	
+	
+}
+
+/* fin moderation commentaire */
+
+#documents_portfolio h2, div.thematique h2{
+	font-size : 1.5em;
+	color : black;
+	border-bottom : 2px solid #AA0000;
+}
+#documents_portfolio img.spip_logos {
+	border: 2px solid #AA0000;
+}
+
+
+div.formulaire_spip h2,div.commentaire h2 {
+	font-size : 1.5em;
+	color : black;
+	border-bottom : 2px solid #AA0000;
+}
+
+div.commentaire {
+}
+
+ul.forum {
+	list-style-image:none;
+	list-style-position:outside;
+	list-style-type:none;
+	padding: 0px;
+}
+
+
+ul.forum div.forum-message {
+	border : 1px dashed #bbb;
+	padding: 0 10px;
+	
+}
+div.forum-message {
+	border : 1px dashed #bbb;
+	padding: 0 10px;
+	
+}
+
+li.forum-fil {
+	margin-bottom : 20px;
+	list-style-type:none;
+}
+
+li.forum-fil li {
+	list-style-type:none;
+	margin-bottom : 20px;
+	margin-top : 20px;
+}
+
+
+
+/*=============================*/
+
+/**************/
+/* DECORATION */
+/**************/
+
+
+fieldset legend,fieldset_agenda legend
+{
+	font-size : 1.2em;
+}
+
+#menu div.menu 
+{
+	border-color : #000;
+	background-color : #AA0000;
+}
+
+#menu div.premier {
+	border-color : #000;
+	-moz-border-radius : 10px 0px 0px 0px;
+}
+
+#menu div.dernier {
+	border-color : #000;
+	-moz-border-radius : 0px 10px 0px 0px;
+}
+
+#menu div.menu div.menuTitre
+{
+	color: white;
+}
+
+#menu div.menu ul.menuItem 
+{
+	border-color : black;
+	background-color : #f5eded;
+}
+
+#menu div.menu ul.menuItem span.sousTitre {
+	font-weight : bold;
+	color : black;
+}
+
+#menu div.menu ul.menuItem a {
+	text-decoration : none;
+	color :  #AA0000;
+}
+#menu div.menu ul.menuItem a:hover {
+	text-decoration : underline;
+}
+
+#colonneDroite div.titreRubrique, #colonneDroite-2col  div.titreRubrique,
+.edito  div.titreRubrique, .prepub  div.titreRubrique, .colonnes  div.titreRubrique
+{
+	color : #222;
+	padding : 4px;
+	display: block;
+ 	font-size: 1.05em;
+    	font-weight: bold;
+	text-transform: capitalize;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+#colonneDroite div.ancres, #colonneDroite-2col div.ancres, .colonnes  div.ancres
+{
+	text-align : center;
+}
+
+#colonneDroite div.caseArticle a, #colonneDroite-2col div.caseArticle a, .colonnes  div.caseArticle a{
+	color : #C62274;
+	text-decoration: none;
+	font-weight : bold;
+
+}
+#colonneDroite div.caseArticle a:hover, #colonneDroite-2col div.caseArticle a:hover, .colonnes div.caseArticle a:hover {
+	color : #87174E;
+}
+
+#colonneDroite div.caseArticle span.dateArticle, #colonneDroite-2col div.caseArticle span.dateArticle, .colonnes  div.caseArticle span.dateArticle {
+	color : #444;
+}
+
+#colonneDroite div.caseArticle span.nombreCommentaire, #colonneDroite-2col div.caseArticle span.nombreCommentaire, .colonnes div.caseArticle span.nombreCommentaire{
+	color : #000;
+}
+
+#colonneDroite div.piedInfo, #colonneDroite-2col div.piedInfo, .colonnes div.piedInfo
+{
+	text-align : center;
+	border-color : #ccc;
+}
+
+/*
+ * Decoration du cadre alerte
+ */
+div.alerte label
+{
+	display : block;
+	float : left;
+	width : 200px;
+}
+
+/*
+ * decoration des articles
+ */
+
+div.article_publication
+{
+	background-color : #fff;
+	padding : 10px;
+	border :  1px solid #000;
+}
+#colonneDroite div.info, #colonneDroite-2col div.info, .colonnes div.info {
+    margin-bottom: 12px;
+}
+#colonneDroite div.piedInfo, #colonneDroite-2col div.piedInfo, .colonnes div.piedInfo {
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+.formulaire_spip .boutons a {
+    text-align: left;
+}
+.avis_droite
+{    
+    background: none repeat scroll 0 0 #FFFFFF;
+    float: right;
+    font-size: 1em;
+    font-weight: normal;
+	padding: 3px;
+	display : inline;
+	margin-right: 10px;    
+	margin: 8px;
+	border :  1px solid #bbb;
+
+}
+.avis_droite_modo
+{    
+    background: none repeat scroll 0 0 #FFFFFF;
+    float: right;
+    font-size: 1em;
+    font-weight: normal;
+	padding: 3px;
+	display : inline;
+
+}
+.avis_droite_mod
+{    
+    background: none repeat scroll 0 0 #FFFFFF;
+    float: right;
+    font-size: 1em;
+    font-weight: normal;
+	padding: 3px;
+	display : inline;
+	border :  1px solid #bbb;
+
+}
+
+.avis_goche 
+{       
+	padding: 10px;    
+	float: left;
+	margin: 2px;
+}
+
+.modo_droite
+{    
+    background: none repeat scroll 0 0 #FFFFFF;
+    float: right;
+    /*position : fixed;
+    top : 0;
+    left : 0;*/
+    font-size: 1em;
+    font-weight: normal;
+    /* padding: 2px;*/
+	border :  1px solid #eee;    
+	border-left: 2px solid #AA0000;
+	padding: 2px;
+}
+
+div.barre_modo  
+{    
+    font-weight: bold;
+}
+
+.meta_droite
+{    
+	background: #FFF url(img/background.png);
+    float: right;
+    font-size: 1.3em;
+    font-weight: bold;
+	border :  1px dashed #ccc;
+    margin: 0 0.2em 0.2em;
+    padding: 0.2em;
+}
+.titre-article  
+{      
+	border-bottom: 1px solid #ccc; border-bottom: 1px solid #999;
+	padding: 4px; 
+}
+.titre-article-resume
+{      
+	border-bottom: 1px solid #ccc;
+	border-top: 0 solid #999;
+	margin :2px;
+}
+.titre-article-edito
+{      
+	border-bottom: 1px solid #ccc;
+	margin :2px;
+}
+.edito .meta_droite a, .liste  .meta_droite a
+{    
+	text-decoration : none;
+	color: #000000;
+}
+.edito .meta_droite a:hover, .liste  .meta_droite a:hover
+{    
+	text-decoration : none;
+	color: #AA0000;
+}
+
+.etape_droite
+{    
+	display: inline;
+}
+.etape_droite a
+{    
+    font-size: 0.9em;
+}
+.avis_publie
+{
+	color : #288107;
+	float : right;
+}
+.avis_attente
+{
+	color : #BD6F02;
+	float : right;
+}
+.avis_debat
+{
+	color : #BD6F02;
+	float : right;
+}
+.avis_refuse
+{
+	color : #D80000;
+	float : right;
+}
+.img_droite
+{    
+	margin-left: 10px;
+	width: 22px;
+	height: 22px;
+	float : right;
+	background: url("img/haut.png") no-repeat left;
+}
+div.formulaire_spip .fieldset_agenda ul {
+    margin: 10px;
+    font-size: 1em;
+}
+div.formulaire_spip .fieldset_agenda label {    
+	width: 200px;    padding: 10px;
+}
+
+#etape_3 select{
+    height: 210px;
+    width: 70%;
+}
+.pseudo
+{    
+    font-weight : bold;
+}
+.info_extra
+{    
+    font-size: 0.8em;
+    display : block;
+    margin-bottom: 8px;
+}
+.edito div.titre a:hover{
+    text-decoration: none;
+}
+.pagination
+{    
+    
+    margin: 15px;
+}
+.markItUp .markItUpHeader {
+    width: 90%;
+}
+span.article-liste, span.article-liste a{
+    vertical-align: top;
+}
+div.cadre-pied {
+    border: 1px solid #777;
+    font-weight: bold;
+	-moz-border-radius : 5px;
+	-webkit-border-radius : 5px;    
+	margin: 10px 0;
+	padding : 10px;
+	background: url(img/stripe.png);
+	font-style: italic;
+}
+.cadre-pied a.listeimc{
+    font-weight: normal;
+}
+#mention {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.page-article .avertissement{
+    margin-bottom: 0px;
+}
+div.formulaire_forum {
+    margin-top: 2px;
+}
+.prepub div.sous-titre {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 10px;
+}
+div.formulaire_spip fieldset.niveau2 {
+	font-size: 0.9em;
+    margin-bottom: 0px;
+    border :none;
+}
+div.formulaire_spip fieldset.niveau3inline {
+	font-size: 0.9em;
+    margin-bottom: 0px;
+    border :none;
+    display : inline;
+    text-align : center;
+}
+.contenu fieldset h3   {     
+	color: #666	;
+    font-size: 1em;
+    font-weight: 200;
+    padding-left: 10px;
+    margin-top: 0;
+    font-style: italic;
+}
+.contenu fieldset h3 p   {	
+    margin: 0;
+}
+.contenu fieldset.niveau2 .page-article h3.spip, h3.spip {  
+	color: #777777;     
+    font-size: 1.2em;    
+    line-height: 1.2em;
+    margin-bottom: 0;
+    padding-left: 0;
+    clear: left;
+/*
+    padding-top: 0.2em;     
+*/
+}
+div.formulaire_spip .page-article li {
+    clear: both;
+    margin-bottom: 0;
+    padding-top: 0;
+}
+.contenu_erreurs   { 
+    padding: 10px;  
+    padding-top: 2px;  
+    font-weight: normal; 
+}
+
+.contenu fieldset h4   { 
+    padding-left: 15px;  
+}
+div.lieu_cadre {
+    border: 1px solid #bbb;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+div.formulaire_spip fieldset.niveau2 .page-article{
+    font-size: 1em;
+    margin: 0;
+}
+div.formulaire_spip fieldset .page-article {
+    font-size: 1em;
+}
+div.formulaire_spip ul {
+    font-size: 1em;
+}
+.niveau2 div.formulaire_spip ul {
+    border: none;
+    font-size: 1em;
+    margin: 10px 5px 5px;
+    padding: 10px;
+}
+.niveau2 .page-article {
+    border-top: 1px solid #bbb;
+    border-bottom: 1px solid #bbb;
+    background: none repeat scroll 0 0 #FFFFFF;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+div.formulaire_spip fieldset.niveau2  .page-article{
+    font-size: 1em;
+}
+
+div.formulaire_spip fieldset.niveau2 {
+    border: medium none;
+    font-size: 1em;
+}
+div.formulaire_spip fieldset {
+/*
+    background: none repeat scroll 0 0 #FFFFFF;
+*/
+    font-size: 1em;
+}
+div.formulaire_spip .page-article ul {
+    border: none;    
+    list-style-type: disc;    
+    padding: 2px;  
+    padding-left: 25px;
+}
+div.formulaire_spip label span.oblige,  span.oblige{
+	color : #F07E16	;
+	font-size : 1.2em;
+	font-weight : bold;
+}
+
+hr {
+    border : medium none #CCCCCC;
+    width : 50%;
+}
+
+.black {
+	color : #000	;
+	background: none repeat scroll 0 0 #000;
+}
+
+.formulaire_ok  {  
+color: #288107;
+}
+.meta_info {     
+    padding-bottom: 0px;  
+}
+
+.codedoc {
+	padding-top: 4px;    
+    float: left;
+	background: none repeat scroll 0 0 #fff;
+    border : 1px solid #ccc;
+}
+
+#etape_1{
+    clear: both;
+}
+
+.reponse_formulaire_ok {  
+	font-size : 1.2em;
+	color: #288107;
+}
+
+div.formulaire_spip fieldset.previsu ul {
+    border:2px solid green;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;	
+    border-radius:8px;
+}
+
+.midi{
+    clear: left;    
+    margin: 4px;
+    text-align: center;
+}
+
+.blink {
+	color: green;
+    text-align: center;
+   	font-weight : bold;   
+/*
+   	text-decoration: blink;
+*/
+}
+
+div.formulaire_spip #publication_ouverte_info ul, div.formulaire_spip #publication_ouverte_agenda ul{
+	background: #FFF url(img/background.png);
+}
+
+formulaire_recherche.formulaire_recherche {
+    margin-top: 0px;
+}
+
+div.formulaire_recherche {
+	margin-top : 0px;   
+} 
+.liens div.formulaire_recherche { 
+/*
+	float: left;
+    margin-left: 15px;
+*/
+} 
+.liens #recherche{    
+	background: url("img/search_field.png") no-repeat scroll 0 0 #FFFFFF;
+    color: #555;
+    font-family: Arial,Helvetica,"Liberation Sans",FreeSans,sans-serif;
+    font-size: 10pt;
+    font-style: italic;
+    padding-left: 30px; 
+    border: none;      
+} 
+.liens form{
+    margin: 0;
+}
+.contenu_erreurs{    
+
+    background: url("img/background.png") repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+/*
+    font-size: 1.2em;
+*/
+    font-weight: 700;
+/*
+    height: 100%;
+*/
+    margin-bottom: 10px;
+    display : block;
+} 
+.contenu_erreurs big{
+   color :red;
+/*
+   padding: 10px;   
+*/
+} 
+.centrer
+{
+	text-align : center;
+}
+#tooltip {
+	position: absolute;
+	z-index: 3000;
+	border: 1px solid #111;
+	right: 15px;
+/*
+	background: url(img/stripe.png);
+*/
+	background-color: #fff;
+	padding: 5px;
+	opacity: 1;
+	font-weight: bold;
+}
+#tooltip h3, #tooltip div { margin: 0; font-weight: normal;font-size: 1.1em;}
+#colonneDroite div.info, #colonneDroite-2col  div.info, #colonneDroite-2col  div.liens, #colonneDroite div.liens, .colonnes div.liens {
+	border-left: 0px solid #ddd;   	
+	border-right: 0px solid #ddd;  	
+	border-bottom: 0px solid #ccc; 
+	background: #FFF url(img/bkgd-dark2.png);  	
+}
+.spip_documents_left {
+	clear: left;
+}
+input.previsu{
+	 border: 2px solid #00B000;
+}
+
+div.lang, div.lang a{  display: inline;}
+
+.ytalic  {
+	font-style: italic;
+	color: #444444;
+}
+.ytalic  {
+	font-style: italic;
+	color: #444444;
+}
+.titre_info{
+	font-size: 1.1em;
+	font-weight: bold;
+	margin-bottom: 0.2em;
+	text-transform: capitalize;
+}
+.choix.chmot {
+    float: left;
+    height: 28px;
+    width: 50%;
+}
+div.formulaire_spip ul.chroup {
+    border: none;
+}
+div.formulaire_spip ul.chmots h2 {
+    border-bottom: 2px solid #ccc;
+    clear: both;
+    color: #000000;
+    font-size: 1.2em;
+}
+div.formulaire_spip ul.chmots {
+	padding-bottom: 2em;
+}
+
+.caseArticle.favori {    
+/*
+	background: none repeat scroll 0 0 #fff;
+    border: 1px solid #ffa500;
+    border-radius: 10px;
+    padding: 0.5em;
+}
+#colonneDroite div.caseArticle.favori, #colonneDroite-2col div.caseArticle.favori, .colonnes div.caseArticle.favori {
+    padding: 1em;
+*/
+}
+.caseArticle.favori:hover {
+   /* background: none repeat scroll 0 0 #FFFFFF;*/
+}
+
+.cd-top {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  position: fixed;
+  bottom: 40px;
+  right: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  /* image replacement properties */
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  background: #AA0000 url(../img/cd-top-arrow.svg) no-repeat center 50%;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+  -moz-transition: opacity .3s 0s, visibility 0s .3s;
+  transition: opacity .3s 0s, visibility 0s .3s;
+}
+.cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+  -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+  -moz-transition: opacity .3s 0s, visibility 0s 0s;
+  transition: opacity .3s 0s, visibility 0s 0s;
+}
+.cd-top.cd-is-visible {
+  /* the button becomes visible */
+  visibility: visible;
+  opacity: .4;
+}
+.cd-top.cd-fade-out {
+  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+  opacity: .3;
+}
+.no-touch .cd-top:hover {
+  background-color: #e86256;
+  opacity: 1;
+}
+@media only screen and (min-width: 768px) {
+  .cd-top {
+    right: 20px;
+    bottom: 20px;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .cd-top {
+    height: 30px;
+    width: 40px;
+    right: 30px;
+    bottom: 30px;
+  }
+}
+
+div.focus{ 
+    border: 1px dotted #fff;
+    clear: none;
+    display: inline;
+    float: left;       
+    margin: 0 5px 4px 5px;
+    width: 47%;
+}
+
+.focus div.titre-article-resume
+{
+	font-size: 0.8em;
+	min-height: 40px; 
+}
+.focus div.texte
+{
+/*
+	min-height: 80px; 
+*/
+}
+.modo_cadre .choix {
+    clear: both;
+    float: left;
+}
+
+.focus div.sous-titre-agenda{
+    font-size: 1em;
+    margin: 5px;
+    width: 90%;
+    float: none;    
+    padding: 5px;
+}
+div.formulaire_spip label {
+    clear: both;
+}
+a.spip_out, a.spip_glossaire {
+    background: transparent url("img/out.gif") no-repeat scroll right center;
+    color: #46839b;
+    padding-right: 12px;
+    color: #8aa02e;
+    font-weight: bold;
+}
+ a.caseSite.spip_out {
+    background: transparent url("img/out.gif") no-repeat scroll right 10px;
+}
+a.fc-event:hover {
+    background: #ddd none repeat scroll 0 0;
+}

@@ -1,0 +1,24 @@
+#CACHE{3600*24}
+
+<a name="haut"></a>
+
+[(#INCLURE{fond=noix/liens_page_special})]
+
+<BOUCLE_texte_collectif(RUBRIQUES){id_rubrique=#CONFIG{indymedia/rubrique_collectif}}>
+<div class="info">
+	[<a name="(#TITRE|no_space)"></a>]
+
+	<div class="titreRubrique">[(#TITRE)]</div>
+	<BOUCLE_article(ARTICLES){id_rubrique}{0,20}{par date}{inverse}>
+		<div class="caseArticle">
+			<span class="titreArticle"><a href="#URL_PAGE{article-collectif,id_article=#ID_ARTICLE}">[(#TITRE|lettreMajuscule)]</a></span>
+			<span class="dateArticle"><:le:>&nbsp;[(#DATE|affdate)]</span>
+		</div>
+	</BOUCLE_article>
+
+	<div class="piedInfo">
+		<a href="#haut">Retourner en haut</a><br />
+	</div>
+
+</div>
+</BOUCLE_texte_collectif>

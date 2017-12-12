@@ -1,0 +1,19 @@
+#CACHE{0}
+
+	<div class="avertissement">
+	[<p>(#CONFIG{metapack::indymedia/texte_alerter}|extraire_multi{#LANG}|propre)</p>]
+			<div>
+			<a href="#URL_PAGE{article,id_article=#CONFIG{metapack::indymedia/article_regles} }">
+				<:politique_editoriale:>
+			</a>
+			</div>
+			<div>
+			<BOUCLE_article(ARTICLES){id_article}>
+				<a href="#URL_ARTICLE"><:revenir_article:></a>
+			</BOUCLE_article>
+			</div>
+			<br />
+	</div>
+
+	#FORMULAIRE_ALERTER
+

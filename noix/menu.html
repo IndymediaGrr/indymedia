@@ -1,0 +1,84 @@
+
+<div class="menuder-container">
+<ul id="nav" class="menuder">
+	<li class="menuderli">
+	<ul>
+	<li>
+		<span class="sousTitre"><:menu_indymedia:></span>
+		<ul class="shaddy">
+		
+		<li><a href="#URL_PAGE{collectif}"><:contacter_le_collectif:></a></li>
+		[(#PLUGIN{abomailmans}|oui)
+			#INCLURE{fond=noix/abomailman}	
+		]
+		<BOUCLE_articles_collectif(ARTICLES){id_rubrique=#CONFIG{indymedia/rubrique_collectif}}{par id_article}>
+			<li><a href="#URL_ARTICLE">[(#TITRE)]</a></li>
+		</BOUCLE_articles_collectif>
+		<BOUCLE_rubrique_collectif(RUBRIQUES){id_parent=#CONFIG{indymedia/rubrique_collectif}}>
+			<li><a href="#URL_PAGE{liste,id_rubrique=#ID_RUBRIQUE}">[(#TITRE)]</a></li>
+		</BOUCLE_rubrique_collectif>
+		<li><a href="https://www.indymedia.org"><:menu_indy_global:></a></li>
+		#INCLURE{fond=noix/menu_admin}
+		</ul>
+	</li>
+		 
+	<li>	
+		<span class="sousTitre"><:mots:titre_page_mots_tous:></span>
+		<BOUCLE_groupe_test(GROUPES_MOTS){tous}{0,1}>
+		</BOUCLE_groupe_test> 
+		<ul class="shaddy">	 
+		<BOUCLE_groupe_barre(GROUPES_MOTS){openKey}>
+			<li class="mamy">
+				<a>#TITRE</a>
+				<ul class="shaddy">				
+				<BOUCLE_mot(MOTS){id_groupe}{par titre}>
+					<BOUCLE_mots_liens(mots_liens){id_mot}{objet=article}{0, 1}>
+					</BOUCLE_mots_liens>
+					[<li><a href="#URL_PAGE{theme,id_mot=#ID_MOT}">(#TITRE*|extraire_multi{#ENV{lang},#ARRAY{'lang_defaut','fr'}}|propre|supprimer_tags|supprimer_numero)</a></li>]	
+					</B_mots_liens>
+				</BOUCLE_mot>
+				</B_mot>
+				</ul>
+			</li>
+		</BOUCLE_groupe_barre>
+		</ul>
+		</B_groupe_test>
+	</li>
+		 
+	<li>
+		<span class="sousTitre"><:articles:></span>
+		<ul class="shaddy">
+		<BOUCLE_si_open_pub_ouvert(CONDITION){si  #CONFIG{metapack::indymedia_modo/moderation_publication_ouverte}|non}>
+		<li><a href="#URL_PAGE{prepublication}"><:publiez:></a></li>
+		</BOUCLE_si_open_pub_ouvert>
+		<li><a href="#URL_PAGE{recherche}"><:menu_recherche:></a></li>
+		<li><span class="sousTitre"><:menu_categories:></span></li>
+		<li><a href="#URL_PAGE{agenda}"><:menu_agenda:></a></li>
+		<BOUCLE_rubrique_menu(RUBRIQUES){id_parent=#CONFIG{indymedia/rubrique_contribution} }{tout}{par id_rubrique}>
+			<li><a href="#URL_PAGE{liste,id_rubrique=#ID_RUBRIQUE}">[(#TITRE*|extraire_multi{#ENV{lang},#ARRAY{'lang_defaut','fr'}}|propre|supprimer_tags|supprimer_numero)]</a></li>
+		</BOUCLE_rubrique_menu>
+		<BOUCLE_rubrique_elsewhere(RUBRIQUES){id_rubrique=#CONFIG{indymedia/rubrique_elsewhere} }{tout}{par id_rubrique}>
+			<li><a href="#URL_PAGE{liste,id_rubrique=#ID_RUBRIQUE}">[(#TITRE*|extraire_multi{#ENV{lang},#ARRAY{'lang_defaut','fr'}}|propre|supprimer_tags|supprimer_numero)]</a></li>
+		</BOUCLE_rubrique_elsewhere>
+		<li><a href="#URL_PAGE{liste-editos}"><:menu_edito:></a></li>
+		
+		[(#CONFIG{indymedia/en_attente_actif}|=={en_attente_actif}|oui|ou
+			{#CONFIG{indymedia/en_debat_actif}|=={en_debat_actif}|oui}|ou
+			{#CONFIG{indymedia/en_debat_actif}|=={refus_actif}|oui})
+				<li><span class="sousTitre"><:menu_autres:></span></li>
+		]
+		[(#CONFIG{indymedia/en_attente_actif}|=={en_attente_actif}|oui)
+			<li><a href="#URL_PAGE{attente}"><:menu_en_attente:></a></li>
+		]
+		[(#CONFIG{indymedia/en_debat_actif}|=={en_debat_actif}|oui)
+			<li><a href="#URL_PAGE{debat}"><:menu_en_debat:></a></li>
+		]
+		[(#CONFIG{indymedia/refus_actif}|=={refus_actif}|oui)
+			<li><a href="#URL_PAGE{refus}"><:menu_donjon:></a></li>
+		]
+		</ul>	 
+	</li>
+	</ul> 
+	</li>
+</ul>
+</div>

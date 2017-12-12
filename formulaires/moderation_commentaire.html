@@ -1,0 +1,62 @@
+[(#REM) Moderation des commentaires ]
+
+<div class="formulaire_spip ajax" id="formulaire_moderation_commentaire">
+
+	<B_commentaire>
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data' id='moderationCommentaire'>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<fieldset class="danger">
+			<p><:modrap:attention_reflechir:></p>
+			<label><:moderation_tous_commentaires:></label>
+			<select name="moderation_action">
+				<option value="cacher"><:moderation_cacher:></option>
+				<option value="montrer"><:moderation_montrer:></option>
+			</select>
+			<br />
+			<p class="boutons">
+				<input name="envoyer" type="submit" value="<:moderation_btn_envoyer:>" class="submit" />
+			</p>
+
+		</fieldset>		
+
+		[<br /><span class='erreur_message'>(#ENV**{erreurs}|table_valeur{dernier_commentaire})</span>]
+		[<br /><span class='erreur_message'>(#ENV**{erreurs}|table_valeur{moderation_action})</span>]
+
+		<center>#PAGINATION</center>
+		<br />
+
+		<BOUCLE_commentaire(FORUMS){statut IN publie,off,prop}{objet=article}{par date}{inverse}{pagination 40}>
+				<fieldset class="
+				[(#CONFIG{metapack::indymedia/dernier_commentaire}|=={#ID_FORUM}|?{commentaire_dernier})]
+				[(#STATUT|=={off}|?{commentaire_cache})]
+				[(#STATUT|=={prop}|?{commentaire_prop})]
+				[(#STATUT|=={publie}|?{commentaire_pub})]
+				"
+				>
+					<div class="mod_commentaire_dernier">
+
+						<input name="dernier_commentaire" type="radio" value="#ID_FORUM" [(#CONFIG{metapack::indymedia/dernier_commentaire}|=={#ID_FORUM}|?{checked="yes"})] />
+						[(#CONFIG{metapack::indymedia/dernier_commentaire}|=={#ID_FORUM}|?{<b><:modrap:alerte_dernier_commentaire:></b>,<:modrap:dernier_commentaire:>})]
+
+					</div>
+
+					<div class="mod_commentaire_titre">
+						<input name="selection[]" type="checkbox" value="#ID_FORUM"/>
+						<strong>#TITRE</strong> | 
+						<span class="dateArticle">
+							<:poste_le:> [(#DATE|affdate)] [(#DATE|heures)]h[(#DATE|minutes)] <:par:>&nbsp;#AUTEUR
+						</span>
+						<BOUCLE_article(ARTICLES){id_article=#_commentaire:ID_OBJET}{tout}>
+							<a href="#URL_ARTICLE#forum#_commentaire:ID_FORUM"> ...<:voir_dans_l_article:></a>
+						</BOUCLE_article>
+					</div>				
+					<div class="mod_commentaire_texte">#TEXTE</div>
+				</fieldset>
+		</BOUCLE_commentaire>
+
+	</form>
+	</B_commentaire>
+</div>
+
+

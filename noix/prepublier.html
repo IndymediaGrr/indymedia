@@ -1,0 +1,14 @@
+#CACHE{3600*24}
+
+<BOUCLE_article_publier(ARTICLES){id_article=#CONFIG{metapack::indymedia/article_publier}}>
+	[
+	<div class="cadre explication petit">
+	(#TEXTE)
+	</div>
+	]
+</BOUCLE_article_publier>
+
+<a class="lien_publier" href="#URL_PAGE{prepublication}">
+	<:publiez:>
+</a>
+

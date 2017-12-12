@@ -1,0 +1,73 @@
+#CACHE{0}
+<B_edito_derniers>
+<div class="colonnes colonnes_focus">
+	<div class="edito">
+	#ANCRE_PAGINATION
+	<div class="barre_focus">
+		<div class="titreRubrique">[(#CONFIG{metapack::indymedia_accueil/titre_focus}|extraire_multi|sinon{<:focus:>})]</div>
+	</div>
+		[(#SET{ligne,0})]
+	<BOUCLE_edito_derniers(ARTICLES)
+		{id_mot = #CONFIG{metapack::indymedia_accueil/mot_focus}}
+		{par date}
+		{inverse}
+		{doublons}
+		{si #CONFIG{metapack::indymedia_accueil/desactiver_focus}|non}
+		{pagination  #CONFIG{metapack::indymedia_accueil/nombre_focus}|intval|sinon{4}}>
+		[(#COMPTEUR_BOUCLE|alterner{'<div style="float:left">',""})]
+			[(#SET{modulo,#COMPTEUR_BOUCLE|modulo{2}})]
+			<BOUCLE_nouvelle_ligne(CONDITION){si #GET{modulo}|=={1}}>
+			[(#SET{ligne,#GET{ligne}|plus{1}})]
+			</BOUCLE_nouvelle_ligne>
+		<div class="focus focus#GET{ligne}">
+			<INCLURE{fond=noix/article-resume-focus}{id_article}{coupe=200}{coupe_titre=75}{ligne=#GET{ligne}}>
+		</div>
+		[(#COMPTEUR_BOUCLE|alterner{'',"</div>"})]
+			<BOUCLE_nouvelle_ligne_non(CONDITION){si #GET{modulo}|=={0}}>
+			<script type="text/javascript">
+				// Crée un nouvel objet maxheight (tableau associatif)
+				var maxheight = {};
+				// Pour chaque rangée, insère la hauteur dans l'objet,
+				// ou écrase la valeur précédente si la hauteur est supérieure
+				$(".colonnes_focus[ .focus(#GET{ligne}) .cadre]").each( function() {
+					var myrow = $(this).attr("class").split(" ")[1];
+					var height = $(this).height(); 
+					if ( ! maxheight[myrow] ) {
+						maxheight[myrow] = height;
+					} else if ( maxheight[myrow] < height ) {
+						maxheight[myrow] = height;
+					}
+				});			
+				// Force la hauteur du .bloc à partir de l'objet maxheight
+				$(".colonnes_focus[ .focus(#GET{ligne}) .cadre]").each( function() {
+					var myrow = $(this).attr("class").split(" ")[1];
+					$(this).css('height',maxheight[myrow]);
+				});
+
+				// Crée un nouvel objet maxheight (tableau associatif)
+				var maxheight = {};
+				// Pour chaque rangée, insère la hauteur dans l'objet,
+				// ou écrase la valeur précédente si la hauteur est supérieure
+				$(".colonnes_focus[ .ytalic(#GET{ligne})]").each( function() {
+					var myrow = $(this).attr("class").split(" ")[1];
+					var height = $(this).height(); 
+					if ( ! maxheight[myrow] ) {
+						maxheight[myrow] = height;
+					} else if ( maxheight[myrow] < height ) {
+						maxheight[myrow] = height;
+					}
+				});			
+				// Force la hauteur du .bloc à partir de l'objet maxheight
+				$(".colonnes_focus[ .ytalic(#GET{ligne})]").each( function() {
+					var myrow = $(this).attr("class").split(" ")[1];
+					$(this).css('height',maxheight[myrow]);
+				});
+
+			</script>
+			</BOUCLE_nouvelle_ligne_non>
+	</BOUCLE_edito_derniers>
+		[(#TOTAL_BOUCLE|modulo{2}|oui)</div>]
+	[<p class="pagination">(#PAGINATION{page})</p>]
+	</div>
+</div>
+</B_edito_derniers>

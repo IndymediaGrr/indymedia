@@ -1,0 +1,19 @@
+#CACHE{0}
+<div id="colonneDroite">
+[(#REM)
+	Le fil de presse
+]
+<BOUCLE_si_agenda(CONDITION){si  #ENV{id_rubrique}|=={#CONFIG{metapack::indymedia/rubrique_agenda}}}>
+</BOUCLE_si_agenda>
+	<a name="haut"></a>
+	<INCLURE{fond=noix/liens_page_special}{noix_moderation=oui}{noix_lang=oui}>
+	<INCLURE{fond=noix/fil-colonneDroiteAgenda}{ajax}>
+	<INCLURE{fond=noix/liens_sites_references}{ajax}>
+</B_si_agenda>
+	<a name="haut"></a>
+	<INCLURE{fond=noix/liens_page_special}{noix_moderation=oui}{noix_lang=oui}>
+	<INCLURE{fond=noix/fil-colonneDroite}{ajax}>
+		<INCLURE{fond=noix/fil-de-presse-elsewhere}{env}{ajax}>
+	<INCLURE{fond=noix/liens_ailleurs}{ajax}>
+<//B_si_agenda>
+</div>

@@ -1,0 +1,4 @@
+#CACHE{0}
+	<BOUCLE_foro(FORUMS) {id_article}></BOUCLE_foro>
+		[(#TOTAL_BOUCLE|>{0}|?{[&nbsp;-&nbsp;(#TOTAL_BOUCLE) [(#TOTAL_BOUCLE|singulier_ou_pluriel{forum_commentaire,forum_commentaires})]],''})]
+	<//B_foro>

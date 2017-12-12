@@ -1,0 +1,9 @@
+<BOUCLE_document(DOCUMENTS)
+		{extension==jpg|png|gif|svg}
+		{mode IN image, document}
+		{id_article}
+		{par id_document}
+		{tout}
+		{0,1}>
+		<span class="vignette-fil">[(#FICHIER|image_reduire{80,60}|image_recadre{40,40}|inserer_attribut{alt, #TITRE|attribut_html})]</span>
+	</BOUCLE_document>

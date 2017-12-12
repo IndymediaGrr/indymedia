@@ -1,0 +1,17 @@
+#CACHE{3600*24}
+
+<BOUCLE_principale(AUTEURS){id_auteur}>
+<div class="page-article">
+	<div class="titre"><:contact:></div>
+			<div class="cartouche">
+				[(#LOGO_AUTEUR|image_reduire{40,*})]
+				<h3>#NOM</h3>
+			</div>
+	
+			[<div class="#EDIT{bio} texte note">(#BIO)</div>]
+			[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="url org spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+			</div>
+	
+			#FORMULAIRE_ECRIRE_AUTEUR
+</div>
+</BOUCLE_principale>[(#INCLURE{fond=noix/404, erreur=<:aucun_auteur:>})]<//B_principale>

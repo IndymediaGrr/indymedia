@@ -1,0 +1,54 @@
+#CACHE{0}
+
+<a name="haut"></a>
+<div id="colonneDroite">
+[(#INCLURE{fond=noix/liens_page_special})]
+[(#REM)
+	Le fil de presse
+]
+<BOUCLE_melange(CONDITION){si #CONFIG{indymedia_contribution/melanger_actif}}>
+	<div class="info">
+		[<a name="(#TITRE|no_space)"></a>]
+		<div class="titreRubrique">
+			<:derniers_posts:>
+		</div><BOUCLE_article_melange(ARTICLES){id_secteur=#CONFIG{metapack::indymedia/rubrique_contribution}}{0,#CONFIG{metapack::indymedia_contribution/nombre_article_melange} }{par date}{inverse}>
+		<div class="caseArticle">
+			<span class="titreArticle"><a href="#URL_ARTICLE">[(#TITRE|lettreMajuscule)]</a></span>
+			<span class="dateArticle">
+				<INCLURE{fond=noix/article-fil-pied,env,id_article,id_rubrique,extra,date}>
+			</span>
+		</div>
+		</BOUCLE_article_melange>
+		<div class="piedInfo">
+			<a href="#haut">Retourner en haut</a><br />
+			<BOUCLE_ancre(RUBRIQUES){id_parent=#CONFIG{metapack::indymedia/rubrique_contribution} }{tout}{par num titre, id_rubrique}{'&nbsp;|&nbsp;'}>
+				<strong><a href="#URL_PAGE{liste,id_rubrique=#ID_RUBRIQUE}">[(#TITRE)]</a></strong>
+			</BOUCLE_ancre>
+		</div>
+	</div>
+</BOUCLE_melange>
+</B_melange>
+	<BOUCLE_publication_ouverte(RUBRIQUES){id_parent=#CONFIG{metapack::indymedia/rubrique_contribution} }{tout}{par num titre, id_rubrique}>
+	<div class="info">
+		[<a name="(#TITRE|no_space)"></a>]
+		<div class="titreRubrique">
+		<a href="#URL_PAGE{liste,id_rubrique=#ID_RUBRIQUE}">
+			<:informations:>&nbsp;#TITRE
+		</a>
+		</div>
+		<BOUCLE_article(ARTICLES){id_rubrique}{0,#CONFIG{metapack::indymedia_contribution/nombre_article_rub#ID_RUBRIQUE} }{par date}{inverse}>
+		<div class="caseArticle">
+			<span class="titreArticle"><a href="#URL_ARTICLE">[(#TITRE|lettreMajuscule)]</a></span>
+			<span class="dateArticle">
+				<INCLURE{fond=noix/article-fil-pied,env,id_article,id_rubrique,extra,date}>
+			</span>
+		</div>
+		</BOUCLE_article>
+		<div class="piedInfo">
+			<a href="#URL_PAGE{liste,id_rubrique=#ID_RUBRIQUE}"><:voir_tous_article:>&nbsp;d'infos #TITRE&nbsp;</a><br />
+			<a href="#haut">Retourner en haut</a><br />
+		</div>
+	</div>
+	</BOUCLE_publication_ouverte>
+<//B_melange>
+</div>

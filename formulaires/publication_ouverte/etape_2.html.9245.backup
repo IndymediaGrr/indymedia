@@ -1,0 +1,83 @@
+<div class="cadre">
+	<div class="sous-titre"><:publication_etape_2_titre:></div>
+	<p>[(#CONFIG{metapack::indymedia/redaction})]</p>
+</div>
+
+<ul>
+	<li><label><:publication_etape_2_label_titre:></label>
+	<input name="titre" value="[(#ENV*{titre})]"  size="56" /></li>
+
+	<li><label><:publication_etape_2_redigez:></label>
+	<textarea name="texte" rows="10" cols="70"
+	class="previsualisation">[(#ENV*{texte})]</textarea></li>
+
+	<li><label><:publication_etape_2_auteur:></label><input name="pseudo" value="[(#ENV*{pseudo})]"
+	/></li>
+	<li><label><:publication_etape_2_email:></label><input name="email" value="[(#ENV*{email})]"
+	/></li>
+</ul>
+
+<fieldset>
+	<legend><:medias:bouton_ajouter_document:></legend>
+	<ul>
+	<li class='editer saisie_document_indy[ (#ENV**{erreurs}|table_valeur{document_indy}|oui)erreur]'>
+	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{document_indy})</span>]
+	<input type="hidden" name="cle_ajouter_document" value="(#ENV{cle_ajouter_document})" />
+	[<div id="ajouter_document_up">(#ENV{ajouter_document})
+	<label for="supprimer_document_ajoute"><input type='checkbox' name='supprimer_document_ajoute' id='supprimer_document_ajoute' />
+	<:lien_supprimer:></label>
+	</div>]
+	<div>
+	[<label for="ajouter_document">(#ENV{formats_documents}|join{', '})</label>]
+	<input class='file' type="file" name="ajouter_document" id="ajouter_document"[
+	accept="(#ENV{formats_documents}|join{','})"] />
+	</div>
+
+	<script type='text/javascript'>
+	jQuery('#ajouter_document_up')
+	.next()
+		.hide()
+	.prev()
+	.find(':checkbox')
+	.bind('change', function(){
+		jQuery('#ajouter_document_up').hide().next().show();
+	})
+	;
+	</script>
+	
+
+	[(#REM) Piege a robots spammeurs, dont on change le nom a chaque fois,
+	][<p style="display: none;">
+		<label for="(#ENV{cle_ajouter_document})"><:antispam_champ_vide:></label>
+		<input type="text" class="text" name="#ENV{cle_ajouter_document}" id="#ENV{cle_ajouter_document}" value="#ENV{#ENV{cle_ajouter_document}}" size="10" />
+	</p>]
+	[(#ENV{cle_ajouter_document}|non)
+	<p style="display: none;">
+		<label for="nobot_forum"><:antispam_champ_vide:></label>
+		<input type="text" class="text" name="nobot" id="nobot_forum" value="#ENV{nobot}" size="10" />
+	</p>
+	]	
+	<p class='boutons'><input class='submit' type="submit" name="joindre_upload" value="<:bouton_upload:>"/></p>
+
+	</li>
+	</ul>
+	</fieldset>
+<B_document_article>
+	<p>[(#CONFIG{metapack::indymedia/inclure_document})]</p>
+	<div class="mini_cadre">
+
+				
+	<BOUCLE_document_article(DOCUMENTS){mode IN image, document}{id_article=#ENV*{id_article}}{tout}>
+		<div class="liste_document">
+			<div>[(#LOGO_DOCUMENT)]</div>
+			<div>
+				<<code>doc</code>#ID_DOCUMENT<code>|left</code>><br />
+				<<code>doc</code>#ID_DOCUMENT<code>|center</code>><br />
+				<<code>doc</code>#ID_DOCUMENT<code>|right</code>><br />
+			</div>
+		</div>
+	</BOUCLE_document_article>
+	<br class="spacer" />
+	</div>
+</B_document_article>
+

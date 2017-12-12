@@ -1,0 +1,32 @@
+<paquet
+       prefix="indymedia"
+       categorie="edition"
+       version="0.1.4"
+       etat="dev"
+       compatibilite="[3.0.0-rc;3.1.*]"
+       logo="images/indy_mini.png"
+       documentation=""
+       schema="1.2.6"
+>
+	<nom>Indym&eacute;dia</nom>
+	<auteur>Collectif Indym&eacute;dia bxl</auteur>
+	<licence>GNU/GPL</licence>
+	<necessite nom="organiseur" compatibilite="[0.8.1;[" />
+	
+	<pipeline nom="post_propre" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/indymedia.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/indymedia.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/indymedia.php" />
+	<pipeline nom="taches_generales_cron" action="cleanit" inclure="indymedia_pipelines.php" /> 
+	<pipeline nom="autoriser" inclure="indymedia_autoriser.php" />
+	
+	<menu nom="indymedia" titre="Indym&eacute;dia" parent="menu_squelette" icone="images/indy_mini-16.png" action ="configurer_indymedia"  />
+	<menu nom="indymedia_lieux" titre="indymedia:gestion_des_lieux" parent="menu_edition" icone="images/lieux.png"  action ="lieux"/>
+	
+	<onglet nom="indymedia" titre="indymedia:configurations" parent="indymedia" icone="images/indy_mini-24.png"  action ="configurer_indymedia"/>
+	<onglet nom="indymedia_contribution" titre="indymedia:affichage_colonnes" parent="indymedia" icone="images/indy_mini-24.png"  action ="configurer_indymedia_contribution"/>
+	<onglet nom="indymedia_accueil" titre="indymedia:affichage_accueil" parent="indymedia" icone="images/indy_mini-24.png"  action ="configurer_indymedia_accueil"/>
+	<onglet nom="indymedia_listes" titre="indymedia:affichage_listes" parent="indymedia" icone="images/indy_mini-24.png"  action ="configurer_indymedia_listes"/>
+	<onglet nom="indymedia_modo" titre="indymedia:moderation" parent="indymedia" icone="images/indy_mini-24.png"  action ="configurer_indymedia_modo"/>
+
+</paquet>

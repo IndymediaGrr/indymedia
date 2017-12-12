@@ -1,0 +1,29 @@
+#CACHE{0}
+<BOUCLE_article(ARTICLES){id_article}{statut IN prepa, prop, publie, debat}>
+		<div class="sous-titre-agenda">
+		<div class='titre_info'>
+			[(#DATE_DEBUT_INDY|nom_jour)]&nbsp;[(#DATE_DEBUT_INDY|affdate)]&nbsp;[(#DATE_DEBUT_INDY|heures)]:[(#DATE_DEBUT_INDY|minutes)]
+		</div>
+		<B_lieu> 
+		 <BOUCLE_lieu(LIEUX){id_article}{0,1}>
+			[
+			<:lieu:> : (#ENV*{lieu_evenement}|sinon{#NOM}) [<br /><:adresse:> : (#ENV*{adresse_evenement}|sinon{#ADRESSE}), ][ (#ENV*{ville_evenement}|sinon{#VILLE})] [<br /> (#ENV*{tel_evenement}|sinon{#TEL})] [<br /> (#ENV*{email_evenement}|sinon{#EMAIL})] [- <a href="(#ENV*{web_evenement}|sinon{#WEB})">Site web</a>]
+			]
+		</BOUCLE_lieu>
+		</B_lieu>
+		<B_lieu_existant> 
+		<BOUCLE_lieu_existant(LIEUX){id_lieu=#ENV{id_lieu}{0,1}}>
+			[
+			<:lieu:> : (#ENV*{lieu_evenement}|sinon{#NOM}) [<br /><:adresse:> : (#ENV*{adresse_evenement}|sinon{#ADRESSE}), ][ (#ENV*{ville_evenement}|sinon{#VILLE})] [<br /> (#ENV*{tel_evenement}|sinon{#TEL})] [<br /> (#ENV*{email_evenement}|sinon{#EMAIL})] [- <a href="(#ENV*{web_evenement}|sinon{#WEB})">Site web</a>]
+			]
+		</BOUCLE_lieu_existant>
+		</B_lieu_existant> 
+			[
+			<:lieu:> : (#ENV*{lieu_evenement}) [<br /><:adresse:> : (#ENV*{adresse_evenement}), ][ (#ENV*{ville_evenement})] [<br /> (#ENV*{tel_evenement})] [<br /> (#ENV*{email_evenement})] [- <a href="(#ENV*{web_evenement})">Site web</a>]
+			]
+		<//B_lieu_existant>
+-		<//B_lieu>
+		</div>
+ 
+</BOUCLE_article>
+

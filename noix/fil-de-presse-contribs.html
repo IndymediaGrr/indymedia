@@ -1,0 +1,6 @@
+#CACHE{0}
+	<BOUCLE_publication_ouverte(RUBRIQUES){id_parent=#CONFIG{metapack::indymedia/rubrique_contribution} }{tout}{par num titre, id_rubrique}>
+	<div class="info">
+		<INCLURE{fond=noix/fil-resume-article,env, id_rubrique}>
+	</div>
+	</BOUCLE_publication_ouverte>

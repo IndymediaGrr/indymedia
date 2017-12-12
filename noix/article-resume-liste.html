@@ -1,0 +1,45 @@
+#SET{coupe, 300}
+[(#ENV{coupe}|oui) 
+	#SET{coupe, #ENV{coupe}}
+]
+#SET{coupe_titre, 250}
+[(#ENV{coupe_titre}|oui) 
+	#SET{coupe_titre, #ENV{coupe_titre}}
+]
+
+#SET{taille_vignette, 80}
+[(#ENV{taille_vignette}|oui) 
+	#SET{taille_vignette, #ENV{taille_vignette}}
+]
+<BOUCLE_article_liste(ARTICLES){id_article}>
+		<BOUCLE_rub_titre(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}{tous}>
+			#SET{rub_titre,#TITRE*|extraire_multi{#ENV{lang},#ARRAY{'lang_defaut','fr'}}|propre|supprimer_tags|supprimer_numero}
+		</BOUCLE_rub_titre>
+<div class="cadre espace edito[ (#ENV{class})]">
+	<div class="titre-article-resume">
+		<div class="titre">
+			<a href="#URL_ARTICLE">
+				[(#TITRE|couper{#GET{coupe_titre},' ... '})]
+			</a>
+		</div>
+	</div>
+	<INCLURE{fond=noix/article-metas,env,id_article,id_rubrique,extra,date}{rub_titre=#GET{rub_titre}}>	
+	<BOUCLE_document(DOCUMENTS)
+		{extension==jpg|png|gif|svg}
+		{mode IN image, document}
+		{id_article}
+		{par id_document}
+		{tout}
+		{0,1}>
+		<div class="vignette-liste"><a href="#URL_ARTICLE">[(#FICHIER|image_reduire{#GET{taille_vignette},#GET{taille_vignette}}|inserer_attribut{alt, #TITRE|attribut_html})]</a></div>
+	</BOUCLE_document>
+		
+	<div class="texte">
+		[(#TEXTE|couper{#GET{coupe},' ... '})] <a href="#URL_ARTICLE"><em><:lire_la_suite:></em></a>
+	</div>
+	<div class="pied ytalic">
+		<INCLURE{fond=noix/article-resume-pied,env,id_article,id_rubrique,extra,date}{rub_titre=#GET{rub_titre}}>
+	</div>
+		
+</div>
+</BOUCLE_article_liste>

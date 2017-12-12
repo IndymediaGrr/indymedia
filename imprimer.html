@@ -1,0 +1,16 @@
+[(#REM)
+	Page article
+]
+
+#CACHE{0}
+
+<BOUCLE_principale(ARTICLES) {id_article}{statut IN prop, publie, debat}>
+
+
+	<INCLURE{fond=structure/structure,env}
+		{page-titre=#TITRE}
+		{page-style=impression}
+		{centre=imprimer}
+		{robot=none}>
+
+</BOUCLE_principale>

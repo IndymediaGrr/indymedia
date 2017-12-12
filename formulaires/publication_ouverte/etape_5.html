@@ -1,0 +1,79 @@
+<a href="#etape_4" name="etape_4"></a>
+
+<div class="sous-titre-po">
+	<div class="avis_goche">  
+		<:publication_etape_5_titre:>
+	</div>
+	<div class="avis_droite">  
+		<:etapes:>
+		<div class="etape_droite">
+		<INCLURE{fond=formulaires/publication_ouverte/boite_etapes,env}>
+	    </div>
+	</div>
+</div>
+
+<fieldset>
+	[<h3>(#CONFIG{metapack::indymedia/previsualisation}|extraire_multi{#LANG}|propre)</h3>]
+	<fieldset class="niveau2">
+		<ul>		
+			<li id='ref_chaussete' class='ajax'>
+			[(#PLUGIN{chaussette}|oui)
+				<INCLURE{fond=noix/chaussette}{env}{ajax}{lang}>
+			]
+			</li>	
+
+			[(#REM) mention pervisualisation obligatoire ]
+			[(#REM) apparait si creation d'article nouveau - pas de titre et pas d'erreur ]
+			[(#ENV{erreurs}|non)	
+				[(#ENV{titre}|non)
+					<div class="centrer"><span class="oblige" title="<:obligatoire:>"><:star_oblige:></span><:indy_previsualisation:></div>
+				]
+			]
+			[(#REM) apparait si erreur ]
+			[(#ENV{erreurs}|oui)
+				<div class="centrer"><span class="oblige" title="<:obligatoire:>"><:star_oblige:></span><:indy_previsualisation:></div>
+			]
+			<p class="boutons">
+				<input class="previsu" type="submit" name="previsu" value="<:publication_etape_5_maj:>"/>
+			</p>
+			
+			[(#ENV{erreurs}|oui)
+				<INCLURE{fond=formulaires/publication_ouverte/erreurs,env}>	
+			]
+			[(#ENV{erreurs}|non)
+				[(#ENV{titre}|oui)
+				<div class="centrer"><span class="blink" title="<:obligatoire:>">[(#CONFIG{metapack::indymedia/message_publier_bas}|extraire_multi{#LANG}|propre)]</span></div>
+				] 
+			]	
+		</ul>	
+	</fieldset>		
+	[(#ENV{erreurs}|non)	
+		[(#ENV{titre}|!={""}|oui)	
+		<fieldset class="niveau2">
+			<INCLURE{fond=noix/article,env}{id_article}{mode_previsu=oui}{id_lieu=#ENV{lieu_evenement_existe}}{mots=#ENV{mots}}>
+		</fieldset>
+						
+		<fieldset class="niveau2">				
+		<p><input class="boutons-publier" type="submit" name="publier" value="<:publiez:>"/></p>
+			
+		</fieldset>
+		<div class="sous-titre-po">
+			<div class="avis_goche"> 
+			</div>
+			<div class="avis_droite">  
+				<:etapes:>
+				<div class="etape_droite">
+				<INCLURE{fond=formulaires/publication_ouverte/boite_etapes,env}>
+			</div>
+			</div>
+		</div>
+		]
+	]
+
+	[(#REM) Piege a robots spammeurs ]
+	<p style="display: none;">
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nobot})</span>]
+		<label for="nobot_forum"><:antispam_champ_vide:></label>
+		<input type="text" class="text" name="nobot" id="nobot_forum" value="#ENV{nobot}" size="10" />
+	</p>
+</fieldset>

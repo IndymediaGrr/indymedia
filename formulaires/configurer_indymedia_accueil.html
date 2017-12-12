@@ -1,0 +1,116 @@
+#CACHE{0}
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+<h3 class='titrem'><:indymedia:indymedia:> - <:indymedia:reglages_edito:></h3>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}">
+	[(#REM) declarer les hidden qui declencheront le service du formulaire
+	parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}		
+	<div>		
+		<fieldset>	
+		<a name="editos"></a>		
+			<p class="explication"><:indymedia:taille_resume_edito:></p>
+			<label><:indymedia:coupe_edito:></label>
+			<p>
+				<input type="text" id="coupe_edito" name="coupe_edito" value="#ENV{coupe_edito}" size="3" />
+			</p>
+			<label><:indymedia:taille_image_edito:></label>
+			<p>
+				<input type="text" id="taille_image_edito" name="taille_image_edito" value="#ENV{taille_image_edito}" size="3" />
+			</p>
+			<label><:indymedia:desactiver_edito:></label>
+			<div class="choix">
+				<input type="checkbox" title="<:indymedia:cocher_desactiver_edito:>" name="desactiver_edito" id="desactiver_edito" value="desactiver_edito" [(#ENV{desactiver_edito}|?{checked="yes"})]  /> 
+				<label for="desactiver_edito"><:indymedia:cocher_desactiver_edito:></label>
+			</div>
+			<p class="boutons">
+				<input type="submit" name="submit"  class='submit' value="Enregistrer" />
+			</p>	
+			<p class="explication"><:indymedia:mot_edito:></p>
+			<div class='choix'>
+				<select name="mot_edito" value="#ENV{mot_edito}">
+					<option>---</option>
+					<BOUCLE_groupe_test(GROUPES_MOTS){tous}>
+					</BOUCLE_groupe_test>
+					<BOUCLE_mot_edito(MOTS){tout}{closeKey}{par titre}>
+						<option value="#ID_MOT" [(#ENV{mot_edito}|=={#ID_MOT}|?{selected="yes"})]>#TITRE</option>
+					</BOUCLE_mot_edito>
+					</B_groupe_test>
+				</select>
+			</div>	
+			<p class="explication"><:indymedia:mot_edito_complet:></p>
+			<div class='choix'>
+				<select name="mot_edito_complet" value="#ENV{mot_edito_complet}">
+					<option>---</option>
+					<BOUCLE_groupe_test_complet(GROUPES_MOTS){tous}>
+					</BOUCLE_groupe_test_complet>
+					<BOUCLE_mot_edito_complet(MOTS){tout}{closeKey}{par titre}>
+						<option value="#ID_MOT" [(#ENV{mot_edito_complet}|=={#ID_MOT}|?{selected="yes"})]>#TITRE</option>
+					</BOUCLE_mot_edito_complet>
+					</B_groupe_test_complet>
+				</select>
+			</div>	
+			<p class="explication"><:indymedia:titre_edito:></p>
+				<textarea name="titre_edito" cols="50" rows="2">#ENV{titre_edito}</textarea>
+			<p class="boutons">
+				<input type="submit" name="submit"  class='submit' value="Enregistrer" />
+			</p>	
+			<hr />
+			<p class="explication"><:indymedia:mot_focus:></p>
+			<div class='choix'>
+				<select name="mot_focus" value="#ENV{mot_focus}">
+					<option>---</option>
+					<BOUCLE_groupe_test_focus(GROUPES_MOTS){tous}>
+					</BOUCLE_groupe_test_focus>
+					<BOUCLE_mot_focus(MOTS){tout}{closeKey}{par titre}>
+						<option value="#ID_MOT" [(#ENV{mot_focus}|=={#ID_MOT}|?{selected="yes"})]>#TITRE</option>
+					</BOUCLE_mot_focus>
+					</B_groupe_focus>
+				</select>
+			</div>
+			<div class='choix'>
+				<p class="explication"><:indymedia:titre_focus:></p>
+				<textarea name="titre_focus" cols="50" rows="2">#ENV{titre_focus}</textarea>
+			</div>
+			<div class='choix'>
+				<label><:indymedia:nombre_focus:></label>
+				<p>
+					<input type="text" id="nombre_focus" name="nombre_focus" value="#ENV{nombre_focus}" size="2" />
+				</p>
+			</div>
+			<br />		
+			<p class="explication"><:indymedia:desactiver_focus:></p>	
+			<div class="choix">
+				<input type="checkbox" title="<:indymedia:cocher_desactiver_focus:>" name="desactiver_focus" id="desactiver_focus" value="desactiver_focus" [(#ENV{desactiver_focus}|?{checked="yes"})]  /> 
+				<label for="desactiver_focus"><:indymedia:cocher_desactiver_focus:></label>
+			</div>
+			<p class="boutons">
+				<input type="submit" name="submit"  class='submit' value="Enregistrer" />
+			</p>	
+			<hr />
+			<br />		
+			<p class="explication"><:indymedia:desactiver_filextra:></p>	
+			<div class="choix">
+				<input type="checkbox" title="<:indymedia:cocher_desactiver_filextra:>" name="desactiver_filextra" id="desactiver_filextra" value="desactiver_filextra" [(#ENV{desactiver_filextra}|?{checked="yes"})]  /> 
+				<label for="desactiver_filextra"><:indymedia:cocher_desactiver_filextra:></label>
+			</div>
+			<br />
+			<p class="explication"><:indymedia:desactiver_liste_editos:></p>
+				<div class="choix">
+					<input type="checkbox" title="<:indymedia:cocher_desactiver_liste_edito:>" name="desactiver_liste_edito" id="desactiver_liste_edito" value="desactiver_liste_edito" [(#ENV{desactiver_liste_edito}|?{checked="yes"})]  /> 
+					<label for="desactiver_liste_edito"><:indymedia:cocher_desactiver_liste_edito:></label>
+				</div>	
+			<label><:indymedia:nombre_edito:></label><br />
+			<input type="text" name="nombre_edito" value="#ENV{nombre_edito}" size="10" />
+			<br /><br />
+		</fieldset>	
+		<p class="boutons">
+			<a href="#haut"><:indymedia:revenir_haut:></a>
+			<input type="submit"  class='submit' name="submit" value="<:bouton_enregistrer:>" />
+		</p>	
+	</div>
+</form>
+</div>
+

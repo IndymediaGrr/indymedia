@@ -1,0 +1,58 @@
+
+#ENV{editable}
+<BOUCLE_si_open_pub_ouvert(CONDITION){si  #CONFIG{metapack::indymedia_modo/moderation_publication_ouverte}|non}{si #ENV{editable}}>
+<div class="formulaire_spip" id="formulaire_alerter">
+
+	[<div class="reponse_formulaire reponse_formulaire_ok"><p>(#ENV**{message}|table_valeur{texte})</p></div>]
+	[<p class='formulaire_ok'>(#ENV*{message_ok})</p>]
+
+	
+
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data' id='alerter'>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<input name="id_article" type="hidden" value="#ENV{id_article}" />
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_article})</span>]
+
+		<fieldset>
+			<legend><:alerte:></legend>
+<ul>
+			[<li><span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span></li>]
+			<li><label>Votre nom ou pseudo</label><input name="nom" type="text" value="#ENV{nom}" />
+
+			[<li><span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span></li>]
+			<li><label>Votre adresse email</label><input name="email" type="text" value="#ENV{email}" /></li>
+
+			
+			[<li><div><span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</div></label></li>]
+			<li><label><:alerte_pourquoi:></label></li>
+			<li><textarea  id='texte' name="texte" rows="10" cols="70" class="inserer_barre_edition">[(#ENV**{texte})]</textarea></li>
+</ul>
+			[(#PLUGIN{chaussette}|oui)
+				<INCLURE{fond=noix/chaussette}{env}>
+			]		
+		</fieldset>
+	
+		[(#REM) Piege a robots spammeurs ]
+		<p style="display: none;">
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nobot})</span>]
+			<label for="nobot_forum"><:antispam_champ_vide:></label>
+			<input type="text" class="text" name="nobot" id="nobot_forum" value="#ENV{nobot}" size="10" />
+		</p>
+
+		<p class="boutons">
+			<input name="alerter" type="submit" value="<:alerte_btn:>" class="submit" />
+		</p>
+	</form>
+
+	
+</div>
+</BOUCLE_si_open_pub_ouvert>
+</B_si_open_pub_ouvert>
+<div class="formulaire_spip ajax" id="formulaire_alerter">
+
+	[<div class="reponse_formulaire reponse_formulaire_ok"><p>(#ENV**{message}|table_valeur{texte})</p></div>]
+	[<p class='formulaire_ok'>(#ENV*{message_ok})</p>]
+</div>
+<//B_si_open_pub_ouvert>
+

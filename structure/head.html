@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<title>[(#NOM_SITE_SPIP|textebrut)][ - (#ENV{page-titre}|attribut_html)]</title>
+	[(#ENV{centre}|=={edito}|oui)#SET{description_meta, #DESCRIPTIF_SITE_SPIP|attribut_html}]<B_titreart>
+	<BOUCLE_titreart(ARTICLES) {id_article}{si #ENV{centre}|=={article}}>#SET{description_meta, #TEXTE**|attribut_html|couper{200}}</BOUCLE_titreart></B_titreart><B_titrerub>
+	<BOUCLE_titrerub(RUBRIQUES) {id_rubrique}{si #ENV{centre}|=={liste}}>#SET{description_meta, #TITRE}	</BOUCLE_titrerub><B_titretheme>
+	<BOUCLE_titretheme(MOTS) {id_mot}{si #ENV{centre}|=={theme}}>#SET{description_meta, #TITRE}	</BOUCLE_titretheme>
+	[<meta name="description" content="(#GET{description_meta})"/>]
+	<B_art><meta name="keywords" content="<BOUCLE_art(ARTICLES) {id_article}><BOUCLE_mots(MOTS) {id_article} {","}>[(#TITRE)]</BOUCLE_mots></BOUCLE_art>" /></B_art>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+	<meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
+    [<link rel="shortcut icon" href="(#CHEMIN{css/img/favicon.ico})" />]
+
+	[(#REM) 
+		rss articles et agenda, court et long
+	]
+	[<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="(#URL_PAGE{backend})" />]
+	[<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="(#URL_PAGE{backend}|parametre_url{integral,oui})" />]
+	[<link rel="alternate" type="application/rss+xml" title="<:syndiquer_agenda:>" href="(#URL_PAGE{backend-agenda})" />]
+	[<link rel="alternate" type="application/rss+xml" title="<:syndiquer_agenda:>" href="(#URL_PAGE{backend-agenda}|parametre_url{integral,oui})" />]
+	[(#REM) 
+		rss rubrique inutile pour agenda
+	]
+	<BOUCLE_non_agenda(CONDITION){si  #ENV{id_rubrique}|!={#CONFIG{metapack::indymedia/rubrique_agenda}}}>
+	[<link rel="alternate" type="application/rss+xml" title="syndiquer_cette_rubrique" href="(#URL_PAGE{backend}|parametre_url{id_rubrique,#ENV{id_rubrique}})" />]
+	[<link rel="alternate" type="application/rss+xml" title="<:syndiquer_cette_rubrique_long:>" href="(#URL_PAGE{backend}|parametre_url{integral,oui}|parametre_url{id_rubrique,#ENV{id_rubrique}})" />]
+	</BOUCLE_non_agenda>
+	
+	[(#REM) Balise permettant aux plugins d'inserer des appels javascript ou css ;
+		C'est ici que SPIP va inserer l'appel de la librairie jQuery
+		Et appeler a la fin compacte_head pour agreger et compacter tout le head dans des fichiers statiques
+		si l'option est cochee dans Configuration
+	]
+	#INSERT_HEAD
+	
+	[(#ENV{page-style}|=={impression}|oui)
+		[<link rel="stylesheet"	href="(#CHEMIN{css/indymedia_impression.css})" type="text/css" media="all" />]
+	]
+
+	[(#ENV{page-style}|=={impression}|non)
+		[<link rel="stylesheet"	href="(#CHEMIN{css/indymedia_structure.css}|url_absolue)" type="text/css" media="all" />]
+		[<link rel="stylesheet"	href="(#CHEMIN{css/indymedia_style.css}|url_absolue|direction_css)" type="text/css"
+ media="all" />]
+		[<link rel="stylesheet"	href="(#CHEMIN{css/indymedia_menuder.css}|url_absolue)" type="text/css" media="all" />]
+		
+	]
+	
+	[(#REM)
+		Certain css ne sont utile que pour certaine page
+		dans ce cas, il faut passer l'argument correspondant
+		de maniere explicite
+	]
+	
+	[(#ENV{css-recherche}|=={oui}|oui)
+		[<link rel="stylesheet"	href="(#CHEMIN{css/recherche_avancee.css})" type="text/css" media="all" />]
+	]
+	
+	[(#REM) Si l'on est connecter, le signaler par une couleur FLASH ! ]
+
+	[(#ENV{page-style}|=={impression}|non)
+		[(#SESSION{statut}|=={0minirezo}|oui)
+			<!--<style>
+				body{background: #FFF url(plugins/auto/indymedia/v0.1.2/css/img/background-admin.png);} 
+				div.moo{color:#fff;}
+			</style>-->
+		]
+	]
+	[<script src="(#CHEMIN{js/main.js})"  type="text/javascript"></script>]
+	[(#ENV{robot}|=={none}|oui)
+		<meta name="robots" content="none" />
+	]
+	[(#REM)
+		si pas javascript on laisse les polices taille origine
+	]
+</head>

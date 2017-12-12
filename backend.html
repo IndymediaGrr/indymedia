@@ -1,0 +1,74 @@
+[(#REM)
+	Ce fichier sert à créer les flux RSS
+	qui permettent aux visiteurs de suivre l'actualité
+	de votre site depuis un lecteur de news.
+
+	Cette page génère un code XML/RSS adapté
+
+]#CACHE{0}[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml 
+version="1.0"[ encoding="(#CHARSET)"]?>
+<rss version="2.0" [(#REM) rss 2.0.9)]
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
+[(#SET{titre_flux,#NOM_SITE_SPIP|textebrut|texte_backend})]
+[(#ID_RUBRIQUE|?{
+		#SET{url_page,#URL_PAGE{liste}|parametre_url{id_rubrique, #ID_RUBRIQUE}|url_absolue}
+		,
+		#SET{url_page,#URL_SITE_SPIP/}
+})]
+[(#ID_MOT|?{
+		#SET{url_page,#URL_PAGE{theme}|parametre_url{id_mot, #ID_MOT}|url_absolue}
+		,
+		#SET{url_page,#URL_SITE_SPIP/}
+})]
+<BOUCLE_rub(RUBRIQUES){id_rubrique ?}{0,1}{tous}{si  #ENV{id_rubrique}}>
+	#SET{titre_flux,#GET{titre_flux}|concat{" - "}|concat{#TITRE}}
+</BOUCLE_rub>
+<BOUCLE_mot(MOTS){id_mot ?}{0,1}{tous}{si  #ENV{id_mot}}>
+	#SET{titre_flux,#GET{titre_flux}|concat{" - "}|concat{#TITRE}}
+</BOUCLE_mot>
+[(#ENV{id_rubrique}ou{#ENV{id_mot}}|non|?{  #SET{titre_flux,#GET{titre_flux}|concat{" - "}|concat{#VAL{<:menu_article:>}}}})]
+[(#ENV{integral}|=={oui}|?{ #SET{titre_flux,#GET{titre_flux}|concat{" "}|concat{#VAL{<:rss_integral:>}}}})]
+[(#ENV{integral}|!={oui}|?{ #SET{titre_flux,#GET{titre_flux}|concat{" "}|concat{#VAL{<:rss_resume:>}}}})]
+<channel[ xml:lang="(#LANG)"]>
+	<title>#GET{titre_flux}</title>
+	<link>#GET{url_page}</link>
+	[<description>(#DESCRIPTIF_SITE_SPIP|supprimer_tags|texte_backend)</description>]
+	[(#DESCRIPTIF_SITE_SPIP|non|?{ <description>#GET{titre_flux}</description>})]
+	<language>#LANG</language>
+	<generator>SPIP - www.spip.net</generator>
+
+	<image>
+		<title>#GET{titre_flux}</title>
+		[<url>(#LOGO_SITE_SPIP|image_reduire{300,400}|extraire_attribut{src}|url_absolue|texte_backend)</url>]
+		<link>#URL_SITE_SPIP/</link>
+		[<height>(#LOGO_SITE_SPIP|image_reduire{144,400}|extraire_attribut{height})</height>]
+		[<width>(#LOGO_SITE_SPIP|image_reduire{144,400}|extraire_attribut{width})</width>]
+	</image>
+
+<BOUCLE_id_rubrique(CONDITION){si  #ENV{id_rubrique}|ou{#ENV{id_mot}}}>
+	<BOUCLE_article_rubrique(ARTICLES){id_rubrique ?}{id_mot ?}{0,25}{par date}{inverse}>
+	<BOUCLE_integral_rubrique(CONDITION){si  #ENV{integral}|=={oui}}>
+		<INCLURE{fond=noix/rss-items-integral, id_article,env} />
+	</BOUCLE_integral_rubrique>
+	</B_integral_rubrique>
+		<INCLURE{fond=noix/rss-items, id_article,env} />
+	<//B_integral_rubrique>
+	</BOUCLE_article_rubrique>
+</BOUCLE_id_rubrique>
+</B_id_rubrique>
+	<BOUCLE_article_melange(ARTICLES){id_parent=#CONFIG{metapack::indymedia/rubrique_contribution}}{0,25}{par date}{inverse}>
+	<BOUCLE_integral(CONDITION){si  #ENV{integral}|=={oui}}>
+		<INCLURE{fond=noix/rss-items-integral, id_article,env} />
+	</BOUCLE_integral>
+	</B_integral>
+		<INCLURE{fond=noix/rss-items, id_article,env} />
+	<//B_integral>
+	</BOUCLE_article_melange>
+<//B_id_rubrique>
+
+
+</channel>
+
+</rss>

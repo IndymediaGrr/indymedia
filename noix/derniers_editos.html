@@ -1,0 +1,17 @@
+	
+<B_edito_derniers>
+#ANCRE_PAGINATION
+<div class="edito bloc_edito">
+	<div class="titreRubrique"><:menu_derniers_editos:></div>
+</div>
+<BOUCLE_edito_derniers(ARTICLES)
+	{id_rubrique IN #ENV{liste_rubriques}}
+	{id_mot = #CONFIG{metapack::indymedia_accueil/mot_edito}}
+	{par date}
+	{inverse}
+	{doublons}
+	{pagination  #CONFIG{metapack::indymedia_accueil/nombre_edito}}>
+		<INCLURE{fond=noix/article-resume-liste}{id_article}{class=bloc_edito}>
+</BOUCLE_edito_derniers>
+[<p class="pagination">(#PAGINATION{page})</p>]
+</B_edito_derniers>

@@ -1,0 +1,79 @@
+#CACHE{0}
+
+[(#ENV{message_publication}|=={ok}|oui)
+	<div class="cadre reussite"><p><:publication_ok:></p></div>
+]
+
+<div class="cadre explication">
+	[<p>(#CONFIG{metapack::indymedia/texte_attente}|extraire_multi{#LANG}|propre)</p>]
+</div>
+
+			
+<BOUCLE_rubrique(RUBRIQUES){id_parent=#CONFIG{metapack::indymedia/rubrique_contribution} }{tout}{inverse}{par id_rubrique}>
+
+<div class="cadre">		
+	<div class="titre">[(#TITRE|lettreMajuscule)]</div>
+		
+	<B_attente_article>
+	<ul>
+		<BOUCLE_attente_article(ARTICLES){id_rubrique}{par date}{inverse}{statut="prop"}>
+			<li>
+				<b><a href="#URL_ARTICLE">
+					[(#TITRE|lettreMajuscule)]
+				</a></b>&nbsp;
+				<small><i>[(#DATE|affdate)]</i></small>
+			</li>
+		</BOUCLE_attente_article>
+	</ul>
+	</B_attente_article>
+			<:attente_aucun:>
+	<//B_attente_article>
+</div>
+</BOUCLE_rubrique>
+
+<BOUCLE_rubrique_elsewhere(RUBRIQUES){id_rubrique=#CONFIG{metapack::indymedia/rubrique_elsewhere} }>
+<div class="cadre">
+
+	<div class="titre">[(#TITRE|lettreMajuscule)]</div>
+
+		<B_attente_elsewhere>		
+			<ul>
+			<BOUCLE_attente_elsewhere(ARTICLES){id_rubrique}{par date}{inverse}{statut="prop"}>
+				<li>
+					<b><a href="#URL_ARTICLE">
+						[(#TITRE|lettreMajuscule)]
+					</a></b>&nbsp;
+					<small><i>[(#DATE|affdate)]</i></small>
+				</li>
+			</BOUCLE_attente_elsewhere>
+			</ul>
+		</B_attente_elsewhere>
+			<:attente_aucun:>
+		<//B_attente_elsewhere>
+</div>
+</BOUCLE_rubrique_elsewhere>
+
+<BOUCLE_rubrique_agenda(RUBRIQUES){id_rubrique=#CONFIG{metapack::indymedia/rubrique_agenda} }>
+<div class="cadre">
+
+	<div class="titre">[(#TITRE|lettreMajuscule)]</div>
+
+		<B_attente_agenda>		
+			<ul>
+			<BOUCLE_attente_agenda(ARTICLES){id_rubrique}{par date}{inverse}{statut="prop"}>
+				<li>
+					<b><a href="#URL_ARTICLE">
+						[(#TITRE|lettreMajuscule)]
+					</a></b>&nbsp;
+					<small><i>[(#DATE|affdate)]</i></small>
+				</li>
+			</BOUCLE_attente_agenda>
+			</ul>
+		</B_attente_agenda>
+			<:attente_aucun:>
+		<//B_attente_agenda>
+</div>
+</BOUCLE_rubrique_agenda>
+
+
+

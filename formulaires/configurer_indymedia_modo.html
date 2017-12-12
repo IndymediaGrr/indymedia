@@ -1,0 +1,46 @@
+#CACHE{0}
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+<h3 class='titrem'><:indymedia:indymedia:> - <:indymedia:moderation:></h3>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}">
+	[(#REM) declarer les hidden qui declencheront le service du formulaire
+	parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}		
+	<div>		
+		<fieldset>	
+		<a name="editos"></a>		
+			<p class="explication"><:indymedia:moderation:></p>
+			<label><strong><:indymedia:moderation_publication_ouverte:> ?</strong></label>
+			<div class="choix">
+				<input type="checkbox" title="<:indymedia:moderer_publication_ouverte:>" name="moderation_publication_ouverte" id="moderation_publication_ouverte" value="moderer_publication_ouverte" [(#ENV{moderation_publication_ouverte}|?{checked="yes"})]  /> 
+				<label for="moderation_publication_ouverte"><:indymedia:moderer_publication_ouverte:></label>
+			</div>
+			<label><:indymedia:texte_moderation_publication_ouverte:></label><br />
+			<textarea name="texte_moderation_publication_ouverte" cols="50" rows="2">#ENV{texte_moderation_publication_ouverte}</textarea>
+			<p class="boutons">
+				<input type="submit" name="submit"  class='submit' value="Enregistrer" />
+			</p>
+		</fieldset>
+		<fieldset>	
+			<p class="explication"><:indymedia:modo_forum_article_id_expl:></p>
+			<label><:indymedia:modo_forum_article_id:></label>
+			<p>
+				<input type="text" id="modo_forum_article_id" name="modo_forum_article_id" value="#ENV{modo_forum_article_id}" size="3" />
+			</p>	
+			<label><:indymedia:modo_forum_article_liste:></label>
+			<p>
+				<input type="text" id="modo_forum_article_liste" name="modo_forum_article_liste" value="#ENV{modo_forum_article_liste}" size="50" />
+			</p>	
+			<label><:indymedia:texte_modo_forum_article:></label>
+			<textarea name="texte_modo_forum_article_id" cols="50" rows="2">#ENV{texte_modo_forum_article_id}</textarea>
+			<p class="boutons">
+				<a href="#haut"><:indymedia:revenir_haut:></a>
+				<input type="submit"  class='submit' name="submit" value="<:bouton_enregistrer:>" />
+			</p>	
+		</fieldset>
+	</div>
+</form>
+</div>
+

@@ -1,0 +1,556 @@
+/* STRUCTURE
+   ---------  */
+
+/*
+ * Présentation sur deux colonnes
+ *
+ * centrée, de largeur variable, taille maximum : 76.5em, taille minimale : 55em
+ * la page sera toujours divisé en trois éléments :
+ * le "haut" contenant les menus et le bandeau
+ * le "milieu" contenant la colone édito et la colone publication ouverte
+ * le "bas" contenant la liste des imcs et les mentions légales
+ */
+
+
+/* GLOBAL
+   ------  */
+img {
+	border : 0px;
+}
+
+
+br.spacer {
+	clear:both;
+}
+
+body {
+	margin : 0;
+	padding : 0;
+}
+
+.spip_documents_center {
+	text-align : center;
+}
+.spip_documents_center img{   
+	margin-right: 25px;
+	margin-left: 25px;
+}
+.spip_documents_left img{    
+	margin-right: 25px;
+}
+.spip_documents_right img{  
+	margin-left: 25px;
+}
+
+.petit {
+	font-size : 0.8em;
+}
+
+/*
+ * La page
+ */
+#page {
+/*
+	border : 2px solid;
+	margin: 1.5em auto 3em;
+	max-width:76.5em;
+*/
+	min-width:65em;
+	max-width:1130px;
+	overflow:visible;
+	position:relative;
+	margin: 0.6em auto 3em;
+	z-index:0;
+    padding: 0;
+    padding-top: 0;
+/*
+	border : 1px solid;
+*/
+}
+
+
+/*
+ * le "haut" de hauteur fixe : 82px ( hauteur du bandeau)
+ */
+#haut 
+{
+	display : block;
+	position : relative;
+	height : 82px;
+
+/*
+	border-bottom : 1px solid #a00;
+*/
+
+}
+
+
+
+/*
+ * le "milieu"
+ */
+#milieu 
+{
+/*
+	overflow:visible;
+	position:relative;
+	width:100%;
+*/
+	width:100%;
+	z-index : 0;
+	display: block;
+    float: left;
+}
+
+
+/*
+ * la colonne centrale
+ * extensible
+ */
+#colonneCentre 
+{
+	display: block;
+    overflow: auto;
+    padding: 1em 2em 1em 1.5em;
+    position: relative;
+    z-index: 0;
+    margin-right: 15px;
+}
+
+
+
+/*
+ * la colonne de droite
+ */
+#colonneDroite 
+{	
+    display: block;
+    float: right;
+    margin: 0px;
+    margin-right: 2px;
+    margin-top: 1em;
+    position: relative;
+    width: 20%;
+}
+
+/*
+ * la 2° colonne de droite - page sommaire
+ */
+#colonneDroite-2col 
+{	
+    display: block;
+    float: right;
+    margin: 0px;
+    margin-right: 1.5%;
+    margin-top: 1em;
+    position: relative;
+    width: 20%;
+}
+
+/*
+ * le pied
+ */
+
+#pied 
+{
+	display : block;
+	clear: both;
+	text-align: justify;
+/*
+	border-top : 1px solid;
+*/
+	margin-top :-1px;
+	padding : 5px;
+}
+
+
+#mention {
+	border-top : 1px solid;
+	text-align : center;
+	margin-bottom : 5px;
+}
+
+/*
+ * le bandeau
+ */
+
+#bandeau 
+{
+	display: block;
+	width : 100%;
+/*
+	overflow : hidden;
+*/
+	position : absolute;
+	top : 0;
+	margin-top: 2px;
+}
+#bandeau img
+{
+	margin: 6px;
+	margin-left: 2px;
+}
+
+/*
+ * Le menu
+ */
+
+#menu 
+{
+	height:2em;
+	position:absolute;
+	right:2em;
+	top:-2.2em;
+	width:100%;
+	z-index:50;
+	
+}
+
+
+/* La ligne de navigation */
+
+div.navigation
+{
+	margin-bottom : 10px;
+}
+
+/* Le gros lien publier ! */
+
+a.lien_publier
+{
+	display : block;
+	text-align : center;
+	cursor : pointer;
+	padding : 8px;
+	margin-bottom : 0px;
+}
+a.bouton_publier
+{
+/*
+	display : block;
+*/
+	cursor : pointer;
+}
+
+/* un cadre standard pour tous les élements 
+ * Pour les cadre particulier, il faut utiliser une classe supplementaire
+ * par exemple class="cadre explication" ou class="cadre avertissement"
+ * de cette maniere, la structure du cadre est identique pour tous les elements
+ * et est personalise dans des classes supplementaire
+ */
+
+div.cadre
+{
+	padding-left : 0px;
+	padding-right : 0px;
+	margin-bottom : 10px;
+	clear : both;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+.page_liste div.cadre
+{
+	padding-left : 0px;
+}
+
+/* Pour faire espacer des cadres se suivant entre eux (par exemple les editos, ou les cadres sous les articles) */
+
+div.espace
+{
+	margin-top : 10px;
+	margin-bottom : 15px;
+}
+
+
+/* Les informations en pied de cadre */
+
+div.cadre div.pied, div.pied
+{
+	border-top : 1px solid;
+	border-bottom : 1px solid;
+	padding-right: 10px;
+	padding-left : 10px;
+	text-align : center;
+	font-size : 0.9em;
+	padding-top : 5px;
+	padding-bottom : 5px;
+}
+
+/* Les cadre indiquant une réussite de l'action */
+
+div.reussite
+{
+	text-align : center;
+	font-size : 1.2em;
+}
+
+/* Les cadre d'avertissement */
+
+div.avertissement
+{
+	border : 2px solid;
+}
+
+/* les titres des cadres */
+
+div.titre 
+{
+	font-size : 1.7em;
+	width : 100%;
+	padding-bottom : 5px;
+	padding-top : 0px;
+	display :inline;
+	/*text-align : center;*/
+}
+
+/* Les sous-titre */
+
+div.sous-titre
+{
+	font-size : 1.2em;
+	margin-bottom: 5px;
+	padding : 10px;
+}
+
+/* Les vignette (pour presenter des vignettes de documents par exemple */
+div.vignette
+{
+	display : block;
+	margin : 5px;
+	float : left;
+	border : 1px dashed;
+	width : 150px;
+	height : 150px;
+}
+div.vignette-liste
+{
+	display : block;
+	margin : 10px;
+	margin-left : 0;
+	margin-right : 20px;
+	float : left;
+	border : 1px dashed #eee;
+}
+
+span.vignette-fil
+{
+	display : block;
+	margin : 5px 10px 5px 0;
+	float : left;
+}
+div.vignette-mini
+{
+	display : block;
+	margin : 5px;
+	float : left;
+	border : 1px dashed #eee;
+	width : 45px;
+	height : 34px;
+}
+.float_left
+{
+	margin-right: 10px;
+}
+
+.aligne_droite
+{
+	text-align : right;
+}
+
+/* SPIP
+   ---- */
+
+/* Une bordure pour les documents inclus dans les articles */
+
+span.spip_documents img
+{
+	border : 1px dotted;
+}
+
+/* Le style des formulaires par défaut de spip */
+
+div.formulaire_spip fieldset
+{
+/*
+	padding : 10px;
+*/
+	font-size : 0.9em;
+	margin-bottom : 20px;
+/*
+    background: #FFF url(img/background.png); 
+*/
+}
+#publication_ouverte_info fieldset, #publication_ouverte_agenda fieldset
+{
+	border : none; 
+	margin: 0;
+    padding: 0;
+} 
+
+#publication_ouverte_info fieldset.niveau3inline
+{
+	border : 1px solid #ccc; 
+}
+
+/* Les champs de type texte et password */
+
+div.formulaire_spip input.text, div.formulaire_spip input.password
+{
+	display : block;
+	width : 200px;
+	margin-bottom : 5px;
+	float: left;
+}
+
+/* Les labels */
+div.formulaire_spip label
+{
+	display : block;
+	font-size : 1em;
+	margin-bottom : 5px;
+	width : 300px;
+	float : left;
+	border-bottom : 1px dotted;
+	padding-bottom : 7px;
+	margin-right: 3px;
+
+}
+
+/* les cases à cocher */
+div.formulaire_spip input.checkbox
+{
+	float : left;
+}
+
+/* Les boutons */
+div.formulaire_spip p.boutons
+{
+	text-align : center;
+/*
+	background: #FFF url(img/stripelight.png);
+*/
+}
+
+/* Les boutons */
+div.formulaire_spip .boutons-publier
+{
+	text-align : center;
+	cursor : pointer;
+   	font-weight : bold;
+	font-size : 2.5em;
+	border : 1px solid #777;
+	text-decoration : none;
+	width:100%;
+	background: #AA0000;
+	color: #eee;
+}
+div.formulaire_spip .boutons-publier:hover
+{
+	border : 1px solid #333;
+	color : #881414;
+	background: #FFF url(img/background.png);
+}
+
+div.formulaire_spip ul
+{
+	list-style-type : none;
+	padding : 10px;
+/*
+	margin : 5px;
+*/
+	margin-top : 5px;
+	margin-bottom : 12px;
+	font-size : 1em;
+	border : 1px solid #ddd;
+	-moz-border-radius : 5px;
+	-webkit-border-radius : 5px;
+}
+div.formulaire_spip ul {
+    
+    padding: 10px;
+}
+div.formulaire_spip ul ul
+{
+	margin : 10px;
+}
+
+
+div.formulaire_spip li
+{
+	margin-bottom : 10px;
+	padding-top : 5px;
+	clear : both;
+}
+ div.formulaire_spip .niveau2 .page-article li
+{
+	clear : none;
+}
+div.formulaire_spip input.grand
+{
+	width : 300px;
+}
+
+/* Pour éviter de déranger les barres d'outils */
+div.markItUpHeader ul
+{
+	border : none;
+}
+
+/* Personalisation du formulaire commentaire */
+
+table.spip_barre a img {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:#EEEEEE none repeat scroll 0 0;
+	border:1px outset #666666;
+	padding:3px;
+}
+
+table.spip_barre a:focus img, table.spip_barre a:hover img, table.spip_barre a:active img {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:#FFFFFF none repeat scroll 0 0;
+	border:1px solid #666666;
+}
+
+span.erreur_message
+{
+	color : red;    
+/*
+	float: left;
+*/
+}
+
+table.spip_barre 
+{
+	width : 487px;
+	padding : 5px;
+}
+
+table.spip_barre a
+{
+	height : 16px;
+}
+table.spip_barre a:hover
+{
+	background-color : #f5eded;
+}
+
+input#barre_1
+{
+	width : 485px;
+}
+
+textarea#texte
+{
+    width: 90%;
+}
+
+div#conteneur
+{
+	padding-left : 10px;
+	padding-right : 10px;
+}
+/*=============================*/

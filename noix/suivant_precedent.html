@@ -1,0 +1,24 @@
+#CACHE{3600}
+
+[(#REM)
+	Calcul des articles suivants et précédent
+]
+
+<BOUCLE_article(ARTICLES){id_article}{statut IN prop, publie, debat}>
+
+	<BOUCLE_precedent(ARTICLES){id_rubrique}{statut=#STATUT}{age_relatif>=0}{par date}{inverse}{1,1}>
+
+		<a href='#URL_ARTICLE' title="<:article_suivant:>&nbsp;:&nbsp;[(#TITRE|textebrut)]">
+			<img src="[(#CHEMIN{images/precedent.png})]"/>
+		</a>
+	</BOUCLE_precedent>
+
+	<BOUCLE_suivant(ARTICLES){id_rubrique}{statut=#STATUT}{age_relatif<0}{par date}{0,1}>
+
+		<a href='#URL_ARTICLE' title="<:article_precedent:>&nbsp;:&nbsp;[(#TITRE|textebrut)]">
+			<img src="[(#CHEMIN{images/suivant.png})]"/>
+		</a>
+
+	</BOUCLE_suivant>
+
+</BOUCLE_article>

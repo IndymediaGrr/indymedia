@@ -1,0 +1,10 @@
+[(#SESSION{statut}|=={0minirezo}|non)
+<li><a href="[(#URL_PAGE{login-public}|parametre_url{url,#SELF})]"><:menu_connection:></a></li>
+]
+[(#SESSION{statut}|=={0minirezo}|oui)
+	<li><span class="sousTitre"><:menu_prive:></span></li>
+	<li><a href="#URL_PAGE{moderation-commentaire}"><:menu_moderation_commentaire:></a></li>
+	<li><a href="#URL_ECRIRE{lieux}"><:menu_moderation_lieu:></a></li>
+	<li><a href="#URL_ECRIRE{}"><:menu_interface_spip:></a></li>
+	<li><a href="#URL_LOGOUT" rel="nofollow"><:menu_deconnection:></a></li>
+]

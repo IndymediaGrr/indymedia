@@ -1,0 +1,22 @@
+#CACHE{3600*24}
+<style>
+	.liste-objets td.ooh, th.ooh  { width:100px}
+	#extra { display: none;}
+	#navigation { display: none;}
+	#chemin { display: none;}
+	html  #contenu {width: 100%; }
+	html table.spip { width: 100%; }
+	html .liste-objets tr td, html .liste-objets tr th { border-left: 1px dotted #4A4A4A; border-bottom: 1px dotted #A5A5A5	; padding: px;}
+	button  { width: 130px;}
+	.liste-objets table tr td {max-width: 80px;}
+	div.formulaire_spip label {display: none;}
+	div.formulaire_recherche {float: right;}
+</style>
+<div class="cadre">
+[(#SESSION{statut}|=={0minirezo}|oui)
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<h2><:indymedia:gestion_des_lieux:></h2>
+<INCLURE{fond=prive/objets/liste/lieux, env, ajax, sinon=<:indymedia:info_aucun_lieux:>}>
+]
+</div>
+

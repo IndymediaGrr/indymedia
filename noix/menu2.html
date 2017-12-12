@@ -1,0 +1,59 @@
+#CACHE{3600*24}
+<div id="nav-container">
+<ul  id="nav" class="menuder">
+	<ul  class="menuder">
+		<li><:menu_indymedia:></li>
+				<li><a href="http://docs.indymedia.org/view/Local/TraductionFaq"><:menu_faq:></a></li>
+				<li><a href="http://www.indymedia.org"><:menu_indy_global:></a></li>
+	</ul>
+		 
+	<ul class="menuder">
+	
+
+		<li><:menu_collectif:></li>
+				<!--<li><a href="https://docs.indymedia.org/view/Local/ImcLille"><:menu_documentation:></a></li>-->
+				<li><a href="#URL_PAGE{login-public}"><:menu_connection:></a></li>
+				[(#SESSION{statut}|=={0minirezo}|oui)
+					<li><a href="#URL_PAGE{moderation-commentaire}"><:menu_moderation_commentaire:></a></li>
+					<li><a href="/ecrire"><:menu_interface_spip:></a></li>
+					<li><a href="#URL_PAGE{liste-lieux}">Liste des lieux</a></li>
+					<li><a href="#URL_ACTION{logout}"><:menu_deconnection:></a></li>
+				]
+
+	</ul>
+
+	<ul class="menuder">
+		 
+		<li><:menu_thematique:></li>
+				<BOUCLE_groupe_barre(GROUPES_MOTS){par titre}{openKey}>
+					<li><a href="#URL_PAGE{theme,id_groupe=#ID_GROUPE}">#TITRE</a></li>
+				</BOUCLE_groupe_barre>
+	</ul>
+		 
+	<ul class="menuder">
+
+		<li><:menu_article:></li>
+				<li><a href="#URL_PAGE{publication-ouverte}"><:menu_publier:></a></li>
+				<li><a href="#URL_PAGE{recherche}"><:menu_recherche:></a></li>
+				<li><span class="sousTitre"><:menu_valide:></span></li>
+				<BOUCLE_rubrique_menu(RUBRIQUES){id_parent=#CONFIG{indymedia/rubrique_contribution} }{tout}{par id_rubrique}>
+					<li><a href="#URL_PAGE{liste,id_rubrique=#ID_RUBRIQUE}">[(#TITRE|lettreMajuscule)]</a></li>
+				</BOUCLE_rubrique_menu>
+				
+				<li><a href="#URL_PAGE{liste,id_rubrique=#CONFIG{indymedia/rubrique_edito} }"><:menu_edito:></a></li>
+				<li><span class="sousTitre"><!--<:menu_non_valide:>-->Autres</span></li>
+				[(#CONFIG{indymedia/en_attente_actif}|=={en_attente_actif}|oui)
+					<li><a href="#URL_PAGE{attente}"><:menu_en_attente:></a></li>
+				]
+				[(#CONFIG{indymedia/en_debat_actif}|=={en_debat_actif}|oui)
+					<li><a href="#URL_PAGE{debat}"><:menu_en_debat:></a></li>
+				]
+				[(#CONFIG{indymedia/refus_actif}|=={refus_actif}|oui)
+					<li><a href="#URL_PAGE{refus}"><:menu_donjon:></a></li>
+				]
+				<li><span class="sousTitre"><:menu_multimedia:></span></li>
+				<li><a href="#URL_PAGE{galerie}"><:menu_galerie:></a></li>
+		 
+	</ul>
+</ul>
+</div>

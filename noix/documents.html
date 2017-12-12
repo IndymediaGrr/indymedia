@@ -1,0 +1,18 @@
+#CACHE{3600*24}
+
+<B_document>
+
+	<div class="espace">
+	<div class="sous-titre"><:liste_document_lies:></div>
+
+	<BOUCLE_document(DOCUMENTS){id_article}{mode IN image, document}{tout}{doublons}>
+		<div class="codedoc">
+			<div class="vignette">[(#LOGO_DOCUMENT|#URL_DOCUMENT|image_reduire{160,160})]</div>
+			<div class="midi" title="[(#FICHIER|basename)]">[(#FICHIER|basename{.*}|couper{20, (...).#EXTENSION})]</div>
+		</div>	
+	</BOUCLE_document>
+
+	<br class="spacer" />
+	</div>
+
+</B_document>

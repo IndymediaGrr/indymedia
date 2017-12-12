@@ -1,0 +1,7 @@
+#CACHE{0}
+<BOUCLE_article(ARTICLES){id_article}{statut IN prepa, prop, publie, debat}>
+		[<div class="sous-titre-agenda">
+			<div class='titre_info'><:titre_lien:></div>
+			<a href="(#URL_SITE)" title="#URL_SITE">[(#URL_SITE|couper{35, ...})]</a>
+		</div>]
+</BOUCLE_article>

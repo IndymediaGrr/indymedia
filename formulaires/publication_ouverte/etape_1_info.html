@@ -1,0 +1,67 @@
+
+[(#SESSION{statut}|=={0minirezo}|oui) 
+<fieldset>
+	<div class="modo_cadre">
+		<table>
+			<tr>
+				<td style="width:50%">
+				<INCLURE{fond=formulaires/publication_ouverte/mettre_edito,env}>	
+				</td>
+				<td style="width:50%">
+					
+					<div class="modo_droite">
+						<a [href="(#URL_PAGE{publication-ouverte-agenda}|parametre_url{id_article,#ENV*{id_article}})"]>
+						<:modifier_article_evenement:>
+						</a>
+						<br />
+						<a [href="(#URL_PAGE{publication-ouverte-elsewhere}|parametre_url{id_article,#ENV*{id_article}})"]>
+						<:modifier_article_elsewhere:>
+						</a>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</fieldset>
+]
+
+<div class="sous-titre-po">
+	<div class="avis_goche">  
+		<:publication_etape_1_rubrique_titre:>
+	</div>
+	<div class="avis_droite">  
+		<:etapes:>
+		<div class="etape_droite">
+		<INCLURE{fond=formulaires/publication_ouverte/boite_etapes,env}>
+	    </div>
+	</div>
+</div>
+
+<fieldset>
+	<input type="hidden" class="flip" name="type" id="article" value="article"/>
+	<span class="oblige" title="<:obligatoire:>"><:star_oblige:></span> = <:champ_obligatoire:>
+	<ul>
+	<li>
+		[<h3>(#CONFIG{metapack::indymedia/choix_rubrique}|extraire_multi{#LANG}|propre)</h3>]
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_rubrique})</span><br />]
+		<label><span class="oblige" title="<:obligatoire:>"><:star_oblige:></span><:publication_etape_1_rubrique:></label>	
+		<select name="id_rubrique">
+			<option value="">---</option>
+		<BOUCLE_rubrique(RUBRIQUES)
+			{id_parent=#CONFIG{metapack::indymedia/rubrique_contribution}}
+			{tout}{par num titre, id_rubrique}{inverse}>
+
+				<option value="#ID_RUBRIQUE" [(#ENV*{id_rubrique}|=={#ID_RUBRIQUE}) selected="yes"]>#TITRE</option>
+				[(#ENV*{id_rubrique}|=={#ID_RUBRIQUE})
+					#SET{titre_rubrique,#TITRE}
+				]
+		</BOUCLE_rubrique>
+		[(#SESSION{statut}|=={0minirezo}|oui) 			
+			<INCLURE{fond=formulaires/publication_ouverte/toutes_rubriques,env}>
+		]
+		</select>
+	</li>	
+	</ul>
+</fieldset>
+
+

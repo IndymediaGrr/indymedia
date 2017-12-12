@@ -1,0 +1,9 @@
+<div class="formulaire_spip formulaire_recherche[ (#ENV{class})]" id="formulaire_recherche">
+<form action="[(#ENV{action})]" method="get">
+	<div class="recherche_spim">
+	[(#ENV{action}|form_hidden)]
+	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
+	<input type="text" class="forml" name="recherche" id="recherche" value="[(#ENV{recherche}|sinon{<:info_rechercher:>" onfocus="this.value='';})]" />
+	</div>
+</form>
+</div>

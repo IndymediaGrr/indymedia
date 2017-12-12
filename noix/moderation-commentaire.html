@@ -1,0 +1,9 @@
+#CACHE{0}
+
+[(#SESSION{statut}|=={0minirezo}|oui)
+	[(#FORMULAIRE_MODERATION_COMMENTAIRE)]
+]
+
+[(#SESSION{statut}|=={0minirezo}|non)
+	<:moderation_non_connecte:>
+]

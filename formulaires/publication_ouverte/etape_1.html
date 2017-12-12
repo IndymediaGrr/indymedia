@@ -1,0 +1,153 @@
+<div class="cadre">
+	<div class="sous-titre"><:publication_etape_1_titre:>
+		<INCLURE{fond=formulaires/publication_ouverte/boite_etapes,env}>
+	</div>
+	<p>#CONFIG{metapack::indymedia/article_evenement}</p>
+</div>
+
+
+<fieldset>
+	<legend>Ev&egrave;nement</legend>
+	<input type="radio" class="flip" name="type" value="evenement" id="evenement" [(#ENV*{type}|=={evenement}) checked="yes"] />
+	<label for="evenement"><:publication_etape_1_evenement:></label>
+
+
+	<h3><:publication_etape_1_date_evenement:></h3>
+	<ul>
+	<li><label>Date : </label><input name="date_evenement" class="datePicker" value="#ENV*{date_evenement}" /><br class="spacer"
+	/></li>
+
+
+	<li><label>A quelle heure ? </label><select name="heure_evenement" value="#ENV*{heure_evenement}">
+		<option value='06:00' [(#ENV*{heure_evenement}|=={06:00}|oui)selected="yes"]>06:00</option>
+		<option value='06:30' [(#ENV*{heure_evenement}|=={06:30}|oui)selected="yes"]>06:30</option>
+		<option value='07:00' [(#ENV*{heure_evenement}|=={07:00}|oui)selected="yes"]>07:00</option>
+		<option value='07:30' [(#ENV*{heure_evenement}|=={07:30}|oui)selected="yes"]>07:30</option>
+		<option value='08:00' [(#ENV*{heure_evenement}|=={08:00}|oui)selected="yes"]>08:00</option>
+		<option value='08:30' [(#ENV*{heure_evenement}|=={08:30}|oui)selected="yes"]>08:30</option>
+		<option value='09:00' [(#ENV*{heure_evenement}|=={09:00}|oui)selected="yes"]>09:00</option>
+		<option value='09:30' [(#ENV*{heure_evenement}|=={09:30}|oui)selected="yes"]>09:30</option>
+		<option value='10:00' [(#ENV*{heure_evenement}|=={10:00}|oui)selected="yes"]>10:00</option>
+		<option value='10:30' [(#ENV*{heure_evenement}|=={10:30}|oui)selected="yes"]>10:30</option>
+		<option value='11:00' [(#ENV*{heure_evenement}|=={11:00}|oui)selected="yes"]>11:00</option>
+		<option value='11:30' [(#ENV*{heure_evenement}|=={11:30}|oui)selected="yes"]>11:30</option>
+		<option value='12:00' [(#ENV*{heure_evenement}|=={12:00}|oui)selected="yes"]>12:00</option>
+		<option value='12:30' [(#ENV*{heure_evenement}|=={12:30}|oui)selected="yes"]>12:30</option>
+		<option value='13:00' [(#ENV*{heure_evenement}|=={13:00}|oui)selected="yes"]>13:00</option>
+		<option value='13:30' [(#ENV*{heure_evenement}|=={13:30}|oui)selected="yes"]>13:30</option>
+		<option value='14:00' [(#ENV*{heure_evenement}|=={14:00}|oui)selected="yes"]>14:00</option>
+		<option value='14:30' [(#ENV*{heure_evenement}|=={14:30}|oui)selected="yes"]>14:30</option>
+		<option value='15:00' [(#ENV*{heure_evenement}|=={15:00}|oui)selected="yes"]>15:00</option>
+		<option value='15:30' [(#ENV*{heure_evenement}|=={15:30}|oui)selected="yes"]>15:30</option>
+		<option value='16:00' [(#ENV*{heure_evenement}|=={16:00}|oui)selected="yes"]>16:00</option>
+		<option value='16:30' [(#ENV*{heure_evenement}|=={16:30}|oui)selected="yes"]>16:30</option>
+		<option value='17:00' [(#ENV*{heure_evenement}|=={17:00}|oui)selected="yes"]>17:00</option>
+		<option value='17:30' [(#ENV*{heure_evenement}|=={17:30}|oui)selected="yes"]>17:30</option>
+		<option value='18:00' [(#ENV*{heure_evenement}|=={18:00}|oui)selected="yes"]>18:00</option>
+		<option value='18:30' [(#ENV*{heure_evenement}|=={18:30}|oui)selected="yes"]>18:30</option>
+		<option value='19:00' [(#ENV*{heure_evenement}|=={19:00}|oui)selected="yes"]>19:00</option>
+		<option value='19:30' [(#ENV*{heure_evenement}|=={19:30}|oui)selected="yes"]>19:30</option>
+		<option value='20:00' [(#ENV*{heure_evenement}|=={20:00}|oui)selected="yes"]>20:00</option>
+		<option value='20:30' [(#ENV*{heure_evenement}|=={20:30}|oui)selected="yes"]>20:30</option>
+		<option value='21:00' [(#ENV*{heure_evenement}|=={21:00}|oui)selected="yes"]>21:00</option>
+		<option value='21:30' [(#ENV*{heure_evenement}|=={21:30}|oui)selected="yes"]>21:30</option>
+		<option value='22:00' [(#ENV*{heure_evenement}|=={22:00}|oui)selected="yes"]>22:00</option>
+		<option value='22:30' [(#ENV*{heure_evenement}|=={22:30}|oui)selected="yes"]>22:30</option>
+		<option value='23:00' [(#ENV*{heure_evenement}|=={23:00}|oui)selected="yes"]>23:00</option>
+		<option value='23:30' [(#ENV*{heure_evenement}|=={23:30}|oui)selected="yes"]>23:30</option>
+		<option value='00:00' [(#ENV*{heure_evenement}|=={00:00}|oui)selected="yes"]>00:00</option>
+		<option value='00:30' [(#ENV*{heure_evenement}|=={00:30}|oui)selected="yes"]>00:30</option>
+		<option value='01:00' [(#ENV*{heure_evenement}|=={01:00}|oui)selected="yes"]>01:00</option>
+		<option value='01:30' [(#ENV*{heure_evenement}|=={01:30}|oui)selected="yes"]>01:30</option>
+		<option value='02:00' [(#ENV*{heure_evenement}|=={02:00}|oui)selected="yes"]>02:00</option>
+		<option value='02:30' [(#ENV*{heure_evenement}|=={02:30}|oui)selected="yes"]>02:30</option>
+		<option value='03:00' [(#ENV*{heure_evenement}|=={03:00}|oui)selected="yes"]>03:00</option>
+		<option value='03:30' [(#ENV*{heure_evenement}|=={03:30}|oui)selected="yes"]>03:30</option>
+		<option value='04:00' [(#ENV*{heure_evenement}|=={04:00}|oui)selected="yes"]>04:00</option>
+		<option value='04:30' [(#ENV*{heure_evenement}|=={04:30}|oui)selected="yes"]>04:30</option>
+		<option value='05:00' [(#ENV*{heure_evenement}|=={05:00}|oui)selected="yes"]>05:00</option>
+		<option value='05:30' [(#ENV*{heure_evenement}|=={05:30}|oui)selected="yes"]>05:30</option>
+	</select></li>
+	</ul>
+	
+	<h3>Lieu ou se d&eacute;roule l'&eacute;v&egrave;nement : </h3>
+	<p>De pr&eacute;f&eacute;rence, essayez de choisir un lieu d&eacute;j&agrave; existant. Cela permettra par la suite de classer votre &eacute;v&egrave;nement avec d'autres évènements à venir dans le même lieu, et éventuellement donner des informations concernant le lieu si celles-ci sont connues (adresse par exemple).</p>
+	<ul>
+		<li><label>Lieu d&eacute;j&agrave; existant :</label>
+		<select name="lieu_evenement_existe">
+			<option value="">---</option>
+		<BOUCLE_lieux(LIEUX)>
+			<option value="#ID_LIEU" [(#ENV*{lieu_evenement_existe}|=={#ID_LIEU}|oui)selected="yes"]>#NOM</option>
+		</BOUCLE_lieux>
+		</select></li>
+
+
+
+		<li>
+			<h3>Si votre lieu n'existe pas encore, 
+				<a href="#" class="showPanneau" panneau="nouveau_lieu">cr&eacute;ez en un nouveau :</a>
+			</h3>
+
+			<ul class="panneau nouveau_lieu">
+				<li>
+					<label>Nom du lieu</label>
+					<input type="text" name="lieu_evenement" value="#ENV*{lieu_evenement}" />
+				</li>
+
+				<li>
+					<label>Ville</label>
+					<input type="text" name="ville_evenement" value="#ENV*{ville_evenement}" class="texte" />
+				</li>
+
+				<li>
+					<label>Adresse</label>
+					<input type="text" name="adresse_evenement" value="#ENV*{adresse_evenement}" class="texte" />
+				</li>
+
+				<li>
+					<label>Tel</label>
+					<input type="text" name="tel_evenement" value="#ENV*{tel_evenement}" class="texte" />
+				</li>
+
+				<li>
+					<label>Site web</label>
+					<input type="text" name="web_evenement" value="#ENV*{web_evenement}" class="texte" />
+				</li>
+
+				<li>
+					<label>Email</label>
+					<input type="text" name="email_evenement" value="#ENV*{email_evenement}" class="texte" />
+				</li>
+		
+			</ul>
+		</li>
+	</ul>
+</fieldset>
+
+<fieldset>
+<legend>Article</legend>
+	<input type="radio" class="flip" name="type" id="article" value="article" [(#ENV*{type}|=={article}) checked="yes"] />
+	<label for="article"><:publication_etape_1_rubrique:></label>
+
+
+	<h3><:publication_etape_1_rubrique:></h3>
+
+	<p>#CONFIG{metapack::indymedia/choix_rubrique}</p>
+
+	<ul>
+	<li><label>Rubrique : </label><select name="id_rubrique">
+		<BOUCLE_rubrique(RUBRIQUES)
+			{id_parent=#CONFIG{metapack::indymedia/rubrique_contribution}}
+			{tout}{par num titre, id_rubrique}{inverse}>
+
+				<option value="#ID_RUBRIQUE" [(#ENV*{id_rubrique}|=={#ID_RUBRIQUE}) selected="yes"]>#TITRE</option>
+				[(#ENV*{id_rubrique}|=={#ID_RUBRIQUE})
+					#SET{titre_rubrique,#TITRE}
+				]
+		</BOUCLE_rubrique>
+	</select></li>
+	</ul>
+
+</fieldset>
+
+

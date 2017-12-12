@@ -1,0 +1,21 @@
+#CACHE{0}
+
+<BOUCLE_article(ARTICLES){id_article}>
+
+
+[(#ID_RUBRIQUE|=={[(#CONFIG{metapack::indymedia/rubrique_agenda})]}|oui)
+	<INCLURE{fond=noix/info_evenement}{id_article}>
+]
+
+	<div class="cadre">
+		<h1>#TITRE</h1>
+		[(#TEXTE|image_reduire{615,300})]
+
+		<hr />
+		<:article_publier_le:>&nbsp;[(#DATE|affdate)] 
+		[#SEPARATEUR&nbsp;<:article_auteur:>&nbsp;(#EXTRA|extra{op_pseudo})]
+		[#SEPARATEUR&nbsp;<:article_email:>&nbsp;(#EXTRA|extra{op_mail}|antispam)]  
+	</div>
+
+
+</BOUCLE_article>

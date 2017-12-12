@@ -1,0 +1,11 @@
+[(#REM)
+	Afficher menu seulement si existe 1 liste active
+]
+<B_listes>
+<BOUCLE_listes(ABOMAILMANS){0,1}{desactive=0}>
+</BOUCLE_listes>
+	<div class="liens">
+		<img src="#CHEMIN{images/newsletter_mini.png}" alt="<:liste_diffusion:>"/>
+		<a href="#URL_PAGE{liste-diffusion}"><:liste_diffusion:></a>
+	</div>
+</B_listes>

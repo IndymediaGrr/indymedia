@@ -1,0 +1,30 @@
+<div class="meta_info">
+	<span class="info_extra ytalic">
+		[<:poste_le:>(#DATE|affdate{'d/m/y'})] 
+		[#SEPARATEUR<:article_auteur:>&nbsp;<span class="pseudo">(#EXTRA|extra{OP_pseudo})</span>]
+	</span>
+	[(#ID_RUBRIQUE|=={[(#CONFIG{metapack::indymedia/rubrique_agenda})]}|oui)
+			<INCLURE{fond=noix/info_evenement,env,id_lieu}>
+	]
+	<BOUCLE_elsewhere(CONDITION){si  #CONFIG{metapack::indymedia/rubrique_elsewhere}|=={#ID_RUBRIQUE}}>
+		<INCLURE{fond=noix/info_elsewhere,env, id_article}{elsewhere_titre=#ENV{rub_titre}}>
+	</BOUCLE_elsewhere>
+	<B_mots_env>
+	<span class="info_meta">
+		<:themes:>&nbsp;
+		<BOUCLE_mots_env(MOTS){id_mot in #MOTS}{openKey}>
+			<a [href="(#URL_PAGE{theme}|parametre_url{id_mot,#ID_MOT})"]>#TITRE</a>&nbsp;
+		</BOUCLE_mots_env>
+	</span>
+	</B_mots_env>
+	<B_mots>
+	<span class="info_meta">
+		<:themes:>&nbsp;
+		<BOUCLE_mots(MOTS){id_article}{openKey}>
+			<a  [href="(#URL_PAGE{theme}|parametre_url{id_mot,#ID_MOT})"]>#TITRE</a>&nbsp;
+		</BOUCLE_mots>
+	</span>
+	</B_mots>
+	<//B_mots_env>
+</div>		
+

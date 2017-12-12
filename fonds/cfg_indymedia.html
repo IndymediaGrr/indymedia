@@ -1,0 +1,214 @@
+<!-- descriptif=
+<a name="haut"></a>
+&nbsp;&nbsp;<b>Navigation</b>
+<br />
+- <a href="#rubrique"><:indymedia:rubrique:></a>
+- <a href="#article"><:indymedia:article:></a>
+- <a href="#mise_en_page"><:indymedia:mise_en_page:></a>
+- <a href="#liste_diffusion"><:indymedia:liste_diffusion:></a>
+- <a href="#moderation"><:indymedia:moderation:></a>
+- <a href="#publication_ouverte"><:indymedia:publication_ouverte:></a>
+-->
+<!-- titre=Indymedia-->
+
+[(#REM) liens_multi*=indymedia_contribution]
+<!-- boite=Configuration du site indymedia-->
+<!-- nom=indymedia-->
+
+#CACHE{0}
+
+<form method="post" action="#SELF">
+[(#ENV{_cfg_}|form_hidden)]
+
+<p><:indymedia:description_plugin:></p>
+
+
+<a name="rubrique"></a>
+
+<fieldset style="background:#F5EDED;"><legend><b><:indymedia:rubrique:></b></legend>
+
+<label><:indymedia:modifier_rubrique_edito:></label><br />
+
+<select name="rubrique_edito" value="#ENV{rubrique_edito}">
+<BOUCLE_rubrique_edito(RUBRIQUES){tout}{par titre}>
+	<option value="#ID_RUBRIQUE" [(#ENV{rubrique_edito}|=={#ID_RUBRIQUE}|?{selected="yes"})]>#TITRE</option>
+</BOUCLE_rubrique_edito>
+</select>
+
+
+<br /><br />
+
+<label><:indymedia:modifier_rubrique_collectif:></label><br />
+<select name="rubrique_collectif" value="#ENV{rubrique_collectif}">
+<BOUCLE_rubrique_collectif(RUBRIQUES){tout}{par titre}>
+	<option value="#ID_RUBRIQUE" [(#ENV{rubrique_collectif}|=={#ID_RUBRIQUE}|?{selected="yes"})]>#TITRE</option>
+</BOUCLE_rubrique_collectif>
+</select>
+
+<br /><br />
+
+<label><:indymedia:modifier_rubrique_agenda:></label><br />
+<select name="rubrique_agenda" value="#ENV{rubrique_agenda}">
+<BOUCLE_rubrique_agenda(RUBRIQUES){tout}{par titre}>
+	<option value="#ID_RUBRIQUE" [(#ENV{rubrique_agenda}|=={#ID_RUBRIQUE}|?{selected="yes"})]>#TITRE</option>
+</BOUCLE_rubrique_agenda>
+</select>
+
+<br /><br />
+
+<label><:indymedia:modifier_rubrique_contribution:></label><br />
+<select name="rubrique_contribution" value="#ENV{rubrique_contribution}">
+<BOUCLE_rubrique_contribution(RUBRIQUES){tout}{par titre}>
+	<option value="#ID_RUBRIQUE" [(#ENV{rubrique_contribution}|=={#ID_RUBRIQUE}|?{selected="yes"})]>#TITRE</option>
+</BOUCLE_rubrique_contribution>
+</select>
+<br /><br />
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+</fieldset>
+
+<br /><br />
+
+
+<a name="article"></a>
+
+<fieldset style="background:#F5EDED;"><legend><b><:indymedia:article:></b></legend>
+
+<label><:indymedia:modifier_article_charte:></label><br />
+<input type="text" name="article_charte" value="#ENV{article_charte}" size="10" />
+<br /><br />
+
+<label><:indymedia:modifier_article_presentation:></label><br />
+<input type="text" name="article_presentation" value="#ENV{article_presentation}" size="10" />
+<br /><br />
+
+
+<label><:indymedia:modifier_article_liste_diffusion:></label><br />
+<input type="text" name="article_liste_diffusion" value="#ENV{article_liste_diffusion}" size="10" />
+<br /><br />
+
+<label><:indymedia:modifier_article_publier:></label><br />
+<input type="text" name="article_publier" value="#ENV{article_publier}" size="10" />
+<br /><br />
+
+<label><:indymedia:modifier_article_publication:></label><br />
+<input type="text" name="article_publication" value="#ENV{article_publication}" size="10" />
+<br /><br />
+
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+</fieldset>
+
+
+
+<a name="mise_en_page"></a>
+
+<fieldset style="background:#F5EDED;"><legend><b><:indymedia:mise_en_page:></b></legend>
+
+<label><:indymedia:nombre_edito:></label><br />
+<input type="text" name="nombre_edito" value="#ENV{nombre_edito}" size="10" />
+<br /><br />
+
+<label><:indymedia:nombre_liste:></label><br />
+<input type="text" name="nombre_liste" value="#ENV{nombre_liste}" size="10" />
+<br /><br />
+
+
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+</fieldset>
+
+
+<a name="liste_diffusion"></a>
+
+<fieldset style="background:#F5EDED;"><legend><b><:indymedia:liste_diffusion:></b></legend>
+
+<label><:indymedia:liste_moderation:></label><br />
+<input type="text" name="liste_moderation" value="#ENV{liste_moderation}" size="30" />
+<br /><br />
+
+<label><:indymedia:liste_envoyeur:></label><br />
+<input type="text" name="liste_envoyeur" value="#ENV{liste_envoyeur}" size="30" />
+<br /><br />
+
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+</fieldset>
+
+<a name="moderation"></a>
+
+<fieldset style="background:#F5EDED;"><legend><b><:indymedia:moderation:></b></legend>
+
+<label><:indymedia:dernier_commentaire:></label><br />
+<input type="text" name="dernier_commentaire" value="#ENV{dernier_commentaire}" size="30" />
+<br /><br />
+
+<label><:indymedia:texte_alerter:></label><br />
+<textarea name="texte_alerter" cols="50" rows="10">#ENV{texte_alerter}</textarea>
+<br /><br />
+
+<label><:indymedia:texte_attente:></label><br />
+<textarea name="texte_attente" cols="50" rows="10">#ENV{texte_attente}</textarea>
+<br /><br />
+
+<label><:indymedia:texte_debat:></label><br />
+<textarea name="texte_debat" cols="50" rows="10">#ENV{texte_debat}</textarea>
+<br /><br />
+
+
+<label><:indymedia:texte_refus:></label><br />
+<textarea name="texte_refus" cols="50" rows="10">#ENV{texte_refus}</textarea>
+<br /><br />
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+</fieldset>
+
+<a name="publication_ouverte"></a>
+
+<fieldset style="background:#F5EDED;"><legend><b><:indymedia:publication_ouverte:></b></legend>
+
+	<label><:indymedia:texte_article_evenement:></label><br />
+	<textarea name="article_evenement" cols="50" rows="10">#ENV{article_evenement}</textarea>
+	<br /><br />
+
+	<label><:indymedia:texte_choix_rubrique:></label><br />
+	<textarea name="choix_rubrique" cols="50" rows="10">#ENV{choix_rubrique}</textarea>
+	<br /><br />
+
+	<label><:indymedia:texte_redaction:></label><br />
+	<textarea name="redaction" cols="50" rows="10">#ENV{redaction}</textarea>
+	<br /><br />
+
+	<label><:indymedia:texte_inclure_document:></label><br />
+	<textarea name="inclure_document" cols="50" rows="10">#ENV{inclure_document}</textarea>
+	<br /><br />
+
+	<label><:indymedia:choix_mots_cles:></label><br />
+	<textarea name="choix_mots_cles" cols="50" rows="10">#ENV{choix_mots_cles}</textarea>
+	<br /><br />
+
+	<label><:indymedia:texte_previsualisation:></label><br />
+	<textarea name="previsualisation" cols="50" rows="10">#ENV{previsualisation}</textarea>
+
+
+	<p><:indymedia:expliq_groupes:></p>
+	<p style="background:#fff; border: 1px dotted #000;">
+	<BOUCLE_groupe(GROUPES_MOTS){par titre}>
+		<input type="checkbox" name="groupe_#ID_GROUPE" value="openPublishing" [(#ENV{groupe_#ID_GROUPE}|=={openPublishing}|?{checked="yes"})]/>#TITRE<br />
+	</BOUCLE_groupe>
+		<:indymedia:expliq_groupes_absent:>
+	<//B_groupe>
+	</p>
+	<p><a href="?exec=mots_type&new=oui"><:indymedia:creer_groupe:></a></p>
+
+	<input type="submit" name="_cfg_ok" value="<:OK:>" />
+
+
+	<a href="#haut"><:indymedia:revenir_haut:></a>
+	<br /><br />
+
+</fieldset>
+
+</form>
+
+#CFG_ARBO{indymedia}

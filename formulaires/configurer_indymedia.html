@@ -1,0 +1,253 @@
+#CACHE{0}
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+<h3 class='titrem'><:indymedia:indymedia:></h3>	
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<p class="explication"><:indymedia:description_plugin:></p>
+<form method="post" action="#ENV{action}">
+	[(#REM) declarer les hidden qui declencheront le service du formulaire
+	parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<div>				
+		<fieldset>
+		<a name="rubrique"></a>	
+			<h3 class='titrem'><:indymedia:rubrique:></h3>
+						
+			<p class="explication"><:indymedia:modifier_rubrique_collectif:></p>
+			<div class='choix'>
+				<select name="rubrique_collectif" value="#ENV{rubrique_collectif}">
+				<option>---</option>
+				<BOUCLE_rubrique_collectif(RUBRIQUES){tout}{par titre}>
+					<option value="#ID_RUBRIQUE" [(#ENV{rubrique_collectif}|=={#ID_RUBRIQUE}|?{selected="yes"})]>#TITRE</option>
+				</BOUCLE_rubrique_collectif>
+				</select>	
+			</div>	
+					
+			<p class="explication"><:indymedia:modifier_rubrique_agenda:></p>
+			<div class='choix'>
+				<select name="rubrique_agenda" value="#ENV{rubrique_agenda}">
+				<option>---</option>
+				<BOUCLE_rubrique_agenda(RUBRIQUES){tout}{par titre}>
+					<option value="#ID_RUBRIQUE" [(#ENV{rubrique_agenda}|=={#ID_RUBRIQUE}|?{selected="yes"})]>#TITRE</option>
+				</BOUCLE_rubrique_agenda>
+				</select>
+			</div>	
+			
+			<p class="explication"><:indymedia:modifier_rubrique_contribution:></p>
+			<div class='choix'>
+				<select name="rubrique_contribution" value="#ENV{rubrique_contribution}">
+				<option>---</option>
+				<BOUCLE_rubrique_contribution(RUBRIQUES){tout}{par titre}>
+					<option value="#ID_RUBRIQUE" [(#ENV{rubrique_contribution}|=={#ID_RUBRIQUE}|?{selected="yes"})]>#TITRE</option>
+				</BOUCLE_rubrique_contribution>
+				</select>
+			</div>	
+						
+			<p class="explication"><:indymedia:modifier_rubrique_elsewhere:></p>
+			<div class='choix'>
+				<select name="rubrique_elsewhere" value="#ENV{rubrique_elsewhere}">
+				<option>---</option>
+				<BOUCLE_rubrique_elsewhere(RUBRIQUES){tout}{par titre}>
+					<option value="#ID_RUBRIQUE" [(#ENV{rubrique_elsewhere}|=={#ID_RUBRIQUE}|?{selected="yes"})]>#TITRE</option>
+				</BOUCLE_rubrique_elsewhere>
+				</select>	
+			</div>
+			<p class="explication"><:indymedia:modifier_edito_modo:></p>
+                        <div class='choix'>
+                                <select name="rubrique_edito_modo" value="#ENV{rubrique_edito_modo}">
+                                <option>---</option>
+                                <BOUCLE_rubrique_edito_modo(RUBRIQUES){tout}{par titre}>
+                                        <option value="#ID_RUBRIQUE" [(#ENV{rubrique_edito_modo}|=={#ID_RUBRIQUE}|?{selected="yes"})]>#TITRE</option>
+                                </BOUCLE_rubrique_edito_modo>
+                                </select>
+                        </div>
+		</fieldset>	
+		<p class="boutons">
+			<a href="#haut"><:indymedia:revenir_haut:></a>
+			<input type="submit"  class='submit' name="submit" value="<:bouton_enregistrer:>" />
+		</p>	
+	</div>
+	<div>		
+		<fieldset>		
+		<a name="article"></a>		
+		<h3 class='titrem'><:indymedia:article:></h3>
+			<p class="explication"><:indymedia:modifier_article_regles:></p>
+			<div class='choix'>
+				<input type="text" name="article_regles" value="#ENV{article_regles}" size="10" />
+			</div>
+			<p class="explication"><:indymedia:modifier_article_presentation:></p>
+			<div class='choix'>
+				<input type="text" name="article_presentation" value="#ENV{article_presentation}" size="10" />
+			</div>
+			<p class="explication"><:indymedia:modifier_article_rss:></p>
+			<div class='choix'>
+				<input type="text" name="article_rss" value="#ENV{article_rss}" size="10" />
+			</div>	
+			<p class="explication"><:indymedia:modifier_article_publier:></p>
+                        <div class='choix'>
+                                <input type="text" name="article_publier" value="#ENV{article_publier}" size="10" />
+                        </div>
+
+		</fieldset>	
+		<p class="boutons">
+			<a href="#haut"><:indymedia:revenir_haut:></a>
+			<input type="submit" class='submit' name="submit" value="<:bouton_enregistrer:>" />
+		</p>
+	</div>
+	<div>				
+		<fieldset>
+		<a name="liste_diffusion"></a>
+			<h3 class='titrem'><:indymedia:contact_email_collectif:></h3>
+			
+			<label><:indymedia:page_contact_collectif:></label><br />
+			<select name="auteur_contact" value="#ENV{auteur_contact}">
+				<option>---</option>
+			<BOUCLE_auteur_contact(AUTEURS){tout}{statut=0minirezo}{par nom}>
+				<option value="#ID_AUTEUR" [(#ENV{auteur_contact}|=={#ID_AUTEUR}|?{selected="yes"})]>#NOM</option>
+			</BOUCLE_auteur_contact>
+			</select>
+			<br /><br />
+			
+			<label><:indymedia:liste_moderation:></label><br />
+			<input type="text" name="liste_moderation" value="#ENV{liste_moderation}" size="30" />
+			<br /><br />
+			
+			<label><:indymedia:liste_envoyeur:></label><br />
+			<input type="text" name="liste_envoyeur" value="#ENV{liste_envoyeur}" size="30" />
+		</fieldset>
+		<p class="boutons">
+			<a href="#haut"><:indymedia:revenir_haut:></a>
+			<input type="submit"  class='submit' name="submit" value="<:bouton_enregistrer:>" />
+		</p>
+	</div>
+	<br />	
+	<div>		
+		<a name="moderation"></a>
+		<h3 class='titrem'><:indymedia:moderation:></h3>
+		[(#REM) categorie EN ATTENTE ? ]
+		<fieldset>		
+		<legend><b>Cat&eacute;gorie en attente </b></legend>					
+		<ul>	
+			<li class="editer attente_active[ (#ENV**{erreurs}|table_valeur{en_attente_actif}|oui)erreur]">
+				<div class="choix">
+					<input type="checkbox" title="Activer/D&eacute;sactiver" name="en_attente_actif" value="en_attente_actif" [(#ENV{en_attente_actif}|?{checked="yes"})] onchange="var t=jQuery(this).parents('li').eq(0).siblings('li.fieldset_attente');if (jQuery(this).prop('checked')) t.show('fast'); else t.hide('fast');"/> 
+					<label>Activer/D&eacute;sactiver</label>
+				</div>
+			</li>
+			<li class="fieldset_attente[(#ENV{en_attente_actif}|=={en_attente_actif}|non)none]">
+				<div class="choix">
+					<input type="checkbox" title="Activer/D&eacute;sactiver" name="en_attente_defaut" value="en_attente_defaut" [(#ENV{en_attente_defaut}|?{checked="yes"})] /> 
+					<label>Les articles soumis sont envoyés dans la catégorie en attente</label>
+				</div>
+				<p class="explication"><:indymedia:texte_attente:></p>
+				<textarea name="texte_attente" cols="50" rows="10">#ENV{texte_attente}</textarea>
+			</li>	
+		</ul>	
+		</fieldset>
+			
+		[(#REM) categorie EN DEBAT ? ]
+		<fieldset>						
+		<legend><b>Cat&eacute;gorie en d&eacute;bat </b></legend>			
+		<ul>								
+			<li class="editer debat_actif[ (#ENV**{erreurs}|table_valeur{en_debat_actif}|oui)erreur]">
+				<div class="choix">
+					<input type="checkbox" title="Activer/D&eacute;sactiver" name="en_debat_actif" value="en_debat_actif" [(#ENV{en_debat_actif}|?{checked="yes"})] onchange="var t=jQuery(this).parents('li').eq(0).siblings('li.fieldset_debat');if (jQuery(this).prop('checked')) t.show('fast'); else t.hide('fast');" /> 
+					<label>Activer/D&eacute;sactiver</label>
+				</div>
+			</li>
+			<li class="fieldset_debat[(#ENV{en_debat_actif}|=={en_debat_actif}|non)none]">
+					<p class="explication"><:indymedia:texte_debat:></p>
+					<textarea name="texte_debat" cols="50" rows="10">#ENV{texte_debat}</textarea>
+			</li>
+		</ul>	
+		</fieldset>
+			
+		[(#REM) categorie REFUSE ? ]
+		<fieldset>					
+		<legend><b>Cat&eacute;gorie refus&eacute; </b></legend>				
+		<ul>							
+			<li class="editer refus_actif[ (#ENV**{erreurs}|table_valeur{refus_actif}|oui)erreur]">
+				<div class="choix">
+					<input type="checkbox" title="Activer/D&eacute;sactiver" name="refus_actif" value="refus_actif" [(#ENV{refus_actif}|?{checked="yes"})] onchange="var t=jQuery(this).parents('li').eq(0).siblings('li.fieldset_refus');if (jQuery(this).prop('checked')) t.show('fast'); else t.hide('fast');" /> 
+					<label>Activer/D&eacute;sactiver </label>
+				</div>
+			</li>			
+			<li class="fieldset_refus[(#ENV{refus_actif}|=={refus_actif}|non)none]">
+					<p class="explication"><:indymedia:texte_refus:></p>
+					<textarea name="texte_refus" cols="50" rows="10">#ENV{texte_refus}</textarea>
+			</li>
+		</ul>	
+		</fieldset>
+		
+		<fieldset>						
+			<label><:indymedia:dernier_commentaire:></label>
+			<input type="text" name="dernier_commentaire" value="#ENV{dernier_commentaire}" size="30" />
+			<br /><br />
+				
+			<label><:indymedia:texte_alerter:></label>
+			<textarea name="texte_alerter" cols="50" rows="10">#ENV{texte_alerter}</textarea>
+		</fieldset>
+		<p class="boutons">
+			<a href="#haut"><:indymedia:revenir_haut:></a>
+			<input type="submit"  class='submit' name="submit" value="<:bouton_enregistrer:>" />
+		</p>
+	</div>
+	<div>
+		<fieldset>
+		<a name="publication_ouverte"></a>
+		<h3 class='titrem'><:indymedia:textes_publication_ouverte:></h3>
+		
+			<label><:indymedia:texte_article_lieu:></label><br />
+			<textarea name="article_lieu" cols="50" rows="10">#ENV{article_lieu}</textarea>
+			<br /><br />
+		
+			<label><:indymedia:texte_choix_rubrique:></label><br />
+			<textarea name="choix_rubrique" cols="50" rows="10">#ENV{choix_rubrique}</textarea>
+			<br /><br />
+		
+			<label><:indymedia:texte_redaction:></label><br />
+			<textarea name="redaction" cols="50" rows="10">#ENV{redaction}</textarea>
+			<br /><br />
+			
+			<label><:indymedia:texte_redaction_elsewhere:></label><br />
+			<textarea name="redaction_elsewhere" cols="50" rows="10">#ENV{redaction_elsewhere}</textarea>
+			<br /><br />
+		
+			<label><:indymedia:texte_inclure_document:></label><br />
+			<textarea name="inclure_document" cols="50" rows="10">#ENV{inclure_document}</textarea>
+			<br /><br />
+			
+			<label><:indymedia:commentaire_charte:></label><br />
+			<textarea name="commentaire_charte" cols="50" rows="10">#ENV{commentaire_charte}</textarea>
+			<br /><br />
+			
+			<label><:indymedia:choix_mots_cles:></label><br />
+			<textarea name="choix_mots_cles" cols="50" rows="10">#ENV{choix_mots_cles}</textarea>
+			<br /><br />
+		
+			<label><:indymedia:texte_previsualisation:></label><br />
+			<textarea name="previsualisation" cols="50" rows="10">#ENV{previsualisation}</textarea>
+			<br /><br />
+		
+			<label><:indymedia:message_publier_bas:></label><br />
+			<textarea name="message_publier_bas" cols="50" rows="10">#ENV{message_publier_bas}</textarea>
+				
+			<p><:indymedia:expliq_groupes:></p>
+			<p style="background:#fff; border: 1px dotted #000;">
+			<BOUCLE_groupe(GROUPES_MOTS){par titre}>
+				<input type="checkbox" name="groupe_#ID_GROUPE" value="openPublishing" [(#ENV{groupe_#ID_GROUPE}|=={openPublishing}|?{checked="yes"})]/>#TITRE<br />
+			</BOUCLE_groupe>
+				<:indymedia:expliq_groupes_absent:>
+			<//B_groupe>
+			</p>
+			<p><a href="?exec=mots_type&new=oui"><:indymedia:creer_groupe:></a></p>
+		</fieldset>		
+		<p class="boutons">
+			<a href="#haut"><:indymedia:revenir_haut:></a>
+			<input type="submit"  class="submit" value="<:bouton_enregistrer:>" />
+		</p>		
+	</div>
+</form>
+</div>
+

@@ -1,0 +1,66 @@
+#CACHE{3600*24}
+
+<div class="avertissement">
+	[<p>(#CONFIG{metapack::indymedia/texte_refus}|extraire_multi{#LANG}|propre)</p>]
+</div>
+
+[(#REM)
+	Recupération de toutes les rubriques succeptible de contenir des articles refusé
+		- la rubrique agenda
+		- elsewhere
+		- les sous-rubriques de contribution
+]
+
+#SET{liste_rubriques, #ARRAY}
+
+#SET{liste_rubriques, #GET{liste_rubriques}|push{#CONFIG{metapack::indymedia/rubrique_agenda}}}
+#SET{liste_rubriques, #GET{liste_rubriques}|push{#CONFIG{metapack::indymedia/rubrique_elsewhere}}}
+<BOUCLE_rubriques(RUBRIQUES){id_parent=#CONFIG{indymedia/rubrique_contribution} }{tout}>
+	#SET{liste_rubriques, #GET{liste_rubriques}|push{#ID_RUBRIQUE}}
+</BOUCLE_rubriques>
+
+<div class="page_liste">		
+	<div class="titre">[(#ENV{page-titre}|lettreMajuscule)]</div>			
+	<B_refus>
+		#ANCRE_PAGINATION
+	<ul>
+
+	<BOUCLE_refus(ARTICLES)
+		{par date}
+		{inverse}
+		{id_rubrique IN #GET{liste_rubriques}}
+		{statut="refuse"}
+		{tout}
+		{pagination 20}>
+		<li>
+			[(#SESSION{statut}|=={0minirezo}|oui)
+			]
+				<a href="#URL_SITE_SPIP/spip.php?article#ID_ARTICLE">
+				[(#TITRE|lettreMajuscule)]
+				</a>
+				<BOUCLE_rubrique(RUBRIQUES){id_rubrique}{tout}>
+				[<br />
+				<small>
+				<i>
+			(#INCLURE{fond=noix/article-fil-pied,env,id_article,id_rubrique,extra,date=#_refus:DATE,titre_rubrique=#TITRE})
+				</i>
+				</small>]
+				</BOUCLE_rubrique>
+			[(#SESSION{statut}|=={0minirezo}|oui)
+			]
+
+			[<br />
+			<:raison_refus:>(#EXTRA|extra{OP_moderation})] [(#SURTITRE)]
+		</li>
+	</BOUCLE_refus>
+
+	</ul>
+			[<p class="pagination">(#PAGINATION{page})</p>]
+	</B_refus>
+	<ul>
+			<li>
+			<:refus_aucun:>
+			</li>
+	</ul>
+	<//B_refus>
+</div>

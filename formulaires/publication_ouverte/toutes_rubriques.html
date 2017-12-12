@@ -1,0 +1,7 @@
+
+<BOUCLE_change_rubrique_edito(RUBRIQUES){id_rubrique = #CONFIG{metapack::indymedia/rubrique_edito}}{tout}>
+	<option value="#ID_RUBRIQUE" [(#ENV*{id_rubrique}|=={#ID_RUBRIQUE}|oui)selected="yes"]>#TITRE</option>
+</BOUCLE_change_rubrique_edito>
+<BOUCLE_change_rubrique_collectif(RUBRIQUES){id_rubrique = #CONFIG{metapack::indymedia/rubrique_collectif}}{tout}>
+	<option value="#ID_RUBRIQUE" [(#ENV*{id_rubrique}|=={#ID_RUBRIQUE}|oui)selected="yes"]>#TITRE</option>
+</BOUCLE_change_rubrique_collectif>

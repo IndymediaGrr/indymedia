@@ -1,0 +1,15 @@
+[(#REM)
+	Alerter le collectif à propos d'un article
+]
+
+#CACHE{0}
+
+<BOUCLE_principale(ARTICLES){id_article}>
+
+	<INCLURE{fond=structure/structure,env}
+		{page-titre=<:alerte:>}
+		{robot=none}
+		{droite=fil-de-presse}
+		{centre=alerter}>
+
+</BOUCLE_principale>

@@ -1,0 +1,10 @@
+#CACHE{3600}
+
+<BOUCLE_semaine(ARTICLES){id_rubrique=#CONFIG{metapack::indymedia/rubrique_agenda}}
+	{agenda date_debut_indy, semaine, #ENV{annee}, #ENV{mois}, #ENV{jour}}
+>[(#DATE_DEBUT_INDY|agenda_memo{#DESCRIPTIF, #TITRE, #URL_ARTICLE,
+	[(#COMPTEUR_BOUCLE|
+		alterner{'calendrier-couleur2',
+		'calendrier-couleur4'})]})]</BOUCLE_semaine>[(#DATE_DEBUT_INDY|
+		agenda_affiche{<:aucun_article:>, 'semaine', 'calendrier-couleur2','calendrier-couleur4'}
+)]<//B_semaine>

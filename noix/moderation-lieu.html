@@ -1,0 +1,16 @@
+#CACHE{0}
+
+<BOUCLE_lieu(LIEUX){id_lieu}>
+
+	[(#SESSION{statut}|=={0minirezo}|oui)
+		<div class="cadre explication">
+			<p><:explication_modification_lieu:></p>
+		</div>
+		[(#FORMULAIRE_MODERATION_LIEU{#ID_LIEU})]
+	]
+
+	[(#SESSION{statut}|=={0minirezo}|non)
+		<:moderation_non_connecte:>
+	]
+
+</BOUCLE_lieu>

@@ -1,0 +1,96 @@
+[(#REM) Cette balise (invisible) provoque le recalcul du forum
+la premiere fois qu'un message est poste (cf. inc/invalideur). ]
+
+[(#PARAMETRES_FORUM|?{''})]
+
+[(#REM) Messages du forum ]
+
+
+<div class="commentaire">
+
+[(#REM) Titre ]
+<div class="sous-titre"><:commentaires_maj:></div>
+<B_forums>
+
+<ul class="forum">
+
+	<BOUCLE_forums(FORUMS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {statut=publie}{par date}>
+
+	<li class="forum-fil">
+
+		<div class="forum-message">
+			<div class="forum-chapo">
+				<div class="#EDIT{titre}"><strong><a  class="#EDIT{titre} titre" href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM">#TITRE</a></strong></div>
+				<div class="#EDIT{qui}"><small>[(#DATE|affdate_jourcourt)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM|couper{80})]</small></div>
+<!--
+				[(#REM) , <:par_auteur:> (#NOM|couper{80})]
+-->
+			</div>
+			<div class="#EDIT{texte} texte">
+				[(#TEXTE|lignes_longues)]
+				[<div class="notes surlignable">(#NOTES|safehtml|lignes_longues)</div>]
+				[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+
+				<BOUCLE_doc(DOCUMENTS){id_forum}>
+				[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+					[(#MODELE{emb}|image_reduire{300})]
+				,
+					[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+				})]
+				</BOUCLE_doc>
+
+			</div>
+		</div>
+
+		
+	</li>
+	</BOUCLE_forums>
+
+</ul>
+
+
+</B_forums>
+	<ul class="forum">
+		<li class="forum-fil">
+			<div class="forum-message">
+				<:moderation_commentaire_aucun:>
+			</div>
+		</li>
+	</ul>
+<//B_forums>
+</div>
+
+<a href="#forum" name="forum" id="forum"></a>
+
+<div class="avertissement">
+	<h3><:commentaire_avertissement:></h3>
+	<div class="spip">
+		[(#CONFIG{metapack::indymedia/commentaire_charte}|extraire_multi{#LANG}|propre)]
+		<BOUCLE_ARTICLE_PRES(ARTICLES){id_article=#CONFIG{metapack::indymedia/article_regles}}>
+			<p><a href="#URL_ARTICLE"><:commentaire_lien_charte:></a></p>
+		</BOUCLE_ARTICLE_PRES>
+	</div>
+</div>
+[(#CONFIG{metapack::indymedia_modo/modo_forum_article_id}|et{
+	#ID_ARTICLE|<{#CONFIG{metapack::indymedia_modo/modo_forum_article_id}}}) 
+	#SET{stop,oui}
+]
+#SET{liste_fermes,#ARRAY}
+[(#CONFIG{metapack::indymedia_modo/modo_forum_article_liste}|oui)
+	#SET{liste_fermes,#VAL{#CONFIG{metapack::indymedia_modo/modo_forum_article_liste}}|explode{#VAL{','}}}
+]
+<BOUCLE_si_open_pub_ouvert(CONDITION){si #GET{stop}|=={oui}|ou{#ID_ARTICLE|in_array{#GET{liste_fermes}}}}>
+
+<div class="avertissement">
+	<h3>[(#CONFIG{metapack::indymedia_modo/texte_modo_forum_article_id}|oui|?{
+		#CONFIG{metapack::indymedia_modo/texte_modo_forum_article_id}
+		,
+		Fin des commentaires pour cet article
+		})]</h3>
+</di
+</BOUCLE_si_open_pub_ouvert>
+</B_si_open_pub_ouvert>
+<div  class="ajax">
+	#FORMULAIRE_FORUM
+</div>
+<//B_si_open_pub_ouvert>

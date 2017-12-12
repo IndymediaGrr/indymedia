@@ -1,0 +1,220 @@
+[(#SESSION{statut}|=={0minirezo}|oui) 
+<fieldset>
+	<div class="modo_cadre">
+		<table>
+			<tr>
+				<td style="width:50%">
+				<INCLURE{fond=formulaires/publication_ouverte/mettre_edito,env}>	
+				</td>
+				<td style="width:50%">						
+					<div class="modo_droite">
+					<a [href="(#URL_PAGE{publication-ouverte-info}|parametre_url{id_article,#ENV*{id_article}})"]>
+					<:modifier_evenement_article:>
+					</a>
+					<br />
+					<a [href="(#URL_PAGE{publication-ouverte-elsewhere}|parametre_url{id_article,#ENV*{id_article}})"]>
+					<:modifier_article_elsewhere:>
+					</a>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</fieldset>
+]
+
+<div class="sous-titre-po">
+	<div class="avis_goche">  
+		<:publication_etape_1_agenda_titre:>
+	</div>
+	<div class="avis_droite">  
+		<:etapes:>
+		<div class="etape_droite">
+		<INCLURE{fond=formulaires/publication_ouverte/boite_etapes,env}>
+	    </div>
+	</div>
+</div>
+
+<fieldset>
+	<input type="hidden" class="flip" name="type" id="evenement" value="evenement"/>
+	<span class="oblige" title="<:obligatoire:>"><:star_oblige:></span> = <:champ_obligatoire:>
+	<ul>	
+		<li>
+			#SET{message_date, #ENV**{erreurs}|table_valeur{jour_evenement}}
+			#SET{message_date, #GET{message_date}|concat{ #ENV**{erreurs}|table_valeur{mois_evenement}}}
+			#SET{message_date, #GET{message_date}|concat{ #ENV**{erreurs}|table_valeur{annee_evenement}}}
+			[(#GET{message_date}|!={""}|oui)
+				[<span class='erreur_message'>(#GET{message_date})</span><br />]
+			]
+			<label><span class="oblige" title="<:obligatoire:>"><:star_oblige:></span><:date:>  </label>
+			<span class="oblige" title="<:obligatoire:>"><:star_oblige:></span><:jour:> : 
+			<select name="jour_evenement" value="#ENV*{jour_evenement}">
+				<option>---</option>
+				<option value='01' [(#ENV*{jour_evenement}|=={01}|oui)selected="yes"]>01</option>
+				<option value='02' [(#ENV*{jour_evenement}|=={02}|oui)selected="yes"]>02</option>
+				<option value='03' [(#ENV*{jour_evenement}|=={03}|oui)selected="yes"]>03</option>
+				<option value='04' [(#ENV*{jour_evenement}|=={04}|oui)selected="yes"]>04</option>
+				<option value='05' [(#ENV*{jour_evenement}|=={05}|oui)selected="yes"]>05</option>
+				<option value='06' [(#ENV*{jour_evenement}|=={06}|oui)selected="yes"]>06</option>
+				<option value='07' [(#ENV*{jour_evenement}|=={07}|oui)selected="yes"]>07</option>
+				<option value='08' [(#ENV*{jour_evenement}|=={08}|oui)selected="yes"]>08</option>
+				<option value='09' [(#ENV*{jour_evenement}|=={09}|oui)selected="yes"]>09</option>
+				<option value='10' [(#ENV*{jour_evenement}|=={10}|oui)selected="yes"]>10</option>
+				<option value='11' [(#ENV*{jour_evenement}|=={11}|oui)selected="yes"]>11</option>
+				<option value='12' [(#ENV*{jour_evenement}|=={12}|oui)selected="yes"]>12</option>
+				<option value='13' [(#ENV*{jour_evenement}|=={13}|oui)selected="yes"]>13</option>
+				<option value='14' [(#ENV*{jour_evenement}|=={14}|oui)selected="yes"]>14</option>
+				<option value='15' [(#ENV*{jour_evenement}|=={15}|oui)selected="yes"]>15</option>
+				<option value='16' [(#ENV*{jour_evenement}|=={16}|oui)selected="yes"]>16</option>
+				<option value='17' [(#ENV*{jour_evenement}|=={17}|oui)selected="yes"]>17</option>
+				<option value='18' [(#ENV*{jour_evenement}|=={18}|oui)selected="yes"]>18</option>
+				<option value='19' [(#ENV*{jour_evenement}|=={19}|oui)selected="yes"]>19</option>
+				<option value='20' [(#ENV*{jour_evenement}|=={20}|oui)selected="yes"]>20</option>
+				<option value='21' [(#ENV*{jour_evenement}|=={21}|oui)selected="yes"]>21</option>
+				<option value='22' [(#ENV*{jour_evenement}|=={22}|oui)selected="yes"]>22</option>
+				<option value='23' [(#ENV*{jour_evenement}|=={23}|oui)selected="yes"]>23</option>
+				<option value='24' [(#ENV*{jour_evenement}|=={24}|oui)selected="yes"]>24</option>
+				<option value='25' [(#ENV*{jour_evenement}|=={25}|oui)selected="yes"]>25</option>
+				<option value='26' [(#ENV*{jour_evenement}|=={26}|oui)selected="yes"]>26</option>
+				<option value='27' [(#ENV*{jour_evenement}|=={27}|oui)selected="yes"]>27</option>
+				<option value='28' [(#ENV*{jour_evenement}|=={28}|oui)selected="yes"]>28</option>
+				<option value='29' [(#ENV*{jour_evenement}|=={29}|oui)selected="yes"]>29</option>
+				<option value='30' [(#ENV*{jour_evenement}|=={30}|oui)selected="yes"]>30</option>
+				<option value='31' [(#ENV*{jour_evenement}|=={31}|oui)selected="yes"]>31</option>
+			</select>
+			<span class="oblige" title="<:obligatoire:>"><:star_oblige:></span><:mois:> : 
+			<select name="mois_evenement" value="#ENV*{mois_evenement}">
+				<option>---</option>
+				<option value='01' [(#ENV*{mois_evenement}|=={01}|oui)selected="yes"]>01</option>
+				<option value='02' [(#ENV*{mois_evenement}|=={02}|oui)selected="yes"]>02</option>
+				<option value='03' [(#ENV*{mois_evenement}|=={03}|oui)selected="yes"]>03</option>
+				<option value='04' [(#ENV*{mois_evenement}|=={04}|oui)selected="yes"]>04</option>
+				<option value='05' [(#ENV*{mois_evenement}|=={05}|oui)selected="yes"]>05</option>
+				<option value='06' [(#ENV*{mois_evenement}|=={06}|oui)selected="yes"]>06</option>
+				<option value='07' [(#ENV*{mois_evenement}|=={07}|oui)selected="yes"]>07</option>
+				<option value='08' [(#ENV*{mois_evenement}|=={08}|oui)selected="yes"]>08</option>
+				<option value='09' [(#ENV*{mois_evenement}|=={09}|oui)selected="yes"]>09</option>
+				<option value='10' [(#ENV*{mois_evenement}|=={10}|oui)selected="yes"]>10</option>
+				<option value='11' [(#ENV*{mois_evenement}|=={11}|oui)selected="yes"]>11</option>
+				<option value='12' [(#ENV*{mois_evenement}|=={12}|oui)selected="yes"]>12</option>
+			</select>
+			<span class="oblige" title="<:obligatoire:>"><:star_oblige:></span><:annee:>  : [(#SESSION{statut}|=={0minirezo}|oui) 
+				#SET{an-1,#DATE|annee|moins{1}}
+				#SET{an-2,#DATE|annee|moins{2}}			
+			]
+			#SET{an0,#DATE|annee}
+			#SET{an1,#DATE|annee|plus{1}}
+			#SET{an2,#DATE|annee|plus{2}}						
+			<select name="annee_evenement" value="#ENV*{annee_evenement}">
+				<option>[(#ENV*{annee_evenement}|<{#GET{an-2}}|oui)#ENV*{annee_evenement}]				[(#ENV*{annee_evenement}|<{#GET{an-2}}|non)---]</option> 
+				[(#SESSION{statut}|=={0minirezo}|oui) 
+					<option value='#GET{an-2}' [(#ENV*{annee_evenement}|=={#GET{an-2}}|oui)selected="yes"]>#GET{an-2}</option>
+					<option value='#GET{an-1}' [(#ENV*{annee_evenement}|=={#GET{an-1}}|oui)selected="yes"]>#GET{an-1}</option>	
+				]
+				<option value='#GET{an0}' [(#ENV*{annee_evenement}|=={#GET{an0}}|oui)selected="yes"]>#GET{an0}</option>
+				<option value='#GET{an1}' [(#ENV*{annee_evenement}|=={#GET{an1}}|oui)selected="yes"]>#GET{an1}</option>
+				<option value='#GET{an2}' [(#ENV*{annee_evenement}|=={#GET{an2}}|oui)selected="yes"]>#GET{an2}</option>
+			</select>
+		</li>
+		<li>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{heure_evenement})</span><br />]
+			<label><span class="oblige" title="<:obligatoire:>"><:star_oblige:></span><:label_heure:></label>
+			<span class="oblige" title="<:obligatoire:>"><:star_oblige:></span><select name="heure_evenement" value="#ENV*{heure_evenement}">
+				<option>---</option>
+				<option value='06:00' [(#ENV*{heure_evenement}|=={06:00}|oui)selected="yes"]>06:00</option>
+				<option value='06:30' [(#ENV*{heure_evenement}|=={06:30}|oui)selected="yes"]>06:30</option>
+				<option value='07:00' [(#ENV*{heure_evenement}|=={07:00}|oui)selected="yes"]>07:00</option>
+				<option value='07:30' [(#ENV*{heure_evenement}|=={07:30}|oui)selected="yes"]>07:30</option>
+				<option value='08:00' [(#ENV*{heure_evenement}|=={08:00}|oui)selected="yes"]>08:00</option>
+				<option value='08:30' [(#ENV*{heure_evenement}|=={08:30}|oui)selected="yes"]>08:30</option>
+				<option value='09:00' [(#ENV*{heure_evenement}|=={09:00}|oui)selected="yes"]>09:00</option>
+				<option value='09:30' [(#ENV*{heure_evenement}|=={09:30}|oui)selected="yes"]>09:30</option>
+				<option value='10:00' [(#ENV*{heure_evenement}|=={10:00}|oui)selected="yes"]>10:00</option>
+				<option value='10:30' [(#ENV*{heure_evenement}|=={10:30}|oui)selected="yes"]>10:30</option>
+				<option value='11:00' [(#ENV*{heure_evenement}|=={11:00}|oui)selected="yes"]>11:00</option>
+				<option value='11:30' [(#ENV*{heure_evenement}|=={11:30}|oui)selected="yes"]>11:30</option>
+				<option value='12:00' [(#ENV*{heure_evenement}|=={12:00}|oui)selected="yes"]>12:00</option>
+				<option value='12:30' [(#ENV*{heure_evenement}|=={12:30}|oui)selected="yes"]>12:30</option>
+				<option value='13:00' [(#ENV*{heure_evenement}|=={13:00}|oui)selected="yes"]>13:00</option>
+				<option value='13:30' [(#ENV*{heure_evenement}|=={13:30}|oui)selected="yes"]>13:30</option>
+				<option value='14:00' [(#ENV*{heure_evenement}|=={14:00}|oui)selected="yes"]>14:00</option>
+				<option value='14:30' [(#ENV*{heure_evenement}|=={14:30}|oui)selected="yes"]>14:30</option>
+				<option value='15:00' [(#ENV*{heure_evenement}|=={15:00}|oui)selected="yes"]>15:00</option>
+				<option value='15:30' [(#ENV*{heure_evenement}|=={15:30}|oui)selected="yes"]>15:30</option>
+				<option value='16:00' [(#ENV*{heure_evenement}|=={16:00}|oui)selected="yes"]>16:00</option>
+				<option value='16:30' [(#ENV*{heure_evenement}|=={16:30}|oui)selected="yes"]>16:30</option>
+				<option value='17:00' [(#ENV*{heure_evenement}|=={17:00}|oui)selected="yes"]>17:00</option>
+				<option value='17:30' [(#ENV*{heure_evenement}|=={17:30}|oui)selected="yes"]>17:30</option>
+				<option value='18:00' [(#ENV*{heure_evenement}|=={18:00}|oui)selected="yes"]>18:00</option>
+				<option value='18:30' [(#ENV*{heure_evenement}|=={18:30}|oui)selected="yes"]>18:30</option>
+				<option value='19:00' [(#ENV*{heure_evenement}|=={19:00}|oui)selected="yes"]>19:00</option>
+				<option value='19:30' [(#ENV*{heure_evenement}|=={19:30}|oui)selected="yes"]>19:30</option>
+				<option value='20:00' [(#ENV*{heure_evenement}|=={20:00}|oui)selected="yes"]>20:00</option>
+				<option value='20:30' [(#ENV*{heure_evenement}|=={20:30}|oui)selected="yes"]>20:30</option>
+				<option value='21:00' [(#ENV*{heure_evenement}|=={21:00}|oui)selected="yes"]>21:00</option>
+				<option value='21:30' [(#ENV*{heure_evenement}|=={21:30}|oui)selected="yes"]>21:30</option>
+				<option value='22:00' [(#ENV*{heure_evenement}|=={22:00}|oui)selected="yes"]>22:00</option>
+				<option value='22:30' [(#ENV*{heure_evenement}|=={22:30}|oui)selected="yes"]>22:30</option>
+				<option value='23:00' [(#ENV*{heure_evenement}|=={23:00}|oui)selected="yes"]>23:00</option>
+				<option value='23:30' [(#ENV*{heure_evenement}|=={23:30}|oui)selected="yes"]>23:30</option>
+				<option value='00:00' [(#ENV*{heure_evenement}|=={00:00}|oui)selected="yes"]>00:00</option>
+				<option value='00:30' [(#ENV*{heure_evenement}|=={00:30}|oui)selected="yes"]>00:30</option>
+				<option value='01:00' [(#ENV*{heure_evenement}|=={01:00}|oui)selected="yes"]>01:00</option>
+				<option value='01:30' [(#ENV*{heure_evenement}|=={01:30}|oui)selected="yes"]>01:30</option>
+				<option value='02:00' [(#ENV*{heure_evenement}|=={02:00}|oui)selected="yes"]>02:00</option>
+				<option value='02:30' [(#ENV*{heure_evenement}|=={02:30}|oui)selected="yes"]>02:30</option>
+				<option value='03:00' [(#ENV*{heure_evenement}|=={03:00}|oui)selected="yes"]>03:00</option>
+				<option value='03:30' [(#ENV*{heure_evenement}|=={03:30}|oui)selected="yes"]>03:30</option>
+				<option value='04:00' [(#ENV*{heure_evenement}|=={04:00}|oui)selected="yes"]>04:00</option>
+				<option value='04:30' [(#ENV*{heure_evenement}|=={04:30}|oui)selected="yes"]>04:30</option>
+				<option value='05:00' [(#ENV*{heure_evenement}|=={05:00}|oui)selected="yes"]>05:00</option>
+				<option value='05:30' [(#ENV*{heure_evenement}|=={05:30}|oui)selected="yes"]>05:30</option>
+			</select>
+		</li>
+		<hr />		
+		<li>
+			<fieldset class="niveau2">
+			<ul>
+				<li>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lieu_evenement})</span><br />]
+					<label><span class="oblige" title="<:obligatoire:>"><:star_oblige:></span><:lieu_evenement:></label>
+				</li>	
+				<li>
+					<label><:lieu_deja_existant:></label>
+					<select name="lieu_evenement_existe">
+						<option value="">---</option>
+					<BOUCLE_lieux(LIEUX){approuve=oui}{par nom}>
+						<option value="#ID_LIEU" [(#ENV*{lieu_evenement_existe}|=={#ID_LIEU}|oui)selected="yes"]>[(#NOM|couper{35,...})][ / (#VILLE|couper{25,...})]</option>
+					</BOUCLE_lieux>
+					</select>
+				</li>	
+				[<h3>(#CONFIG{metapack::indymedia/article_lieu}|extraire_multi{#LANG}|propre)</h3>]
+				<li>
+					<label><:lieu_nom:></label>
+					<input type="text" name="lieu_evenement" value="#ENV*{lieu_evenement}" />
+				</li>
+				<li>
+					<label><:lieu_ville:></label>
+					<input type="text" name="ville_evenement" value="#ENV*{ville_evenement}" class="texte" />
+				</li>
+				<li>
+					<label><:lieu_adresse:></label>
+					<input type="text" name="adresse_evenement" value="#ENV*{adresse_evenement}" class="texte" />
+				</li>
+				<li>
+					<label><:lieu_tel:></label>
+					<input type="text" name="tel_evenement" value="#ENV*{tel_evenement}" class="texte" />
+				</li>
+				<li>
+					<label><:lieu_site_web:></label>
+					<input type="text" name="web_evenement" value="#ENV*{web_evenement}" class="texte" />
+				</li>
+				<li>
+					<label><:lieu_email:></label>
+					<input type="text" name="email_evenement" value="#ENV*{email_evenement}" class="texte" />
+				</li>	
+			</ul>
+			</fieldset>
+		</li>
+	</ul>
+</fieldset>

@@ -1,0 +1,52 @@
+<plugin>
+	<nom>indymedia</nom>
+	<auteur>Collectif Indym&#233;dia lille
+		- [contact->mailto:imc.lille@no-log.org]
+		- [site->http://lille.indymedia.org]
+		- &#169; 2009-2010 - Distribu&#233; sous licence GNU/GPL
+	</auteur>
+	<version>0.1</version>
+	<etat>test</etat>
+	<icon></icon>
+	<description>Ce plugin offre un squelette configurable et modulable à destination des sites Indymédia. Il dispose des fonctionalités suivantes :
+			<ul>
+				<li>Gestion des listes de diffusion</li>
+				<li>Interface de moderation</li>
+				<li>Publication ouverte</li>
+			</ul>
+		Ce plugin s'adresse principalement aux sites Indym&#233;dia
+	</description>
+	<lien></lien>
+	
+	
+	<prefix>indymedia</prefix>
+	
+	<options>
+		indymedia_options.php
+	</options>
+	
+	<fonctions>
+		indymedia_fonctions.php
+	</fonctions>
+
+	<pipeline>
+        	<nom>declarer_tables_principales</nom>
+        	<inclure>base/indymedia_base.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+        	<nom>declarer_tables_auxiliaires</nom>
+        	<inclure>base/indymedia_base.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+        	<nom>declarer_tables_interfaces</nom>
+        	<inclure>base/indymedia_base.php</inclure>
+	</pipeline>
+	
+
+	<install>base/indymedia_installation.php</install>
+
+		
+	<categorie>edition</categorie>
+</plugin>

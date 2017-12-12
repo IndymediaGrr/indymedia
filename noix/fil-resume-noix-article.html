@@ -1,0 +1,12 @@
+#CACHE{0}
+<BOUCLE_article(ARTICLES){id_article}>
+		<div class="caseArticle">
+			<span class="titreArticle"><a href="#URL_ARTICLE" [ title="(#TEXTE|attribut_html|couper{250})"]>
+				[(#CONFIG{metapack::indymedia_contribution/vignette_dans_fil}|oui)
+				#INCLURE{fond=noix/vignette-fil,id_article}]
+				[(#TITRE|lettreMajuscule|couper{200})]</a></span>
+			<span class="dateArticle">
+				#INCLURE{fond=noix/article-fil-pied,env,id_article,id_rubrique,extra,date,titre_rubrique=#ENV{titre_rubrique}}
+			</span>
+		</div>
+</BOUCLE_article>

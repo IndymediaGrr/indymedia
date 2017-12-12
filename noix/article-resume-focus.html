@@ -1,0 +1,52 @@
+#SET{coupe, 350}
+[(#ENV{coupe}|oui) 
+	#SET{coupe, #ENV{coupe}}
+]
+#SET{coupe_titre, 250}
+[(#ENV{coupe_titre}|oui) 
+	#SET{coupe_titre, #ENV{coupe_titre}}
+]
+
+#SET{taille_vignette, 100}
+[(#ENV{taille_vignette}|oui) 
+	#SET{taille_vignette, #ENV{taille_vignette}}
+]
+<BOUCLE_article_liste(ARTICLES){id_article}>
+		<BOUCLE_rub_titre(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}{tous}>
+			#SET{rub_titre,#TITRE*|extraire_multi{#ENV{lang},#ARRAY{'lang_defaut','fr'}}|propre|supprimer_tags|supprimer_numero}
+		</BOUCLE_rub_titre>
+<div class="cadre">
+	<div class="titre-article-resume">
+		<div class="titre">
+			<a href="#URL_ARTICLE" title="#TITRE">
+				[(#SET{suite_titre, " ..." })]
+				[(#TITRE|couper{#GET{coupe_titre},#GET{suite_titre}})]
+			</a>
+		</div>
+	</div>
+	<INCLURE{fond=noix/focus-metas,env,id_article,id_rubrique,extra,date}{rub_titre=#GET{rub_titre}}>	
+	#SET{ajout_texte,60}
+	<BOUCLE_document(DOCUMENTS)
+		{extension==jpg|png|gif|svg}
+		{mode IN image, document}
+		{id_article}
+		{par id_document}
+		{tout}
+		{0,1}>
+		<span class="vignette-fil">[(#FICHIER|image_reduire{90,69}|image_recadre{50,50}|inserer_attribut{alt, #TITRE|attribut_html})#SET{ajout_texte,0}]</span>
+	</BOUCLE_document>
+		
+[(#GET{coupe}|oui) 
+	#SET{long_titre,#TITRE**|couper{#GET{coupe_titre}}|strlen|mult{1.2}}
+	#SET{coupe, #GET{coupe}|moins{#GET{long_titre}}|plus{#GET{ajout_texte}}}
+]
+	<div class="texte">
+		[
+		#SET{coupe, #GET{coupe}|moins{90}}
+		(#TEXTE|couper{#GET{coupe},' ... '})
+		] <a href="#URL_ARTICLE"><em><:lire_la_suite:></em></a>
+	</div> 
+		
+</div>
+	
+</BOUCLE_article_liste>

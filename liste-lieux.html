@@ -1,0 +1,13 @@
+[(#REM)
+	Page listant tous les lieux
+	Uniquement pour les moderateurs pour le moment
+]
+
+#CACHE{0}
+
+[(#SESSION{statut}|=={0minirezo}|oui)
+<INCLURE{fond=structure/structure,env}
+	{page-titre=<:liste_lieux:>}
+	{droite=fil-de-presse}
+	{centre=liste-lieux}>
+]
