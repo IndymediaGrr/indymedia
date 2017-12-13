@@ -269,10 +269,10 @@ p.modo {
 	margin-bottom : 0.8em;
 }
 blockquote { 
-    border-left: 2px solid #cc6600;    
+    border-left: 2px solid #000000;    
     padding: 0 10px 10px;
 	margin-bottom : 0.8em;
-	color : #ffffff;
+	color : #000000;
 	background: url(img/stripe.png); 
 }
 /* Pour indiquer qu'il s'agit d'un message d'un membre de l'equipe de moderation */
