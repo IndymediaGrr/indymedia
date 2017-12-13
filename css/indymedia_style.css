@@ -273,7 +273,6 @@ blockquote {
     padding: 0 10px 10px;
 	margin-bottom : 0.8em;
 	color : #000000;
-	background: url(img/stripe.png);
     text-align : justify;                                                                                                                                                                   
 
 }
@@ -323,7 +322,6 @@ div.titre
 
 div.sous-titre
 {
-	background:  url("img/stripe.png") repeat 0 0 #FFFFFF;
     border: 1px solid #ccc;
     font-weight: 700;
 }
@@ -342,8 +340,7 @@ div.mots-po
 	padding: 10px;
 }
 span.info_meta
-{    
-	background: url(img/stripe.png);
+{
 	border-bottom: 1px dashed #aaa;
     font-size: 1em;
 	font-style: italic;
@@ -358,7 +355,6 @@ div.sous-titre-elsewhere
     display: block;
     clear: both;
     font-size: 1.3em;
-	background: url(img/stripe.png);
 	padding : 10px;
     float: left;
     margin: 5px 10px 10px 0;	
@@ -369,7 +365,6 @@ div.sous-titre-elsewhere
 	border: 1px dashed #666666;
     display: block;
     font-size: 1.1em;
-	background: url(img/stripe.png);
 	padding : 10px;
     float: right;
     margin-left: 15px;	
@@ -378,7 +373,6 @@ div.sous-titre-elsewhere
 }
 div.sous-titre-agenda, div.friture
 {      
-	background: url("img/stripe.png") repeat scroll 0 0 #FFFFFF;
     border: 1px dashed #999999;
     display: block;
     float: right;
@@ -619,8 +613,7 @@ div.ancres
 	text-align : center;
 	font-size: 1em;
 	font-style: italic;
-	border-top : 1px solid #ddd;  
-	background: url(img/stripe.png);
+	border-top : 1px solid #ddd;
     border-bottom: 1px #ddd;
 }
 #colonneDroite div.caseDate, #colonneDroite-2col div.caseDate, .colonnes div.caseDate
@@ -629,8 +622,7 @@ div.ancres
 	text-align : center;
 	font-size: 1.15em;
 	font-weight: bold;
-	border-top : 1px solid #ddd;    
-	background: url(img/stripe.png);
+	border-top : 1px solid #ddd;
   	border-bottom: 1px solid #ddd;
 	text-transform: capitalize;
 }
@@ -638,7 +630,6 @@ span.caseDateFocus
 { 
 	margin : 4px;
 	font-style: italic;
-	background: url(img/stripe.png);    
 	line-height: 1.3em;border: 1px dotted #aaa;
 }
 #colonneDroite .info_agenda span.titreArticle, #colonneDroite-2col .info_agenda span.titreArticle, .colonnes .info_agenda span.titreArticle
@@ -1384,7 +1375,6 @@ div.cadre-pied {
 	-webkit-border-radius : 5px;    
 	margin: 10px 0;
 	padding : 10px;
-	background: url(img/stripe.png);
 	font-style: italic;
 }
 .cadre-pied a.listeimc{
