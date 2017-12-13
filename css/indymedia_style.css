@@ -272,7 +272,7 @@ blockquote {
     border-left: 2px solid #cc6600;    
     padding: 0 10px 10px;
 	margin-bottom : 0.8em;
-	color : #cc6600;
+	color : #ffffff;
 	background: url(img/stripe.png); 
 }
 /* Pour indiquer qu'il s'agit d'un message d'un membre de l'equipe de moderation */
