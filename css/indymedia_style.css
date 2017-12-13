@@ -273,7 +273,9 @@ blockquote {
     padding: 0 10px 10px;
 	margin-bottom : 0.8em;
 	color : #000000;
-	background: url(img/stripe.png); 
+	background: url(img/stripe.png);
+    text-align : justify;                                                                                                                                                                   
+
 }
 /* Pour indiquer qu'il s'agit d'un message d'un membre de l'equipe de moderation */
 
