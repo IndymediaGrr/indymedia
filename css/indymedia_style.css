@@ -99,9 +99,6 @@ div.titreRubrique a{
 	background:#eee none repeat scroll 0 0;
 */
 	right: 3px;
-/*
-	background: #FFF url(img/stripelight.png);
-*/
 }
 
 #haut {
@@ -181,9 +178,6 @@ a:hover {
 a.lien_publier
 {
 	color : #a00;
-/*
-	background: url(img/stripe.png);
-*/
 	background: #7A1547;
 	color: #f5eded;
    	font-weight : bold;
@@ -218,8 +212,7 @@ a.bouton_publier
 a.bouton_publier:hover
 {
 	border : 1px solid #333;
-	color : #7A1547;
-	background: url(img/stripe.png); 
+	color : #7A1547; 
 }
 
 /* Les liens pour les modérateurs/tices */
@@ -240,7 +233,6 @@ div.cadre
 div.cadre div.pied, div.pied
 {
 	border-color : #ccc; 
-	background: url(img/stripe.png); 
 /*
 	font-weight : bold;     
 */
@@ -932,8 +924,7 @@ span.titreArticle {
 div.caseArticle:hover {  
 	background: #fefefe; 
 }
-div.contenu-article { 
-	background: #FFF url(img/stripelight.png);
+div.contenu-article {
 	padding: 8px; 
 }
 div.texte span.spip_documents 
@@ -1610,9 +1601,6 @@ div.formulaire_recherche {
 	z-index: 3000;
 	border: 1px solid #111;
 	right: 15px;
-/*
-	background: url(img/stripe.png);
-*/
 	background-color: #fff;
 	padding: 5px;
 	opacity: 1;
