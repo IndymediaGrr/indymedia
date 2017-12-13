@@ -269,8 +269,10 @@ p.modo {
 }
 blockquote { 
     border-left: 2px solid #000000;    
-    padding: 0 10px 10px;
-	margin-bottom : 0.8em;
+    padding: 0em;
+    margin-left:1em;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
 	color : #000000;
     text-align : justify;                                                                                                                                                                   
 
