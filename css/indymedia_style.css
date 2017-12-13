@@ -175,8 +175,7 @@ a {
 }
 
 a:hover {
-	text-decoration: underline;
-	color : #87174E;
+	color : #f99939;
 }
 
 a.lien_publier
