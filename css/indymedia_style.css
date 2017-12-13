@@ -57,8 +57,7 @@ body {
 	font-family: Arial, Helvetica, "Liberation Sans", FreeSans, sans-serif; 
 	font-size:10pt;
 	background: #efefef none repeat scroll 0 0;
-/*	background: #FFF url(img/stripelight.png);*/
-	
+    text-align: justify;
 }
 
   /* police titres */
